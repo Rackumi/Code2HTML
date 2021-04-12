@@ -1,30 +1,10 @@
-contador
-contador1
-acumulador_total_2
-_contador3
-
-+123
--69
-45
-$+123
-$-A6F9
-$FFFF
-+123.456
--0.69
-45.0
-$+123.0
-$-E.A6F9
-$0.FFFF
-
-'comilla doble " dentro'
-"comilla simple ' dentro"
-'comilla simple '' dentro'
-"comilla doble "" dentro"
-'comilla doble " y simple '' dentro'
-"comilla simple ' y doble "" dentro"
-
-%%aaaaaaaaaaaaaaaa
-
-%- aaaa -%
-%- aaaa
-  bbbbbbbbbbbbb -%
+funcion entero nombre1(caracter param1, entero _param2)
+	inicio
+		entero variable1;
+		real variable2, variable3;
+		variable5 = 1;
+		variable5 = "saaa";
+		variable5 = "saaa" + "a";
+		nombre1();
+		return antonio;
+	fin
