@@ -46,7 +46,8 @@ sent : type lid ';'
     | IDENTIFICADOR asig exp ';'
     | IDENTIFICADOR '(' lid ')' ';'
     | IDENTIFICADOR '(' ')' ';'
-    | blq;
+    | blq
+    ;
 
 lid : IDENTIFICADOR | IDENTIFICADOR ',' lid; //variables 1 o mas
 

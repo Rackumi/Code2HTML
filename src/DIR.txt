@@ -10,62 +10,62 @@ DIR(restpart ::= IDENTIFICADOR "(" ")" blq) = {IDENTIFICADOR}
 DIR(listparam ::= listparam "," type IDENTIFICADOR) =  {"entero", "real", "caracter"}
 DIR(listparam ::= type IDENTIFICADOR ) = {"entero", "real", "caracter"}
 
-DIR(type ::= "entero") =
-DIR(type ::= "real") =
-DIR(type ::= "caracter") =
+DIR(type ::= "entero") = {"entero"}
+DIR(type ::= "real") = {"real"}
+DIR(type ::= "caracter") = {"caracter"}
 
-DIR(blq ::= "inicio" sentlist "fin") =
+DIR(blq ::= "inicio" sentlist "fin") = {"inicio"}
 
-DIR(sentlist ::= sentlist sent) =
-DIR(sentlist ::= sent) =
+DIR(sentlist ::= sentlist sent) = {"entero", "real", "caracter", "inicio, "return", "bifurcacion", "buclepara", "buclemientras", "bucle"}
+DIR(sentlist ::= sent) = {"entero", "real", "caracter", "inicio, "return", "bifurcacion", "buclepara", "buclemientras", "bucle"}
 
-DIR(sent ::= type lid ";") =
-DIR(sent ::= IDENTIFICADOR asig exp ";") =
-DIR(sent ::= "return" exp ";") =
-DIR(sent ::= IDENTIFICADOR "(" lid ")" ";") =
-DIR(sent ::= IDENTIFICADOR "(" ")" ";") =
-DIR(sent ::= "bifurcacion" "(" lcond ")" "entonces" blq "sino" blq) =
-DIR(sent ::= "buclepara" "(" IDENTIFICADOR asig exp ";" lcond ";" IDENTIFICADOR asig exp ")" blq ) =
-DIR(sent ::= "buclemientras" "(" lcond ")" blq ) =
-DIR(sent ::= "bucle" blq "hasta" "(" lcond ")") =
-DIR(sent ::= blq) =
+DIR(sent ::= type lid ";") = {"entero", "real", "caracter"}
+DIR(sent ::= IDENTIFICADOR asig exp ";") = {IDENTIFICADOR}
+DIR(sent ::= "return" exp ";") = {"return"}
+DIR(sent ::= IDENTIFICADOR "(" lid ")" ";") = {IDENTIFICADOR}
+DIR(sent ::= IDENTIFICADOR "(" ")" ";") = {IDENTIFICADOR}
+DIR(sent ::= "bifurcacion" "(" lcond ")" "entonces" blq "sino" blq) = {"bifurcacion"}
+DIR(sent ::= "buclepara" "(" IDENTIFICADOR asig exp ";" lcond ";" IDENTIFICADOR asig exp ")" blq ) = {"buclepara"}
+DIR(sent ::= "buclemientras" "(" lcond ")" blq ) = {"buclemientras"}
+DIR(sent ::= "bucle" blq "hasta" "(" lcond ")") = {"bucle"}
+DIR(sent ::= blq) = {"inicio"}
 
-DIR(lid ::= IDENTIFICADOR) =
-DIR(lid ::= IDENTIFICADOR "," lid) =
+DIR(lid ::= IDENTIFICADOR) = {IDENTIFICADOR}
+DIR(lid ::= IDENTIFICADOR "," lid) = {IDENTIFICADOR}
 
-DIR(asig ::= "=") =
-DIR(asig ::= "+=") =
-DIR(asig ::= "-=") =
-DIR(asig ::= "*=") =
-DIR(asig ::= "/=") =
+DIR(asig ::= "=") = {"="}
+DIR(asig ::= "+=") = {"+="}
+DIR(asig ::= "-=") = {"-="}
+DIR(asig ::= "*=") = {"*="}
+DIR(asig ::= "/=") = {"/="}
 
-DIR(exp ::= exp op exp) =
-DIR(exp ::= IDENTIFICADOR "(" lid ")") =
-DIR(exp ::= "(" exp ")") =
-DIR(exp ::= IDENTIFICADOR) =
-DIR(exp ::= CONSTENTERO) =
-DIR(exp ::= CONSTREAL) =
-DIR(exp ::= CONSTLIT) =
+DIR(exp ::= exp op exp) = {IDENTIFICADOR, "(", CONSTENTERO, CONSTREAL, CONSTLIT}
+DIR(exp ::= IDENTIFICADOR "(" lid ")") = {IDENTIFICADOR}
+DIR(exp ::= "(" exp ")") = {"("}
+DIR(exp ::= IDENTIFICADOR) = {IDENTIFICADOR}
+DIR(exp ::= CONSTENTERO) = {CONSTENTERO}
+DIR(exp ::= CONSTREAL) = {CONSTREAL}
+DIR(exp ::= CONSTLIT) = {CONSTLIT}
 
-DIR(op ::= "+") =
-DIR(op ::= "-") =
-DIR(op ::= "*") =
-DIR(op ::= "/") =
+DIR(op ::= "+") = {"+"}
+DIR(op ::= "-") = {"-"}
+DIR(op ::= "*") = {"*"}
+DIR(op ::= "/") = {"/"}
 
-DIR(lcond ::= lcond opl lcond) =
-DIR(lcond ::= lcond) =
-DIR(lcond ::= "no" cond) =
+DIR(lcond ::= lcond opl lcond) = {IDENTIFICADOR, "(", CONSTENTERO, CONSTREAL, CONSTLIT, "no"}
+DIR(lcond ::= lcond) = {IDENTIFICADOR, "(", CONSTENTERO, CONSTREAL, CONSTLIT, "no"}
+DIR(lcond ::= "no" cond) = {"no"}
 
-DIR(cond ::= exp opr exp) =
-DIR(cond ::= "cierto") =
-DIR(cond ::= "falso") =
+DIR(cond ::= exp opr exp) = {IDENTIFICADOR, "(", CONSTENTERO, CONSTREAL, CONSTLIT}
+DIR(cond ::= "cierto") = {"cierto"}
+DIR(cond ::= "falso") = {"falso"}
 
-DIR(opl ::= "y") =
-DIR(opl ::= "o") =
+DIR(opl ::= "y") = {"y"}
+DIR(opl ::= "o") = {"o"}
 
-DIR(opr::= "==") =
-DIR(opr::= "<>") =
-DIR(opr::= "<") =
-DIR(opr::= ">") =
-DIR(opr::= ">=") =
-DIR(opr::= "<=") =
+DIR(opr::= "==") = {"=="}
+DIR(opr::= "<>") = {"<>""}
+DIR(opr::= "<") = {"<"}
+DIR(opr::= ">") = {">"}
+DIR(opr::= ">=") = {">="}
+DIR(opr::= "<=") = {"<="}
