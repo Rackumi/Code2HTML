@@ -1,0 +1,71 @@
+DIR(program ::= part program) = CAB'(part) = {"function", "procedimiento"}
+DIR(program ::= part) = CAB'(part) = {"function", "procedimiento"}
+
+DIR(part ::= "funcion" type restpart) = {function}
+DIR(part ::= "procedimiento" restpart) = {procedimiento}
+
+DIR(restpart ::= IDENTIFICADOR "(" listparam ")" blq) = {IDENTIFICADOR}
+DIR(restpart ::= IDENTIFICADOR "(" ")" blq) = {IDENTIFICADOR}
+
+DIR(listparam ::= listparam "," type IDENTIFICADOR) =  {"entero", "real", "caracter"}
+DIR(listparam ::= type IDENTIFICADOR ) = {"entero", "real", "caracter"}
+
+DIR(type ::= "entero") =
+DIR(type ::= "real") =
+DIR(type ::= "caracter") =
+
+DIR(blq ::= "inicio" sentlist "fin") =
+
+DIR(sentlist ::= sentlist sent) =
+DIR(sentlist ::= sent) =
+
+DIR(sent ::= type lid ";") =
+DIR(sent ::= IDENTIFICADOR asig exp ";") =
+DIR(sent ::= "return" exp ";") =
+DIR(sent ::= IDENTIFICADOR "(" lid ")" ";") =
+DIR(sent ::= IDENTIFICADOR "(" ")" ";") =
+DIR(sent ::= "bifurcacion" "(" lcond ")" "entonces" blq "sino" blq) =
+DIR(sent ::= "buclepara" "(" IDENTIFICADOR asig exp ";" lcond ";" IDENTIFICADOR asig exp ")" blq ) =
+DIR(sent ::= "buclemientras" "(" lcond ")" blq ) =
+DIR(sent ::= "bucle" blq "hasta" "(" lcond ")") =
+DIR(sent ::= blq) =
+
+DIR(lid ::= IDENTIFICADOR) =
+DIR(lid ::= IDENTIFICADOR "," lid) =
+
+DIR(asig ::= "=") =
+DIR(asig ::= "+=") =
+DIR(asig ::= "-=") =
+DIR(asig ::= "*=") =
+DIR(asig ::= "/=") =
+
+DIR(exp ::= exp op exp) =
+DIR(exp ::= IDENTIFICADOR "(" lid ")") =
+DIR(exp ::= "(" exp ")") =
+DIR(exp ::= IDENTIFICADOR) =
+DIR(exp ::= CONSTENTERO) =
+DIR(exp ::= CONSTREAL) =
+DIR(exp ::= CONSTLIT) =
+
+DIR(op ::= "+") =
+DIR(op ::= "-") =
+DIR(op ::= "*") =
+DIR(op ::= "/") =
+
+DIR(lcond ::= lcond opl lcond) =
+DIR(lcond ::= lcond) =
+DIR(lcond ::= "no" cond) =
+
+DIR(cond ::= exp opr exp) =
+DIR(cond ::= "cierto") =
+DIR(cond ::= "falso") =
+
+DIR(opl ::= "y") =
+DIR(opl ::= "o") =
+
+DIR(opr::= "==") =
+DIR(opr::= "<>") =
+DIR(opr::= "<") =
+DIR(opr::= ">") =
+DIR(opr::= ">=") =
+DIR(opr::= "<=") =

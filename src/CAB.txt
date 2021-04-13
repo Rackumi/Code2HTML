@@ -1,0 +1,42 @@
+CAB(program) = CAB'(part) U CAB'(part) = {"function"}
+
+CAB(part) = {"function", "procedimiento"}
+
+CAB(restpart) = {IDENTIFICADOR}
+
+CAB(listparam) = ̶C̶A̶B̶'̶(̶l̶i̶s̶t̶p̶a̶r̶a̶m̶)̶  U CAB'(type) = {"entero", "real", "caracter"}
+
+CAB(type) = {"entero", "real", "caracter"}
+
+CAB(blq) = {"inicio"}
+
+CAB(sentlist) =  ̶C̶A̶B̶'̶(̶s̶e̶n̶t̶l̶i̶s̶t̶)̶  U CAB'(sent) =
+    {"entero", "real", "caracter", "inicio, "return", "bifurcacion", "buclepara", "buclemientras", "bucle"}
+
+CAB(sent) = CAB'(type) U CAB'(blq) U {IDENTIFICADOR} U {"return"} U {"bifurcacion"} U {"buclepara"} U {"buclemientras"} U {"bucle"} =
+    = {"entero", "real", "caracter", "inicio, "return", "bifurcacion", "buclepara", "buclemientras", "bucle"}
+
+CAB(lid) = {IDENTIFICADOR}
+
+CAB(asig) = {"="} U {"+="} U {"-="} U {"*="} U {"/="} =
+    = {"=", "+=", "-=", "*=", "/="}
+
+CAB(exp) = C̶A̶B̶'̶(̶e̶x̶p̶)̶  U {IDENTIFICADOR} U {"("} U {CONSTENTERO} U {CONSTREAL} U {CONSTLIT} =
+    {IDENTIFICADOR, "(", CONSTENTERO, CONSTREAL, CONSTLIT}
+
+CAB(op) = {"+"} U {"-"} U {"*"} U {"/"} =
+    = {"+", "-", "*", "/"}
+
+CAB(lcond) = ̶C̶A̶B̶'̶(̶l̶c̶o̶n̶d̶)̶  U CAB'(cond) U {"no"} =
+    = {IDENTIFICADOR, "(", CONSTENTERO, CONSTREAL, CONSTLIT} U {"no"} =
+    = {IDENTIFICADOR, "(", CONSTENTERO, CONSTREAL, CONSTLIT, "no"}
+
+CAB(cond) = CAB'(exp) U {"cierto"} U {"falso"} = {IDENTIFICADOR} U {"("} U {CONSTENTERO} U {CONSTREAL} U {CONSTLIT} =
+    = {IDENTIFICADOR, "(", CONSTENTERO, CONSTREAL, CONSTLIT}
+
+CAB(opl) = {"y"} U {"o"} = {"y", "o"}
+
+CAB(opr) = {"=="} U {"<>"} U {"<"} U {">"} U {">="} U {"<="} =
+    = {"==", "<>", "<", ">", ">=", "<="}
+
+ʎ

@@ -1,10 +1,24 @@
 funcion entero nombre1(caracter param1, entero _param2)
-	inicio
-		entero variable1;
-		real variable2, variable3;
-		variable5 = 1;
-		variable5 = "saaa";
-		variable5 = "saaa" + "a";
-		nombre1();
-		return antonio;
-	fin
+    inicio
+        entero variable1;
+        real variable2, variable3;
+        variable5 = 1;
+        variable5 = "saaa";
+        variable5 = "saaa" + "a";
+        nombre1();
+        return antonio;
+    fin
+procedimiento nombre2(entero param3)
+    inicio
+        entero variable4;
+        return juan;
+        entero variable4;
+        bifurcacion (cierto) entonces
+            inicio
+            paco = 1;
+            fin
+        sino
+            inicio
+                paco = 1;
+            fin
+    fin

@@ -1,0 +1,31 @@
+SIG(program) = {$} U
+
+SIG(part) =
+
+SIG(restpart) =
+
+SIG(listparam) =
+
+SIG(type) =
+
+SIG(blq) =
+
+SIG(sentlist) =
+
+SIG(sent) =
+
+SIG(lid) =
+
+SIG(asig) =
+
+SIG(exp) =
+
+SIG(op) =
+
+SIG(lcond) = CAB'(opl) U ̶ ̶S̶I̶G̶(̶l̶c̶o̶n̶d̶)̶  U
+
+SIG(cond) = SIG(lcond) =
+
+SIG(opl) = CAB'(lcond) =
+
+SIG(opr) = CAB'(exp) = {IDENTIFICADOR, "(", CONSTENTERO, CONSTREAL, CONSTLIT}
