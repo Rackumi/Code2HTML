@@ -1,4 +1,4 @@
-// Generated from C:/Users/alvar/Desktop/WorkinSpace/ANTLR/Code2HTML/src\CodeToHTML.g4 by ANTLR 4.9.1
+// Generated from C:/Users/gocruz17/IdeaProjects/Code2HTML/src\CodeToHTML.g4 by ANTLR 4.9.1
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -40,6 +40,12 @@ public interface CodeToHTMLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitListparam(CodeToHTMLParser.ListparamContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CodeToHTMLParser#listparamAux}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitListparamAux(CodeToHTMLParser.ListparamAuxContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CodeToHTMLParser#type}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -57,6 +63,12 @@ public interface CodeToHTMLVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSentlist(CodeToHTMLParser.SentlistContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CodeToHTMLParser#sentlistAux}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSentlistAux(CodeToHTMLParser.SentlistAuxContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CodeToHTMLParser#sent}.
 	 * @param ctx the parse tree
@@ -82,9 +94,45 @@ public interface CodeToHTMLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExp(CodeToHTMLParser.ExpContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CodeToHTMLParser#expAux}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpAux(CodeToHTMLParser.ExpAuxContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CodeToHTMLParser#op}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitOp(CodeToHTMLParser.OpContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CodeToHTMLParser#lcond}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLcond(CodeToHTMLParser.LcondContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CodeToHTMLParser#lcondAux}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLcondAux(CodeToHTMLParser.LcondAuxContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CodeToHTMLParser#cond}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCond(CodeToHTMLParser.CondContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CodeToHTMLParser#opl}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOpl(CodeToHTMLParser.OplContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CodeToHTMLParser#opr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOpr(CodeToHTMLParser.OprContext ctx);
 }

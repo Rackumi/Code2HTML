@@ -1,75 +1,97 @@
 grammar CodeToHTML;
 
 r : program;
-
-IDENTIFICADOR : ('_' | WORD)('_' | WORD | DECIMAL)+ {System.out.println(getText());};
-
-CONSTENTERO : ((('+'|'-')? DECIMAL+) | ('$' ('+'|'-')? HEXADECIMAL+)) {System.out.println(getText());};
-
-CONSTREAL : ((('+'|'-')? DECIMAL+ '.' DECIMAL+) | ('$' ('+'|'-')? HEXADECIMAL+ '.' HEXADECIMAL+)) {System.out.println(getText());};
-
-CONSTLIT : (('"' (WORD | '\'' | '""' | WS)+ '"') | ('\'' (WORD | '"' | '\'\'' | WS)+ '\'')) {System.out.println(getText());};
-
-COMENTARIOL : ('%%' (WORD)+ '\r\n') {System.out.println(getText());};
-
-COMENTARIOM : ('%-' (WORD | WS)+ '-%') {System.out.println(getText());};
-
-WS : [ \n\t\r] -> skip;
-
 program : part program | part;
 
-part : 'funcion' type restpart | 'procedimiento' restpart;
+part : F type restpart | P restpart;
 
-restpart : IDENTIFICADOR '(' listparam ')' blq | IDENTIFICADOR '(' ')' blq;
+restpart : IDENTIFICADOR ABRE listparam CIERRA blq | IDENTIFICADOR ABRE CIERRA blq;
 
-listparam : listparam ',' type IDENTIFICADOR | type IDENTIFICADOR;
+//listparam : listparam ',' type IDENTIFICADOR | type IDENTIFICADOR;
 // recursividad por la izquierda. Arreglado
-//listparam : type IDENTIFICADOR listparamAux;
-//listparamAux : listparam ',' type IDENTIFICADOR listparamAux | ;
+listparam : type IDENTIFICADOR listparamAux;
+listparamAux : listparam PUNTOYCOMA type IDENTIFICADOR listparamAux | ;
 
-type : 'entero' | 'real' | 'caracter';
+type : ENTERO  | REAL | CAR ;
 
-blq : 'inicio' sentlist 'fin';
+blq : INICIO sentlist FIN;
 
-sentlist : sentlist sent | sent;
+//sentlist : sentlist sent | sent;
 // recursicidad por la izquierda. Arreglado
 //1 o varios sent que son asignaciones operaciones etc
-//sentlist : sent sentlistAux;
-//sentlistAux : sentlist sent sentlistAux | ;
+sentlist : sent sentlistAux;
+sentlistAux : sentlist sent sentlistAux | ;
 
-sent : type lid ';'
-    | 'bifurcacion' '(' lcond ')' 'entonces' blq 'sino' blq
+sent : type lid PUNTOYCOMA
+    | IDENTIFICADOR asig exp PUNTOYCOMA
+    | 'return' exp ';'
+    | IDENTIFICADOR ABRE lid CIERRA PUNTOYCOMA
+    | IDENTIFICADOR ABRE CIERRA PUNTOYCOMA
+    | B ABRE lcond CIERRA E blq S blq
     | 'buclepara' '(' IDENTIFICADOR asig exp ';' lcond ';' IDENTIFICADOR asig exp ')' blq
     | 'buclemientras' '(' lcond ')' blq
     | 'bucle' blq 'hasta' '(' lcond ')'
-    | 'return' exp ';'
-    | IDENTIFICADOR asig exp ';'
-    | IDENTIFICADOR '(' lid ')' ';'
-    | IDENTIFICADOR '(' ')' ';'
     | blq
     ;
 
-lid : IDENTIFICADOR | IDENTIFICADOR ',' lid; //variables 1 o mas
+//bif: 'bifurcacion' '(' lcond ')' 'entonces' blq 'sino' blq;
 
-asig : '=' | '+=' | '-=' | '*=' | '/=';
+lid : IDENTIFICADOR | (IDENTIFICADOR COMA) lid; //variables 1 o mas
 
-exp : exp op exp | IDENTIFICADOR '(' lid ')' | '(' exp ')' | IDENTIFICADOR | CONSTENTERO | CONSTREAL | CONSTLIT;
+asig : IGUAL | '+=' | '-=' | '*=' | '/=';
+
+//exp : exp op exp | IDENTIFICADOR '(' lid ')' | '(' exp ')' | IDENTIFICADOR | CONSTENTERO | CONSTREAL | CONSTLIT;
 //recursicidad por la izquierda. Arreglar
-//exp : (IDENTIFICADOR '(' lid ')' | '(' exp ')' | IDENTIFICADOR | CONSTENTERO | CONSTREAL | CONSTLIT) expAux;
-//expAux :  exp op exp expAux | ;
+exp : (IDENTIFICADOR ABRE lid CIERRA | ABRE exp CIERRA | IDENTIFICADOR | CONSTENTERO | CONSTREAL | CONSTLIT) expAux;
+expAux :  exp op exp expAux | ;
 
 op : '+' | '-' | '*' | '/';
 
-lcond : lcond opl lcond | cond | 'no' cond;
+//lcond : lcond opl lcond | cond | 'no' cond;
 // recursicidad por la izquierda. Arreglar
-//lcond :  (cond | 'no' cond) lcondAux;
-//lcondAux : lcond opl lcond lcondAux | ;
+lcond :  (cond | 'no' cond) lcondAux;
+lcondAux : lcond opl lcond lcondAux | ;
 
 cond : exp opr exp | 'cierto' | 'falso';
 
 opl : 'y' | 'o';
 
 opr : '==' | '<>' | '<' | '>' | '>=' | '<=';
+
+B : 'bifurcacion';
+E : 'entonces';
+S : 'sino'{System.out.println("fUNCIONA");};
+
+ABRE : '(';
+CIERRA : ')';
+
+F : 'funcion'{System.out.println("fUNCIONA");};
+P : 'procedimiento';
+
+INICIO : 'inicio'{System.out.println("fUNCIONA");};
+FIN : 'fin';
+
+ENTERO : 'entero';
+REAL : 'real';
+CAR : 'caracter';
+
+PUNTOYCOMA : ';';
+COMA : ',';
+IGUAL : '=';
+
+IDENTIFICADOR : ('_' | WORD)('_' | WORD | DECIMAL )+ {System.out.println(getText());};
+
+CONSTENTERO : ((('+'|'-')? DECIMAL+) | ('$' ('+'|'-')? HEXADECIMAL+)) {System.out.println(getText());};
+
+CONSTREAL : ((('+'|'-')? DECIMAL+ '.' DECIMAL+) | ('$' ('+'|'-')? HEXADECIMAL+ '.' HEXADECIMAL+)) {System.out.println(getText());};
+
+CONSTLIT : (('"' (WORD | '\'' | '""' | WS)+ '"') | ('\'' (WORD | '"' | '\'\'' | WS)+ '\'') ) {System.out.println(getText());};
+
+COMENTARIOL : ('%%' (WORD)+ '\r\n') {System.out.println(getText());};
+
+COMENTARIOM : ('%-' (WORD | WS)+ '-%') {System.out.println(getText());};
+
+WS : [ \n\t\r] -> skip;
 
 fragment
 
@@ -79,3 +101,4 @@ HEXADECIMAL: [0-9A-F];
 
 ALPHA : [A-Za-z];
 WORD : ALPHA+;
+
