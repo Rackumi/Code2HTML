@@ -1,0 +1,12 @@
+procedimiento nombre1(entero variable1, entero variable2)
+    inicio
+        bifurcacion (cierto) entonces
+                    inicio
+                    paco = 1;
+                    return juan;
+                    fin
+                sino
+                    inicio
+                        paco = 1;
+                    fin
+    fin

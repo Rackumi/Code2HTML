@@ -1,0 +1,4 @@
+funcion entero nombre1(variable1 entero)
+    inicio
+        return 1;
+    fin

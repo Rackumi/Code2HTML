@@ -10,14 +10,3 @@ funcion entero nombre1(entero variable1, entero variable2)
                         paco = 1;
                     fin
     fin
-procedimiento nombre1(real variable3, caracter variable4)
-    inicio
-        bucle (cierto) hasta
-                    inicio
-                    paco = 1;
-                    fin
-                sino
-                    inicio
-                        paco = 1;
-                    fin
-    fin
