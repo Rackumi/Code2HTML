@@ -1,4 +1,4 @@
-funcion entero nombre1()
+funcion entero nombre1(entero variable1, entero variable2)
     inicio
         bifurcacion (cierto) entonces
                     inicio

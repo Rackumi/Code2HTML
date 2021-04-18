@@ -7,10 +7,10 @@ part : F type restpart | P restpart;
 
 restpart : IDENTIFICADOR ABRE listparam CIERRA blq | IDENTIFICADOR ABRE CIERRA blq;
 
-//listparam : listparam ',' type IDENTIFICADOR | type IDENTIFICADOR;
+//listparam : listparam COMA type IDENTIFICADOR | type IDENTIFICADOR;
 // recursividad por la izquierda. Arreglado
 listparam : type IDENTIFICADOR listparamAux;
-listparamAux : listparam COMA type IDENTIFICADOR listparamAux | ;
+listparamAux : COMA type IDENTIFICADOR listparamAux | ;
 
 type : ENTERO  | REAL | CAR ;
 
@@ -20,7 +20,7 @@ blq : INICIO sentlist FIN;
 // recursicidad por la izquierda. Arreglado
 //1 o varios sent que son asignaciones operaciones etc
 sentlist : sent sentlistAux;
-sentlistAux : sentlist sent sentlistAux | ;
+sentlistAux : sent sentlistAux | ;
 
 sent : type lid PUNTOYCOMA
     | IDENTIFICADOR asig exp PUNTOYCOMA
@@ -34,8 +34,6 @@ sent : type lid PUNTOYCOMA
     | blq
     ;
 
-//bif: 'bifurcacion' '(' lcond ')' 'entonces' blq 'sino' blq;
-
 lid : IDENTIFICADOR | (IDENTIFICADOR COMA) lid; //variables 1 o mas
 
 asig : IGUAL | '+=' | '-=' | '*=' | '/=';
@@ -43,14 +41,14 @@ asig : IGUAL | '+=' | '-=' | '*=' | '/=';
 //exp : exp op exp | IDENTIFICADOR '(' lid ')' | '(' exp ')' | IDENTIFICADOR | CONSTENTERO | CONSTREAL | CONSTLIT;
 //recursicidad por la izquierda. Arreglar
 exp : (IDENTIFICADOR ABRE lid CIERRA | ABRE exp CIERRA | IDENTIFICADOR | CONSTENTERO | CONSTREAL | CONSTLIT) expAux;
-expAux :  exp op exp expAux | ;
+expAux : op exp expAux | ;
 
 op : '+' | '-' | '*' | '/';
 
 //lcond : lcond opl lcond | cond | 'no' cond;
 // recursicidad por la izquierda. Arreglar
 lcond :  (cond | 'no' cond) lcondAux;
-lcondAux : lcond opl lcond lcondAux | ;
+lcondAux : opl lcond lcondAux | ;
 
 cond : exp opr exp | 'cierto' | 'falso';
 
