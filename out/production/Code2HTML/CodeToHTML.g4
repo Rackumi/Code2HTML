@@ -1,11 +1,18 @@
 grammar CodeToHTML;
 
 r : program;
-program : part program | part;
+
+//program : part program | part;
+// factorizacion. Arreglado
+program : part programAux;
+programAux : program | ;
 
 part : F type restpart | P restpart;
 
-restpart : IDENTIFICADOR ABRE listparam CIERRA blq | IDENTIFICADOR ABRE CIERRA blq;
+//restpart : IDENTIFICADOR ABRE listparam CIERRA blq | IDENTIFICADOR ABRE CIERRA blq;
+// factorizacion. Arreglado
+restpart : IDENTIFICADOR ABRE restpartAux;
+restpartAux : listparam CIERRA blq | CIERRA blq;
 
 //listparam : listparam COMA type IDENTIFICADOR | type IDENTIFICADOR;
 // recursividad por la izquierda. Arreglado
@@ -22,19 +29,33 @@ blq : INICIO sentlist FIN;
 sentlist : sent sentlistAux;
 sentlistAux : sent sentlistAux | ;
 
+//sent : type lid PUNTOYCOMA
+//    | IDENTIFICADOR asig exp PUNTOYCOMA
+//    | 'return' exp ';'
+//    | IDENTIFICADOR ABRE lid CIERRA PUNTOYCOMA
+//    | IDENTIFICADOR ABRE CIERRA PUNTOYCOMA
+//    | B ABRE lcond CIERRA E blq S blq
+//    | 'buclepara' '(' IDENTIFICADOR asig exp ';' lcond ';' IDENTIFICADOR asig exp ')' blq
+//    | 'buclemientras' '(' lcond ')' blq
+//    | 'bucle' blq 'hasta' '(' lcond ')'
+//    | blq
+//    ;
+// factorizacion. Arreglado
 sent : type lid PUNTOYCOMA
-    | IDENTIFICADOR asig exp PUNTOYCOMA
+    | IDENTIFICADOR sentId
     | 'return' exp ';'
-    | IDENTIFICADOR ABRE lid CIERRA PUNTOYCOMA
-    | IDENTIFICADOR ABRE CIERRA PUNTOYCOMA
     | B ABRE lcond CIERRA E blq S blq
     | 'buclepara' '(' IDENTIFICADOR asig exp ';' lcond ';' IDENTIFICADOR asig exp ')' blq
     | 'buclemientras' '(' lcond ')' blq
     | 'bucle' blq 'hasta' '(' lcond ')'
-    | blq
-    ;
+    | blq;
+sentId : asig exp PUNTOYCOMA | ABRE sentAbre;
+sentAbre : lid CIERRA PUNTOYCOMA | CIERRA PUNTOYCOMA;
 
-lid : IDENTIFICADOR | (IDENTIFICADOR COMA) lid; //variables 1 o mas
+//lid : IDENTIFICADOR | (IDENTIFICADOR COMA) lid;
+// factorizacion. Arreglar
+lid : IDENTIFICADOR lidAux;
+lidAux : | COMA lid;
 
 asig : IGUAL | '+=' | '-=' | '*=' | '/=';
 
@@ -99,4 +120,3 @@ HEXADECIMAL: [0-9A-F];
 
 ALPHA : [A-Za-z];
 WORD : ALPHA+;
-

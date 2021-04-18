@@ -1,4 +1,4 @@
-// Generated from C:/Users/gocruz17/IdeaProjects/Code2HTML/src\CodeToHTML.g4 by ANTLR 4.9.1
+// Generated from C:/Users/alvar/Desktop/WorkinSpace/ANTLR/Code2HTML/src\CodeToHTML.g4 by ANTLR 4.9.1
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -39,6 +39,18 @@ public class CodeToHTMLBaseListener implements CodeToHTMLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterProgramAux(CodeToHTMLParser.ProgramAuxContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitProgramAux(CodeToHTMLParser.ProgramAuxContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterPart(CodeToHTMLParser.PartContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -58,6 +70,18 @@ public class CodeToHTMLBaseListener implements CodeToHTMLListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRestpart(CodeToHTMLParser.RestpartContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterRestpartAux(CodeToHTMLParser.RestpartAuxContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRestpartAux(CodeToHTMLParser.RestpartAuxContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -147,6 +171,30 @@ public class CodeToHTMLBaseListener implements CodeToHTMLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterSentId(CodeToHTMLParser.SentIdContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSentId(CodeToHTMLParser.SentIdContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSentAbre(CodeToHTMLParser.SentAbreContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSentAbre(CodeToHTMLParser.SentAbreContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterLid(CodeToHTMLParser.LidContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -154,6 +202,18 @@ public class CodeToHTMLBaseListener implements CodeToHTMLListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitLid(CodeToHTMLParser.LidContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLidAux(CodeToHTMLParser.LidAuxContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLidAux(CodeToHTMLParser.LidAuxContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
