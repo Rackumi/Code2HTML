@@ -419,7 +419,7 @@ public class CodeToHTMLParser extends Parser {
 		public ListparamContext listparam() {
 			return getRuleContext(ListparamContext.class,0);
 		}
-		public TerminalNode PUNTOYCOMA() { return getToken(CodeToHTMLParser.PUNTOYCOMA, 0); }
+		public TerminalNode COMA() { return getToken(CodeToHTMLParser.COMA, 0); }
 		public TypeContext type() {
 			return getRuleContext(TypeContext.class,0);
 		}
@@ -461,7 +461,7 @@ public class CodeToHTMLParser extends Parser {
 				setState(74);
 				listparam();
 				setState(75);
-				match(PUNTOYCOMA);
+				match(COMA);
 				setState(76);
 				type();
 				setState(77);
@@ -471,7 +471,7 @@ public class CodeToHTMLParser extends Parser {
 				}
 				break;
 			case CIERRA:
-			case PUNTOYCOMA:
+			case COMA:
 				enterOuterAlt(_localctx, 2);
 				{
 				}
@@ -1635,8 +1635,8 @@ public class CodeToHTMLParser extends Parser {
 		"\b\5\2:\64\3\2\2\2:8\3\2\2\2;\7\3\2\2\2<=\7*\2\2=>\7\36\2\2>?\5\n\6\2"+
 		"?@\7\37\2\2@A\5\20\t\2AG\3\2\2\2BC\7*\2\2CD\7\36\2\2DE\7\37\2\2EG\5\20"+
 		"\t\2F<\3\2\2\2FB\3\2\2\2G\t\3\2\2\2HI\5\16\b\2IJ\7*\2\2JK\5\f\7\2K\13"+
-		"\3\2\2\2LM\5\n\6\2MN\7\'\2\2NO\5\16\b\2OP\7*\2\2PQ\5\f\7\2QT\3\2\2\2R"+
-		"T\3\2\2\2SL\3\2\2\2SR\3\2\2\2T\r\3\2\2\2UV\t\2\2\2V\17\3\2\2\2WX\7\"\2"+
+		"\3\2\2\2LM\5\n\6\2MN\7(\2\2NO\5\16\b\2OP\7*\2\2PQ\5\f\7\2QT\3\2\2\2RT"+
+		"\3\2\2\2SL\3\2\2\2SR\3\2\2\2T\r\3\2\2\2UV\t\2\2\2V\17\3\2\2\2WX\7\"\2"+
 		"\2XY\5\22\n\2YZ\7#\2\2Z\21\3\2\2\2[\\\5\26\f\2\\]\5\24\13\2]\23\3\2\2"+
 		"\2^_\5\22\n\2_`\5\26\f\2`a\5\24\13\2ad\3\2\2\2bd\3\2\2\2c^\3\2\2\2cb\3"+
 		"\2\2\2d\25\3\2\2\2ef\5\16\b\2fg\5\30\r\2gh\7\'\2\2h\u00a2\3\2\2\2ij\7"+

@@ -1,4 +1,4 @@
-funcion entero nombre1(caracter param1, entero _param2)
+funcion entero nombre1()
     inicio
         bifurcacion (cierto) entonces
                     inicio

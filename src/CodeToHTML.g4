@@ -10,7 +10,7 @@ restpart : IDENTIFICADOR ABRE listparam CIERRA blq | IDENTIFICADOR ABRE CIERRA b
 //listparam : listparam ',' type IDENTIFICADOR | type IDENTIFICADOR;
 // recursividad por la izquierda. Arreglado
 listparam : type IDENTIFICADOR listparamAux;
-listparamAux : listparam PUNTOYCOMA type IDENTIFICADOR listparamAux | ;
+listparamAux : listparam COMA type IDENTIFICADOR listparamAux | ;
 
 type : ENTERO  | REAL | CAR ;
 
