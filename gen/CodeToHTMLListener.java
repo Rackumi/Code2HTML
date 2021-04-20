@@ -167,6 +167,16 @@ public interface CodeToHTMLListener extends ParseTreeListener {
 	 */
 	void exitLid(CodeToHTMLParser.LidContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CodeToHTMLParser#lid_f}.
+	 * @param ctx the parse tree
+	 */
+	void enterLid_f(CodeToHTMLParser.Lid_fContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeToHTMLParser#lid_f}.
+	 * @param ctx the parse tree
+	 */
+	void exitLid_f(CodeToHTMLParser.Lid_fContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CodeToHTMLParser#asig}.
 	 * @param ctx the parse tree
 	 */
@@ -186,6 +196,16 @@ public interface CodeToHTMLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExp(CodeToHTMLParser.ExpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeToHTMLParser#exp_f}.
+	 * @param ctx the parse tree
+	 */
+	void enterExp_f(CodeToHTMLParser.Exp_fContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeToHTMLParser#exp_f}.
+	 * @param ctx the parse tree
+	 */
+	void exitExp_f(CodeToHTMLParser.Exp_fContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CodeToHTMLParser#exp_r}.
 	 * @param ctx the parse tree

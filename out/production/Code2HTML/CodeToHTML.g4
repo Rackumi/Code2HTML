@@ -2,13 +2,13 @@ grammar CodeToHTML;
 
 r : program;
 
-// factorizacion. Arreglado
+//Factorizacion. Arreglado
 program : part program_f;
 program_f : program | ;
 
 part : 'funcion' type restpart | 'procedimiento' restpart;
 
-// factorizacion. Arreglado
+//Factorizacion. Arreglado
 restpart : IDENTIFICADOR '(' restpart_f ')' blq;
 restpart_f : listparam | ;
 
@@ -24,7 +24,7 @@ blq : 'inicio' sentlist 'fin';
 sentlist : sent sentlist_r;
 sentlist_r : sent sentlist_r | ;
 
-// factorizacion. Arreglado
+//Factorizacion. Arreglado
 sent : type lid ';'
     | IDENTIFICADOR sent_f1
     | 'return' exp ';'
@@ -34,17 +34,18 @@ sent : type lid ';'
     | 'bucle' blq 'hasta' '(' lcond ')'
     | blq;
 sent_f1 : asig exp ';' | '(' sent_f2;
-sent_f2 : lid ')' ';' | '(' ')' exp ';';
+sent_f2 : lid ')' ';' | '(' ')' ';';
 
-lid : IDENTIFICADOR | IDENTIFICADOR ',' lid;
-// factorizacion. Arreglado
-//lid : IDENTIFICADOR lidAux;
-//lidAux : COMA lid | ;
+//Factorizacion. Arreglado
+lid : IDENTIFICADOR lid_f;
+lid_f : ',' lid | ;
 
 asig : '=' | '+=' | '-=' | '*=' | '/=';
 
 //Recursividad por la izquierda. Arreglado.
-exp : IDENTIFICADOR '(' lid ')' exp_r | '(' exp ')' exp_r | IDENTIFICADOR exp_r | CONSTENTERO exp_r | CONSTREAL exp_r | CONSTLIT exp_r;
+//Factorizacion. Arreglado
+exp : IDENTIFICADOR exp_f | '(' exp ')' exp_r | CONSTENTERO exp_r | CONSTREAL exp_r | CONSTLIT exp_r;
+exp_f : '(' lid ')' exp_r | exp_r;
 exp_r : op exp exp_r | ;
 
 op : '+' | '-' | '*' | '/';

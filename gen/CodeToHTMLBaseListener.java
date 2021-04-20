@@ -207,6 +207,18 @@ public class CodeToHTMLBaseListener implements CodeToHTMLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterLid_f(CodeToHTMLParser.Lid_fContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLid_f(CodeToHTMLParser.Lid_fContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterAsig(CodeToHTMLParser.AsigContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -226,6 +238,18 @@ public class CodeToHTMLBaseListener implements CodeToHTMLListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitExp(CodeToHTMLParser.ExpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExp_f(CodeToHTMLParser.Exp_fContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExp_f(CodeToHTMLParser.Exp_fContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

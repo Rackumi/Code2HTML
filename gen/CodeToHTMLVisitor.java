@@ -106,6 +106,12 @@ public interface CodeToHTMLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLid(CodeToHTMLParser.LidContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CodeToHTMLParser#lid_f}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLid_f(CodeToHTMLParser.Lid_fContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CodeToHTMLParser#asig}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -117,6 +123,12 @@ public interface CodeToHTMLVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitExp(CodeToHTMLParser.ExpContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CodeToHTMLParser#exp_f}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExp_f(CodeToHTMLParser.Exp_fContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CodeToHTMLParser#exp_r}.
 	 * @param ctx the parse tree

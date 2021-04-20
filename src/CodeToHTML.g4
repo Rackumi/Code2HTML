@@ -43,7 +43,9 @@ lid_f : ',' lid | ;
 asig : '=' | '+=' | '-=' | '*=' | '/=';
 
 //Recursividad por la izquierda. Arreglado.
-exp : IDENTIFICADOR '(' lid ')' exp_r | '(' exp ')' exp_r | IDENTIFICADOR exp_r | CONSTENTERO exp_r | CONSTREAL exp_r | CONSTLIT exp_r;
+//Factorizacion. Arreglado
+exp : IDENTIFICADOR exp_f | '(' exp ')' exp_r | CONSTENTERO exp_r | CONSTREAL exp_r | CONSTLIT exp_r;
+exp_f : '(' lid ')' exp_r | exp_r;
 exp_r : op exp exp_r | ;
 
 op : '+' | '-' | '*' | '/';
