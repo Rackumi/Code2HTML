@@ -40,6 +40,12 @@ public interface CodeToHTMLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitListparam(CodeToHTMLParser.ListparamContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CodeToHTMLParser#listparam_r}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitListparam_r(CodeToHTMLParser.Listparam_rContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CodeToHTMLParser#type}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -57,6 +63,12 @@ public interface CodeToHTMLVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSentlist(CodeToHTMLParser.SentlistContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CodeToHTMLParser#sentlist_r}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSentlist_r(CodeToHTMLParser.Sentlist_rContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CodeToHTMLParser#sent}.
 	 * @param ctx the parse tree
@@ -82,6 +94,12 @@ public interface CodeToHTMLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExp(CodeToHTMLParser.ExpContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CodeToHTMLParser#exp_r}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExp_r(CodeToHTMLParser.Exp_rContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CodeToHTMLParser#op}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -93,6 +111,12 @@ public interface CodeToHTMLVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitLcond(CodeToHTMLParser.LcondContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CodeToHTMLParser#lcond_r}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLcond_r(CodeToHTMLParser.Lcond_rContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CodeToHTMLParser#cond}.
 	 * @param ctx the parse tree

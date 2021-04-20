@@ -75,6 +75,18 @@ public class CodeToHTMLBaseListener implements CodeToHTMLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterListparam_r(CodeToHTMLParser.Listparam_rContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitListparam_r(CodeToHTMLParser.Listparam_rContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterType(CodeToHTMLParser.TypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -106,6 +118,18 @@ public class CodeToHTMLBaseListener implements CodeToHTMLListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitSentlist(CodeToHTMLParser.SentlistContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSentlist_r(CodeToHTMLParser.Sentlist_rContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSentlist_r(CodeToHTMLParser.Sentlist_rContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -159,6 +183,18 @@ public class CodeToHTMLBaseListener implements CodeToHTMLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterExp_r(CodeToHTMLParser.Exp_rContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExp_r(CodeToHTMLParser.Exp_rContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterOp(CodeToHTMLParser.OpContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -178,6 +214,18 @@ public class CodeToHTMLBaseListener implements CodeToHTMLListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitLcond(CodeToHTMLParser.LcondContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLcond_r(CodeToHTMLParser.Lcond_rContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLcond_r(CodeToHTMLParser.Lcond_rContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

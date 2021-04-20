@@ -57,6 +57,16 @@ public interface CodeToHTMLListener extends ParseTreeListener {
 	 */
 	void exitListparam(CodeToHTMLParser.ListparamContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CodeToHTMLParser#listparam_r}.
+	 * @param ctx the parse tree
+	 */
+	void enterListparam_r(CodeToHTMLParser.Listparam_rContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeToHTMLParser#listparam_r}.
+	 * @param ctx the parse tree
+	 */
+	void exitListparam_r(CodeToHTMLParser.Listparam_rContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CodeToHTMLParser#type}.
 	 * @param ctx the parse tree
 	 */
@@ -86,6 +96,16 @@ public interface CodeToHTMLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSentlist(CodeToHTMLParser.SentlistContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeToHTMLParser#sentlist_r}.
+	 * @param ctx the parse tree
+	 */
+	void enterSentlist_r(CodeToHTMLParser.Sentlist_rContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeToHTMLParser#sentlist_r}.
+	 * @param ctx the parse tree
+	 */
+	void exitSentlist_r(CodeToHTMLParser.Sentlist_rContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CodeToHTMLParser#sent}.
 	 * @param ctx the parse tree
@@ -127,6 +147,16 @@ public interface CodeToHTMLListener extends ParseTreeListener {
 	 */
 	void exitExp(CodeToHTMLParser.ExpContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CodeToHTMLParser#exp_r}.
+	 * @param ctx the parse tree
+	 */
+	void enterExp_r(CodeToHTMLParser.Exp_rContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeToHTMLParser#exp_r}.
+	 * @param ctx the parse tree
+	 */
+	void exitExp_r(CodeToHTMLParser.Exp_rContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CodeToHTMLParser#op}.
 	 * @param ctx the parse tree
 	 */
@@ -146,6 +176,16 @@ public interface CodeToHTMLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitLcond(CodeToHTMLParser.LcondContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeToHTMLParser#lcond_r}.
+	 * @param ctx the parse tree
+	 */
+	void enterLcond_r(CodeToHTMLParser.Lcond_rContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeToHTMLParser#lcond_r}.
+	 * @param ctx the parse tree
+	 */
+	void exitLcond_r(CodeToHTMLParser.Lcond_rContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CodeToHTMLParser#cond}.
 	 * @param ctx the parse tree

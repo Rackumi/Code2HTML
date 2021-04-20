@@ -14,20 +14,17 @@ restpart : IDENTIFICADOR '(' listparam ')' blq | IDENTIFICADOR '(' ')' blq;
 //restpart : IDENTIFICADOR ABRE restpartAux blq;
 //restpartAux : listparam CIERRA | CIERRA;
 
-listparam : listparam ',' type IDENTIFICADOR | type IDENTIFICADOR;
-// recursividad por la izquierda. Arreglado
-//listparam : type IDENTIFICADOR listparamAux;
-//listparamAux : COMA type IDENTIFICADOR listparamAux | ;
+//Recursividad por la izquierda. Arreglado
+listparam : type IDENTIFICADOR listparam_r;
+listparam_r : ',' type IDENTIFICADOR listparam_r | ;
 
-type : 'entero'  | 'real' | 'caracter' ;
+type : 'entero'  | 'real' | 'caracter';
 
 blq : 'inicio' sentlist 'fin';
 
-sentlist : sentlist sent | sent;
-// recursicidad por la izquierda. Arreglado
-//1 o varios sent que son asignaciones operaciones etc
-//sentlist : sent sentlistAux;
-//sentlistAux : sent sentlistAux | ;
+//Recursividad por la izquierda. Arreglado
+sentlist : sent sentlist_r;
+sentlist_r : sent sentlist_r | ;
 
 sent : type lid ';'
     | IDENTIFICADOR asig exp ';'
@@ -52,24 +49,22 @@ sent : type lid ';'
 //sentId : asig exp PUNTOYCOMA | ABRE sentAbre;
 //sentAbre : lid CIERRA PUNTOYCOMA | CIERRA PUNTOYCOMA;
 
-lid : IDENTIFICADOR | (IDENTIFICADOR ',') lid;
+lid : IDENTIFICADOR | IDENTIFICADOR ',' lid;
 // factorizacion. Arreglado
 //lid : IDENTIFICADOR lidAux;
 //lidAux : COMA lid | ;
 
 asig : '=' | '+=' | '-=' | '*=' | '/=';
 
-exp : exp op exp | IDENTIFICADOR '(' lid ')' | '(' exp ')' | IDENTIFICADOR | CONSTENTERO | CONSTREAL | CONSTLIT;
-//recursicidad por la izquierda. Sin arreglar
-//exp : (IDENTIFICADOR ABRE lid CIERRA | ABRE exp CIERRA | IDENTIFICADOR | CONSTENTERO | CONSTREAL | CONSTLIT) expAux;
-//expAux : op exp expAux | ;
+//Recursividad por la izquierda. Arreglado
+exp : IDENTIFICADOR '(' lid ')' exp_r | '(' exp ')' exp_r | IDENTIFICADOR exp_r | CONSTENTERO exp_r | CONSTREAL exp_r | CONSTLIT exp_r;
+exp_r : op exp exp_r | ;
 
 op : '+' | '-' | '*' | '/';
 
-lcond : lcond opl lcond | cond | 'no' cond;
 // recursicidad por la izquierda. Arreglar
-//lcond :  (cond | 'no' cond) lcondAux;
-//lcondAux : opl lcond lcondAux | ;
+lcond : cond lcond_r | 'no' cond lcond_r;
+lcond_r : opl lcond lcond_r | ;
 
 cond : exp opr exp | 'cierto' | 'falso';
 
