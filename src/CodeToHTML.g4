@@ -2,23 +2,21 @@ grammar CodeToHTML;
 
 r : program;
 
-program : part program | part;
-// factorizacion. Arreglado
-//program : part programAux;
-//programAux : program | ;
+//Factorizacion. Arreglado
+program : part program_f;
+program_f : program | ;
 
 part : 'funcion' type restpart | 'procedimiento' restpart;
 
-restpart : IDENTIFICADOR '(' listparam ')' blq | IDENTIFICADOR '(' ')' blq;
-// factorizacion. Arreglado
-//restpart : IDENTIFICADOR ABRE restpartAux blq;
-//restpartAux : listparam CIERRA | CIERRA;
+//Factorizacion. Arreglado
+restpart : IDENTIFICADOR '(' restpart_f ')' blq;
+restpart_f : listparam | ;
 
 //Recursividad por la izquierda. Arreglado.
 listparam : type IDENTIFICADOR listparam_r;
 listparam_r : ',' type IDENTIFICADOR listparam_r | ;
 
-type : 'entero'  | 'real' | 'caracter';
+type : 'entero' | 'real' | 'caracter';
 
 blq : 'inicio' sentlist 'fin';
 
@@ -26,33 +24,21 @@ blq : 'inicio' sentlist 'fin';
 sentlist : sent sentlist_r;
 sentlist_r : sent sentlist_r | ;
 
+//Factorizacion. Arreglado
 sent : type lid ';'
-    | IDENTIFICADOR asig exp ';'
+    | IDENTIFICADOR sent_f1
     | 'return' exp ';'
-    | IDENTIFICADOR '(' lid ')' ';'
-    | IDENTIFICADOR '(' ')' ';'
     | 'bifurcacion' '(' lcond ')' 'entonces' blq 'sino' blq
     | 'buclepara' '(' IDENTIFICADOR asig exp ';' lcond ';' IDENTIFICADOR asig exp ')' blq
     | 'buclemientras' '(' lcond ')' blq
     | 'bucle' blq 'hasta' '(' lcond ')'
-    | blq
-    ;
-// factorizacion. Arreglado
-//sent : type lid PUNTOYCOMA
-//    | IDENTIFICADOR sentId
-//    | 'return' exp ';'
-//    | B ABRE lcond CIERRA E blq S blq
-//    | 'buclepara' '(' IDENTIFICADOR asig exp ';' lcond ';' IDENTIFICADOR asig exp ')' blq
-//    | 'buclemientras' '(' lcond ')' blq
-//    | 'bucle' blq 'hasta' '(' lcond ')'
-//    | blq;
-//sentId : asig exp PUNTOYCOMA | ABRE sentAbre;
-//sentAbre : lid CIERRA PUNTOYCOMA | CIERRA PUNTOYCOMA;
+    | blq;
+sent_f1 : asig exp ';' | '(' sent_f2;
+sent_f2 : lid ')' ';' | '(' ')' ';';
 
-lid : IDENTIFICADOR | IDENTIFICADOR ',' lid;
-// factorizacion. Arreglado
-//lid : IDENTIFICADOR lidAux;
-//lidAux : COMA lid | ;
+//Factorizacion. Arreglado
+lid : IDENTIFICADOR lid_f;
+lid_f : ',' lid | ;
 
 asig : '=' | '+=' | '-=' | '*=' | '/=';
 

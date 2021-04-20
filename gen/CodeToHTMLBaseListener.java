@@ -39,6 +39,18 @@ public class CodeToHTMLBaseListener implements CodeToHTMLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterProgram_f(CodeToHTMLParser.Program_fContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitProgram_f(CodeToHTMLParser.Program_fContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterPart(CodeToHTMLParser.PartContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -58,6 +70,18 @@ public class CodeToHTMLBaseListener implements CodeToHTMLListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRestpart(CodeToHTMLParser.RestpartContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterRestpart_f(CodeToHTMLParser.Restpart_fContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRestpart_f(CodeToHTMLParser.Restpart_fContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -142,6 +166,30 @@ public class CodeToHTMLBaseListener implements CodeToHTMLListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitSent(CodeToHTMLParser.SentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSent_f1(CodeToHTMLParser.Sent_f1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSent_f1(CodeToHTMLParser.Sent_f1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSent_f2(CodeToHTMLParser.Sent_f2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSent_f2(CodeToHTMLParser.Sent_f2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -27,6 +27,16 @@ public interface CodeToHTMLListener extends ParseTreeListener {
 	 */
 	void exitProgram(CodeToHTMLParser.ProgramContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CodeToHTMLParser#program_f}.
+	 * @param ctx the parse tree
+	 */
+	void enterProgram_f(CodeToHTMLParser.Program_fContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeToHTMLParser#program_f}.
+	 * @param ctx the parse tree
+	 */
+	void exitProgram_f(CodeToHTMLParser.Program_fContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CodeToHTMLParser#part}.
 	 * @param ctx the parse tree
 	 */
@@ -46,6 +56,16 @@ public interface CodeToHTMLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRestpart(CodeToHTMLParser.RestpartContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeToHTMLParser#restpart_f}.
+	 * @param ctx the parse tree
+	 */
+	void enterRestpart_f(CodeToHTMLParser.Restpart_fContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeToHTMLParser#restpart_f}.
+	 * @param ctx the parse tree
+	 */
+	void exitRestpart_f(CodeToHTMLParser.Restpart_fContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CodeToHTMLParser#listparam}.
 	 * @param ctx the parse tree
@@ -116,6 +136,26 @@ public interface CodeToHTMLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSent(CodeToHTMLParser.SentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeToHTMLParser#sent_f1}.
+	 * @param ctx the parse tree
+	 */
+	void enterSent_f1(CodeToHTMLParser.Sent_f1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeToHTMLParser#sent_f1}.
+	 * @param ctx the parse tree
+	 */
+	void exitSent_f1(CodeToHTMLParser.Sent_f1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeToHTMLParser#sent_f2}.
+	 * @param ctx the parse tree
+	 */
+	void enterSent_f2(CodeToHTMLParser.Sent_f2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeToHTMLParser#sent_f2}.
+	 * @param ctx the parse tree
+	 */
+	void exitSent_f2(CodeToHTMLParser.Sent_f2Context ctx);
 	/**
 	 * Enter a parse tree produced by {@link CodeToHTMLParser#lid}.
 	 * @param ctx the parse tree

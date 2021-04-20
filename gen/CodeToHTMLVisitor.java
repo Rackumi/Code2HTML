@@ -22,6 +22,12 @@ public interface CodeToHTMLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitProgram(CodeToHTMLParser.ProgramContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CodeToHTMLParser#program_f}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitProgram_f(CodeToHTMLParser.Program_fContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CodeToHTMLParser#part}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -33,6 +39,12 @@ public interface CodeToHTMLVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitRestpart(CodeToHTMLParser.RestpartContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CodeToHTMLParser#restpart_f}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRestpart_f(CodeToHTMLParser.Restpart_fContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CodeToHTMLParser#listparam}.
 	 * @param ctx the parse tree
@@ -75,6 +87,18 @@ public interface CodeToHTMLVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSent(CodeToHTMLParser.SentContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CodeToHTMLParser#sent_f1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSent_f1(CodeToHTMLParser.Sent_f1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link CodeToHTMLParser#sent_f2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSent_f2(CodeToHTMLParser.Sent_f2Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link CodeToHTMLParser#lid}.
 	 * @param ctx the parse tree
