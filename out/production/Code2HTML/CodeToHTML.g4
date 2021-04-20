@@ -2,74 +2,74 @@ grammar CodeToHTML;
 
 r : program;
 
-//program : part program | part;
+program : part program | part;
 // factorizacion. Arreglado
-program : part programAux;
-programAux : program | ;
+//program : part programAux;
+//programAux : program | ;
 
-part : F type restpart | P restpart;
+part : 'funcion' type restpart | 'procedimiento' restpart;
 
-//restpart : IDENTIFICADOR ABRE listparam CIERRA blq | IDENTIFICADOR ABRE CIERRA blq;
+restpart : IDENTIFICADOR '(' listparam ')' blq | IDENTIFICADOR '(' ')' blq;
 // factorizacion. Arreglado
-restpart : IDENTIFICADOR ABRE restpartAux;
-restpartAux : listparam CIERRA blq | CIERRA blq;
+//restpart : IDENTIFICADOR ABRE restpartAux blq;
+//restpartAux : listparam CIERRA | CIERRA;
 
-//listparam : listparam COMA type IDENTIFICADOR | type IDENTIFICADOR;
+listparam : listparam ',' type IDENTIFICADOR | type IDENTIFICADOR;
 // recursividad por la izquierda. Arreglado
-listparam : type IDENTIFICADOR listparamAux;
-listparamAux : COMA type IDENTIFICADOR listparamAux | ;
+//listparam : type IDENTIFICADOR listparamAux;
+//listparamAux : COMA type IDENTIFICADOR listparamAux | ;
 
-type : ENTERO  | REAL | CAR ;
+type : 'entero'  | 'real' | 'caracter' ;
 
-blq : INICIO sentlist FIN;
+blq : 'inicio' sentlist 'fin';
 
-//sentlist : sentlist sent | sent;
+sentlist : sentlist sent | sent;
 // recursicidad por la izquierda. Arreglado
 //1 o varios sent que son asignaciones operaciones etc
-sentlist : sent sentlistAux;
-sentlistAux : sent sentlistAux | ;
+//sentlist : sent sentlistAux;
+//sentlistAux : sent sentlistAux | ;
 
+sent : type lid ';'
+    | IDENTIFICADOR asig exp ';'
+    | 'return' exp ';'
+    | IDENTIFICADOR '(' lid ')' ';'
+    | IDENTIFICADOR '(' ')' ';'
+    | 'bifurcacion' '(' lcond ')' 'entonces' blq 'sino' blq
+    | 'buclepara' '(' IDENTIFICADOR asig exp ';' lcond ';' IDENTIFICADOR asig exp ')' blq
+    | 'buclemientras' '(' lcond ')' blq
+    | 'bucle' blq 'hasta' '(' lcond ')'
+    | blq
+    ;
+// factorizacion. Arreglado
 //sent : type lid PUNTOYCOMA
-//    | IDENTIFICADOR asig exp PUNTOYCOMA
+//    | IDENTIFICADOR sentId
 //    | 'return' exp ';'
-//    | IDENTIFICADOR ABRE lid CIERRA PUNTOYCOMA
-//    | IDENTIFICADOR ABRE CIERRA PUNTOYCOMA
 //    | B ABRE lcond CIERRA E blq S blq
 //    | 'buclepara' '(' IDENTIFICADOR asig exp ';' lcond ';' IDENTIFICADOR asig exp ')' blq
 //    | 'buclemientras' '(' lcond ')' blq
 //    | 'bucle' blq 'hasta' '(' lcond ')'
-//    | blq
-//    ;
+//    | blq;
+//sentId : asig exp PUNTOYCOMA | ABRE sentAbre;
+//sentAbre : lid CIERRA PUNTOYCOMA | CIERRA PUNTOYCOMA;
+
+lid : IDENTIFICADOR | (IDENTIFICADOR ',') lid;
 // factorizacion. Arreglado
-sent : type lid PUNTOYCOMA
-    | IDENTIFICADOR sentId
-    | 'return' exp ';'
-    | B ABRE lcond CIERRA E blq S blq
-    | 'buclepara' '(' IDENTIFICADOR asig exp ';' lcond ';' IDENTIFICADOR asig exp ')' blq
-    | 'buclemientras' '(' lcond ')' blq
-    | 'bucle' blq 'hasta' '(' lcond ')'
-    | blq;
-sentId : asig exp PUNTOYCOMA | ABRE sentAbre;
-sentAbre : lid CIERRA PUNTOYCOMA | CIERRA PUNTOYCOMA;
+//lid : IDENTIFICADOR lidAux;
+//lidAux : COMA lid | ;
 
-//lid : IDENTIFICADOR | (IDENTIFICADOR COMA) lid;
-// factorizacion. Arreglar
-lid : IDENTIFICADOR lidAux;
-lidAux : | COMA lid;
+asig : '=' | '+=' | '-=' | '*=' | '/=';
 
-asig : IGUAL | '+=' | '-=' | '*=' | '/=';
-
-//exp : exp op exp | IDENTIFICADOR '(' lid ')' | '(' exp ')' | IDENTIFICADOR | CONSTENTERO | CONSTREAL | CONSTLIT;
-//recursicidad por la izquierda. Arreglar
-exp : (IDENTIFICADOR ABRE lid CIERRA | ABRE exp CIERRA | IDENTIFICADOR | CONSTENTERO | CONSTREAL | CONSTLIT) expAux;
-expAux : op exp expAux | ;
+exp : exp op exp | IDENTIFICADOR '(' lid ')' | '(' exp ')' | IDENTIFICADOR | CONSTENTERO | CONSTREAL | CONSTLIT;
+//recursicidad por la izquierda. Sin arreglar
+//exp : (IDENTIFICADOR ABRE lid CIERRA | ABRE exp CIERRA | IDENTIFICADOR | CONSTENTERO | CONSTREAL | CONSTLIT) expAux;
+//expAux : op exp expAux | ;
 
 op : '+' | '-' | '*' | '/';
 
-//lcond : lcond opl lcond | cond | 'no' cond;
+lcond : lcond opl lcond | cond | 'no' cond;
 // recursicidad por la izquierda. Arreglar
-lcond :  (cond | 'no' cond) lcondAux;
-lcondAux : opl lcond lcondAux | ;
+//lcond :  (cond | 'no' cond) lcondAux;
+//lcondAux : opl lcond lcondAux | ;
 
 cond : exp opr exp | 'cierto' | 'falso';
 
@@ -77,38 +77,17 @@ opl : 'y' | 'o';
 
 opr : '==' | '<>' | '<' | '>' | '>=' | '<=';
 
-B : 'bifurcacion';
-E : 'entonces';
-S : 'sino'{System.out.println("fUNCIONA");};
+IDENTIFICADOR : ('_' | WORD)('_' | WORD | DECIMAL )+;
 
-ABRE : '(';
-CIERRA : ')';
+CONSTENTERO : ((('+'|'-')? DECIMAL+) | ('$' ('+'|'-')? HEXADECIMAL+));
 
-F : 'funcion'{System.out.println("fUNCIONA");};
-P : 'procedimiento';
+CONSTREAL : ((('+'|'-')? DECIMAL+ '.' DECIMAL+) | ('$' ('+'|'-')? HEXADECIMAL+ '.' HEXADECIMAL+));
 
-INICIO : 'inicio'{System.out.println("fUNCIONA");};
-FIN : 'fin';
+CONSTLIT : (('"' (WORD | '\'' | '""' | WS)+ '"') | ('\'' (WORD | '"' | '\'\'' | WS)+ '\''));
 
-ENTERO : 'entero';
-REAL : 'real';
-CAR : 'caracter';
+COMENTARIOL : ('%%' (WORD)+ '\r\n');
 
-PUNTOYCOMA : ';';
-COMA : ',';
-IGUAL : '=';
-
-IDENTIFICADOR : ('_' | WORD)('_' | WORD | DECIMAL )+ {System.out.println(getText());};
-
-CONSTENTERO : ((('+'|'-')? DECIMAL+) | ('$' ('+'|'-')? HEXADECIMAL+)) {System.out.println(getText());};
-
-CONSTREAL : ((('+'|'-')? DECIMAL+ '.' DECIMAL+) | ('$' ('+'|'-')? HEXADECIMAL+ '.' HEXADECIMAL+)) {System.out.println(getText());};
-
-CONSTLIT : (('"' (WORD | '\'' | '""' | WS)+ '"') | ('\'' (WORD | '"' | '\'\'' | WS)+ '\'') ) {System.out.println(getText());};
-
-COMENTARIOL : ('%%' (WORD)+ '\r\n') {System.out.println(getText());};
-
-COMENTARIOM : ('%-' (WORD | WS)+ '-%') {System.out.println(getText());};
+COMENTARIOM : ('%-' (WORD | WS)+ '-%');
 
 WS : [ \n\t\r] -> skip;
 

@@ -27,16 +27,6 @@ public interface CodeToHTMLListener extends ParseTreeListener {
 	 */
 	void exitProgram(CodeToHTMLParser.ProgramContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CodeToHTMLParser#programAux}.
-	 * @param ctx the parse tree
-	 */
-	void enterProgramAux(CodeToHTMLParser.ProgramAuxContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CodeToHTMLParser#programAux}.
-	 * @param ctx the parse tree
-	 */
-	void exitProgramAux(CodeToHTMLParser.ProgramAuxContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link CodeToHTMLParser#part}.
 	 * @param ctx the parse tree
 	 */
@@ -57,16 +47,6 @@ public interface CodeToHTMLListener extends ParseTreeListener {
 	 */
 	void exitRestpart(CodeToHTMLParser.RestpartContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CodeToHTMLParser#restpartAux}.
-	 * @param ctx the parse tree
-	 */
-	void enterRestpartAux(CodeToHTMLParser.RestpartAuxContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CodeToHTMLParser#restpartAux}.
-	 * @param ctx the parse tree
-	 */
-	void exitRestpartAux(CodeToHTMLParser.RestpartAuxContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link CodeToHTMLParser#listparam}.
 	 * @param ctx the parse tree
 	 */
@@ -76,16 +56,6 @@ public interface CodeToHTMLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitListparam(CodeToHTMLParser.ListparamContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link CodeToHTMLParser#listparamAux}.
-	 * @param ctx the parse tree
-	 */
-	void enterListparamAux(CodeToHTMLParser.ListparamAuxContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CodeToHTMLParser#listparamAux}.
-	 * @param ctx the parse tree
-	 */
-	void exitListparamAux(CodeToHTMLParser.ListparamAuxContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CodeToHTMLParser#type}.
 	 * @param ctx the parse tree
@@ -117,16 +87,6 @@ public interface CodeToHTMLListener extends ParseTreeListener {
 	 */
 	void exitSentlist(CodeToHTMLParser.SentlistContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CodeToHTMLParser#sentlistAux}.
-	 * @param ctx the parse tree
-	 */
-	void enterSentlistAux(CodeToHTMLParser.SentlistAuxContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CodeToHTMLParser#sentlistAux}.
-	 * @param ctx the parse tree
-	 */
-	void exitSentlistAux(CodeToHTMLParser.SentlistAuxContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link CodeToHTMLParser#sent}.
 	 * @param ctx the parse tree
 	 */
@@ -137,26 +97,6 @@ public interface CodeToHTMLListener extends ParseTreeListener {
 	 */
 	void exitSent(CodeToHTMLParser.SentContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CodeToHTMLParser#sentId}.
-	 * @param ctx the parse tree
-	 */
-	void enterSentId(CodeToHTMLParser.SentIdContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CodeToHTMLParser#sentId}.
-	 * @param ctx the parse tree
-	 */
-	void exitSentId(CodeToHTMLParser.SentIdContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link CodeToHTMLParser#sentAbre}.
-	 * @param ctx the parse tree
-	 */
-	void enterSentAbre(CodeToHTMLParser.SentAbreContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CodeToHTMLParser#sentAbre}.
-	 * @param ctx the parse tree
-	 */
-	void exitSentAbre(CodeToHTMLParser.SentAbreContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link CodeToHTMLParser#lid}.
 	 * @param ctx the parse tree
 	 */
@@ -166,16 +106,6 @@ public interface CodeToHTMLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitLid(CodeToHTMLParser.LidContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link CodeToHTMLParser#lidAux}.
-	 * @param ctx the parse tree
-	 */
-	void enterLidAux(CodeToHTMLParser.LidAuxContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CodeToHTMLParser#lidAux}.
-	 * @param ctx the parse tree
-	 */
-	void exitLidAux(CodeToHTMLParser.LidAuxContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CodeToHTMLParser#asig}.
 	 * @param ctx the parse tree
@@ -197,16 +127,6 @@ public interface CodeToHTMLListener extends ParseTreeListener {
 	 */
 	void exitExp(CodeToHTMLParser.ExpContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CodeToHTMLParser#expAux}.
-	 * @param ctx the parse tree
-	 */
-	void enterExpAux(CodeToHTMLParser.ExpAuxContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CodeToHTMLParser#expAux}.
-	 * @param ctx the parse tree
-	 */
-	void exitExpAux(CodeToHTMLParser.ExpAuxContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link CodeToHTMLParser#op}.
 	 * @param ctx the parse tree
 	 */
@@ -226,16 +146,6 @@ public interface CodeToHTMLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitLcond(CodeToHTMLParser.LcondContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link CodeToHTMLParser#lcondAux}.
-	 * @param ctx the parse tree
-	 */
-	void enterLcondAux(CodeToHTMLParser.LcondAuxContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CodeToHTMLParser#lcondAux}.
-	 * @param ctx the parse tree
-	 */
-	void exitLcondAux(CodeToHTMLParser.LcondAuxContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CodeToHTMLParser#cond}.
 	 * @param ctx the parse tree

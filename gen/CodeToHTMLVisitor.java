@@ -22,12 +22,6 @@ public interface CodeToHTMLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitProgram(CodeToHTMLParser.ProgramContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CodeToHTMLParser#programAux}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitProgramAux(CodeToHTMLParser.ProgramAuxContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link CodeToHTMLParser#part}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -40,23 +34,11 @@ public interface CodeToHTMLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitRestpart(CodeToHTMLParser.RestpartContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CodeToHTMLParser#restpartAux}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitRestpartAux(CodeToHTMLParser.RestpartAuxContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link CodeToHTMLParser#listparam}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitListparam(CodeToHTMLParser.ListparamContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link CodeToHTMLParser#listparamAux}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitListparamAux(CodeToHTMLParser.ListparamAuxContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CodeToHTMLParser#type}.
 	 * @param ctx the parse tree
@@ -76,41 +58,17 @@ public interface CodeToHTMLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSentlist(CodeToHTMLParser.SentlistContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CodeToHTMLParser#sentlistAux}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSentlistAux(CodeToHTMLParser.SentlistAuxContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link CodeToHTMLParser#sent}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitSent(CodeToHTMLParser.SentContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CodeToHTMLParser#sentId}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSentId(CodeToHTMLParser.SentIdContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link CodeToHTMLParser#sentAbre}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSentAbre(CodeToHTMLParser.SentAbreContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link CodeToHTMLParser#lid}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitLid(CodeToHTMLParser.LidContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link CodeToHTMLParser#lidAux}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitLidAux(CodeToHTMLParser.LidAuxContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CodeToHTMLParser#asig}.
 	 * @param ctx the parse tree
@@ -124,12 +82,6 @@ public interface CodeToHTMLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExp(CodeToHTMLParser.ExpContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CodeToHTMLParser#expAux}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExpAux(CodeToHTMLParser.ExpAuxContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link CodeToHTMLParser#op}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -141,12 +93,6 @@ public interface CodeToHTMLVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitLcond(CodeToHTMLParser.LcondContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link CodeToHTMLParser#lcondAux}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitLcondAux(CodeToHTMLParser.LcondAuxContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CodeToHTMLParser#cond}.
 	 * @param ctx the parse tree

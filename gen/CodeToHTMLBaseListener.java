@@ -39,18 +39,6 @@ public class CodeToHTMLBaseListener implements CodeToHTMLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterProgramAux(CodeToHTMLParser.ProgramAuxContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitProgramAux(CodeToHTMLParser.ProgramAuxContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterPart(CodeToHTMLParser.PartContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -75,18 +63,6 @@ public class CodeToHTMLBaseListener implements CodeToHTMLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRestpartAux(CodeToHTMLParser.RestpartAuxContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitRestpartAux(CodeToHTMLParser.RestpartAuxContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterListparam(CodeToHTMLParser.ListparamContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -94,18 +70,6 @@ public class CodeToHTMLBaseListener implements CodeToHTMLListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitListparam(CodeToHTMLParser.ListparamContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterListparamAux(CodeToHTMLParser.ListparamAuxContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitListparamAux(CodeToHTMLParser.ListparamAuxContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -147,18 +111,6 @@ public class CodeToHTMLBaseListener implements CodeToHTMLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSentlistAux(CodeToHTMLParser.SentlistAuxContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSentlistAux(CodeToHTMLParser.SentlistAuxContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterSent(CodeToHTMLParser.SentContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -171,30 +123,6 @@ public class CodeToHTMLBaseListener implements CodeToHTMLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSentId(CodeToHTMLParser.SentIdContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSentId(CodeToHTMLParser.SentIdContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterSentAbre(CodeToHTMLParser.SentAbreContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSentAbre(CodeToHTMLParser.SentAbreContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterLid(CodeToHTMLParser.LidContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -202,18 +130,6 @@ public class CodeToHTMLBaseListener implements CodeToHTMLListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitLid(CodeToHTMLParser.LidContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterLidAux(CodeToHTMLParser.LidAuxContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitLidAux(CodeToHTMLParser.LidAuxContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -243,18 +159,6 @@ public class CodeToHTMLBaseListener implements CodeToHTMLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpAux(CodeToHTMLParser.ExpAuxContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitExpAux(CodeToHTMLParser.ExpAuxContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterOp(CodeToHTMLParser.OpContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -274,18 +178,6 @@ public class CodeToHTMLBaseListener implements CodeToHTMLListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitLcond(CodeToHTMLParser.LcondContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterLcondAux(CodeToHTMLParser.LcondAuxContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitLcondAux(CodeToHTMLParser.LcondAuxContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
