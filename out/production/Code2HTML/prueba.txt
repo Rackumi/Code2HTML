@@ -19,7 +19,7 @@ procedimiento nombre1(real variable3, caracter variable4)
                     fin
                 sino
                     inicio
-                        paco = 1;
+                        paco = ;
                     fin
     fin
 
