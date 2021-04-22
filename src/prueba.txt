@@ -1,47 +1,83 @@
-funcion entero nombre1(entero variable1, entero variable2)
+funcion entero nombre1()
     inicio
-        bifurcacion (cierto) entonces
-                    inicio
-                    paco = 1;
-                    return juan;
-                    fin
-                sino
-                    inicio
-                        paco = 1;
-                    fin
+        caracter var5;
+        entero var3;
+        var4 = +56.65;
+        var4 = -66335.3262;
+        var4 += 23545;
+        var4 = +56.65;
+        var4 -= +56.65;
+        var5 = "Hola";
     fin
-
-procedimiento nombre1(real variable3, caracter variable4)
+funcion entero nombre1(entero var5, real var6)
     inicio
-        bifurcacion (cierto) entonces
-                    inicio
-                    paco = 1;
-                    fin
-                sino
-                    inicio
-                        paco = 1;
-                    fin
+        entero var3;
+        real var4;
+        var3 /= var5;
+        var4 = $0.FFFF;
+        var5 = "Hola' ";
+        var5 *= 'Maunuel" ';
+        var5 = "Paco  ' ";
     fin
-
-procedimiento nombre1(entero variable1, entero variable2)
+funcion entero nombre1()
     inicio
-        bifurcacion (cierto) entonces
-                    inicio
-                    paco = 1;
-                    return juan;
-                    fin
-                sino
-                    inicio
-                        paco = 1;
-                    fin
+        var4 = var1 + var2;
+        var5 = (-66335.3262 * 33445);
+        var4 += 23545;
+        var6 = +56.65;
+        var4 *= nombre1();
+        var2 = "Hola" + 11;
     fin
-
-funcion entero nombre1(entero variable1)
+funcion entero nombre1(entero var5, real var6)
     inicio
-        return 1;
+        var4 = (5252 * 3726) / 7822;
+        var += var2;
+        var /= $0.FFFF;
     fin
-
+funcion entero nombre1()
+    inicio
+        bifurcacion (a == 5) entonces
+            inicio
+                b = a + 23;
+                bucle
+                    inicio
+                        a = (b + 2) / c;
+                        return a;
+                    fin
+                hasta(cierto)
+            fin
+    fin
+funcion entero nombre1(entero var5, real var6)
+    inicio
+        buclepara (entero i = 0; i <= var6; entero j = -2)
+            inicio
+                nombre1(var5, var6);
+                buclemientras (falso)
+                    inicio
+                        return -1;
+                    fin
+            fin
+    fin
 procedimiento nombre1(entero variable1, entero variable2)
     inicio
         return 0;
     fin
+
+procedimiento nombre1()
+    inicio
+        return 0;
+    fin
+
+%% Hola esto es un comentario de una linea
+
+funcion entero nombre1()
+    inicio
+        return 0; %% Comentario despues de un elemento
+    fin
+
+funcion entero nombre1()
+    inicio
+        return 0; %% Comentario despues de un elemento
+    fin
+%- Hola esto es un comentario
+multilinea -%

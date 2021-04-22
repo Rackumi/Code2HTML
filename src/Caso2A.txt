@@ -1,12 +1,15 @@
-procedimiento nombre1(entero variable1, entero variable2)
+funcion entero nombre1()
     inicio
-        bifurcacion (cierto) entonces
-                    inicio
-                    paco = 1;
-                    return juan;
-                    fin
-                sino
-                    inicio
-                        paco = 1;
-                    fin
+        var4 = var1 + var2;
+        var5 = (-66335.3262 * 33445);
+        var4 += 23545;
+        var6 = +56.65;
+        var4 *= nombre1();
+        var2 = "Hola" + 11;
+    fin
+funcion entero nombre1(entero var5, real var6)
+    inicio
+        var4 = (5252 * 3726) / 7822;
+        var += var2;
+        var /= $0.FFFF;
     fin
