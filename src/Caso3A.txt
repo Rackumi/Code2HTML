@@ -1,4 +1,24 @@
-funcion entero nombre1(entero variable1)
+funcion entero nombre1()
     inicio
-        return 1;
+        bifurcacion (a == 5) entonces
+            inicio
+                b = a + 23;
+                bucle
+                    inicio
+                        a = (b + 2) / c;
+                        return a;
+                    fin
+                hasta(cierto)
+            fin
+    fin
+funcion entero nombre1(entero var5, real var6)
+    inicio
+        buclepara (entero i = 0; i <= var6; entero j = -2)
+            inicio
+                nombre1(var5, var6);
+                buclemientras (falso)
+                    inicio
+                        return -1;
+                    fin
+            fin
     fin
