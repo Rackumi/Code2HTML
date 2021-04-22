@@ -60,7 +60,7 @@ opl : 'y' | 'o';
 
 opr : '==' | '<>' | '<' | '>' | '>=' | '<=';
 
-IDENTIFICADOR : ('_' | WORD)('_' | WORD | DECIMAL )+;
+IDENTIFICADOR : ('_' | WORD)('_' | WORD | DECIMAL )*;
 
 CONSTENTERO : ((('+'|'-')? DECIMAL+) | ('$' ('+'|'-')? HEXADECIMAL+));
 
@@ -68,9 +68,9 @@ CONSTREAL : ((('+'|'-')? DECIMAL+ '.' DECIMAL+) | ('$' ('+'|'-')? HEXADECIMAL+ '
 
 CONSTLIT : (('"' (WORD | '\'' | '""' | WS)+ '"') | ('\'' (WORD | '"' | '\'\'' | WS)+ '\''));
 
-COMENTARIOL : ('%%' (WORD)+ '\r\n');
+COMENTARIOL : '%%'.*?[\r\n]-> skip;
 
-COMENTARIOM : ('%-' (WORD | WS)+ '-%');
+COMENTARIOM : '%-' .*?[\r\n]* '-%'-> skip;
 
 WS : [ \n\t\r] -> skip;
 

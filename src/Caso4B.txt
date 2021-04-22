@@ -7,8 +7,8 @@ procedimiento nombre1(entero variable1, entero variable2)
 
 funcion entero nombre1()
     inicio
-        return 0; %% Comentario despues de un elemento %%
-    fin
+        return 0; %- Comentario despues de un elemento
+    fin hola-%
 
 %- Hola esto es un comentario
 multilinea %

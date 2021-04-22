@@ -4,7 +4,6 @@ funcion entero nombre1()
         var5 = (-66335.3262 * 33445);
         var4 += 23545;
         var6 = +56.65;
-        var4 *= nombre1();
         var2 = "Hola" + 11;
     fin
 funcion entero nombre1(entero var5, real var6)
