@@ -8,8 +8,26 @@ import java.util.List;
 public class CodeToHTMLErrorListener extends BaseErrorListener{
 
     public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol, int line, int charPositionInLine, String msg, RecognitionException e){
-        System.err.println("line "+line+":"+charPositionInLine+" at "+offendingSymbol+": "+msg);
+        List<String> stack = ((Parser)recognizer).getRuleInvocationStack();
+        Collections.reverse(stack);
+        System.err.println("Partes afectadas: "+stack+"\n");
+
+        System.err.println("linea "+line+":"+charPositionInLine+" en "+offendingSymbol+": "+msg);
         underlineError(recognizer,(Token)offendingSymbol, line, charPositionInLine);
+
+//        StringBuilder buf = new StringBuilder();
+//        buf.append("rule stack: "+stack+" ");
+//        buf.append("line "+line+":"+charPositionInLine+" at "+
+//                offendingSymbol+": "+msg);
+//        JDialog dialog = new JDialog();
+//        Container contentPane = dialog.getContentPane();
+//        contentPane.add(new JLabel(buf.toString()));
+//        contentPane.setBackground(Color.white);
+//        dialog.setTitle("Syntax error");
+//        dialog.pack();
+//        dialog.setLocationRelativeTo(null);
+//        dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//        dialog.setVisible(true);
     }
 
     protected void underlineError(Recognizer recognizer, Token offendingToken, int line, int charPositionInLine){

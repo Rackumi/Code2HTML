@@ -1,4 +1,6 @@
 import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.atn.PredictionMode;
+
 import java.io.IOException;
 
 public class MainClass{
@@ -11,7 +13,9 @@ public class MainClass{
 
             CodeToHTMLParser anasint = new CodeToHTMLParser(tokens);
             anasint.removeErrorListeners();
-            anasint.addErrorListener(new CodeToHTMLErrorListener());
+            anasint.addErrorListener(new DiagnosticErrorListener());
+            anasint.getInterpreter()
+                    .setPredictionMode(PredictionMode.LL_EXACT_AMBIG_DETECTION);
 
             anasint.r();
 
