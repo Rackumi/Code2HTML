@@ -12,4 +12,6 @@ funcion entero nombre1(entero var5, real var6)
         var4 = (5252 * 3726)  7822;
         var += var2;
         var /== $0.FFFF;
+        var = $-AAAA + $-A6F9;
+        var **= $A.AFED;
     fin

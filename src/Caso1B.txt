@@ -8,8 +8,15 @@ funcion entero nombre1()
         var4 = +56.65;
         var4 = +56.65;
         var5 = "Hola";
+        entero;
+        varp = 'comilla doble " dentro';
+        varp = "comilla simple ' dentro;
+        varp = 'comilla simple '' dentro';
+        varp = "comilla doble "" dentro";
+        varp = 'comilla doble " y simple '' dentro';
+        varp = "comilla simple ' y doble "?|``" dentro";
     fin
-funcion entero nombre1(entero var5, real var6)
+funcion entero nombre1(entero var5,,, real var6)
     inicio
         entero var3;
         var4;
@@ -18,4 +25,5 @@ funcion entero nombre1(entero var5, real var6)
         var5 = "Hola' ";
         var5 = 'Maunuel" ';
         var5 *= "Paco  ' ";
+        cd;
     fin
