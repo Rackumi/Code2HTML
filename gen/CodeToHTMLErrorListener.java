@@ -21,21 +21,21 @@ public class CodeToHTMLErrorListener extends BaseErrorListener{
         if(msg.contains("mismatched input")){
             msg = msg.replace("mismatched input","No coincide la entrada");
             msg = msg.replace("expecting","se esperaba");
-            msg = msg+"\nPuede que este error se deba a que varios caracteres fueron añadidos donde no debian.";
+            msg = msg+"\nError sintactico: Puede que este error se deba a que varios tokens fueron añadidos donde no debian.";
         }
         else if(msg.contains("extraneous input")){
             msg = msg.replace("extraneous input","Entrada no esperada");
             msg = msg.replace("expecting","se esperaba");
-            msg = msg+"\nPuede que este error se deba a que un caracter fue añadido donde no debia.";
+            msg = msg+"\nError sintactico: Puede que este error se deba a que un token fue añadido donde no debia.";
         }
         else if(msg.contains("no viable alternative")){
             msg = msg.replace("no viable alternative at input","No hay una alternativa viable a la entrada obtenida");
-            msg = msg+"\nPuede que este error se deba a que ninguna otra alternativa es consistente con esa regla o subregla.";
+            msg = msg+"\nError sintactico: Puede que este error se deba a que ninguna otra alternativa es consistente con esa regla o subregla.";
         }
         else if(msg.contains("missing")){
             msg = msg.replace("missing","falta");
             msg = msg.replace("at","en");
-            msg = msg+"\nPuede que este error se deba a que falta un cierto caracter en la ubicacion antes mencionada.";
+            msg = msg+"\nError sintactico: Puede que este error se deba a que falta un cierto token en la ubicacion antes mencionada.";
         }
 
         System.err.println("linea "+line+":"+charPositionInLine+" en "+offendingSymbol+": "+msg);

@@ -2,9 +2,9 @@ procedimiento nombre1(entero variable1, entero variable2)
     inicio
         return 0;
     fin
-%-
+
 % Hola esto es un comentario de una linea
--%
+
 
 
 funcion entero nombre1()

@@ -10,7 +10,7 @@ funcion entero nombre1()
         var5 = "Hola";
         entero;
         varp = 'comilla doble " dentro';
-        varp = "comilla simple ' dentro;
+        varp = "comilla simple ' dentro";
         varp = 'comilla simple '' dentro';
         varp = "comilla doble "" dentro";
         varp = 'comilla doble " y simple '' dentro';
