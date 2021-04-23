@@ -10,6 +10,7 @@ procedimiento nombre1()
 
 %% Hola esto es un comentario de una linea
 
+
 funcion entero nombre1()
     inicio
         return 0; %% Comentario despues de un elemento

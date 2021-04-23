@@ -16,6 +16,8 @@ funcion entero nombre1()
         varp = "comilla simple ' y doble ""?|``"" dentro";
         VAT = "?|``";
     fin
+
+
 funcion entero nombre1(entero var5, real var6)
     inicio
         entero var3;
