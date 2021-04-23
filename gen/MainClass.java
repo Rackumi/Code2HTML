@@ -13,9 +13,7 @@ public class MainClass{
 
             CodeToHTMLParser anasint = new CodeToHTMLParser(tokens);
             anasint.removeErrorListeners();
-            anasint.addErrorListener(new DiagnosticErrorListener());
-            anasint.getInterpreter()
-                    .setPredictionMode(PredictionMode.LL_EXACT_AMBIG_DETECTION);
+            anasint.addErrorListener(new CodeToHTMLErrorListener());
 
             anasint.r();
 

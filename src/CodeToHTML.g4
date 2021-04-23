@@ -66,7 +66,7 @@ CONSTENTERO : ((('+'|'-')? DECIMAL+) | ('$' ('+'|'-')? HEXADECIMAL+));
 
 CONSTREAL : ((('+'|'-')? DECIMAL+ '.' DECIMAL+) | ('$' ('+'|'-')? HEXADECIMAL+ '.' HEXADECIMAL+));
 
-CONSTLIT : (('"' (WORD | '\'' | '""' | WS)+ '"') | ('\'' (WORD | '"' | '\'\'' | WS)+ '\''));
+CONSTLIT : (('"' (WORD | '\'' | '""' | SYMBOL | WS)+ '"') | ('\'' (WORD | '"' | '\'\'' | WS)+ '\''));
 
 COMENTARIOL : '%%'.*?[\r\n]-> skip;
 
@@ -74,11 +74,14 @@ COMENTARIOM : '%-' .*?[\r\n]* '-%'-> skip;
 
 WS : [ \n\t\r] -> skip;
 
+
 fragment
 
 DECIMAL : [0-9];
 
 HEXADECIMAL: [0-9A-F];
+
+SYMBOL : [ !#-&(-~];
 
 ALPHA : [A-Za-z];
 WORD : ALPHA+;
