@@ -1,11 +1,9 @@
 <component name="ArtifactManager">
-  <artifact name="Code2HTML:jar">
+  <artifact type="jar" name="Code2HTML:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/Code2HTML_jar</output-path>
-    <root id="root">
-      <element id="archive" name="Code2HTML.jar">
-        <element id="module-output" name="Code2HTML" />
-      </element>
-      <element id="library" level="project" name="antlr-4.9.1-complete" />
+    <root id="archive" name="Code2HTML.jar">
+      <element id="module-output" name="Code2HTML" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/antlr-4.9.1-complete.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

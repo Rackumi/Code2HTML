@@ -1,5 +1,4 @@
 import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.atn.PredictionMode;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
