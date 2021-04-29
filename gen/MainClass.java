@@ -1,7 +1,9 @@
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.atn.PredictionMode;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 
 public class MainClass{
 
@@ -14,6 +16,9 @@ public class MainClass{
             CodeToHTMLParser anasint = new CodeToHTMLParser(tokens);
             anasint.removeErrorListeners();
             anasint.addErrorListener(new CodeToHTMLErrorListener());
+
+            FileOutputStream f = new FileOutputStream("Ejemplo.html");
+            System.setOut(new PrintStream(f));
 
             anasint.r();
 
