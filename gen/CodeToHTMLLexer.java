@@ -101,6 +101,12 @@ public class CodeToHTMLLexer extends Lexer {
 	}
 
 
+	int ord=1;
+		void ImprimeOperacion (String str){
+			System.out.println((ord++) + " : " + str);
+		}
+
+
 	public CodeToHTMLLexer(CharStream input) {
 		super(input);
 		_interp = new LexerATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);

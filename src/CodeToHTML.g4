@@ -1,9 +1,16 @@
 grammar CodeToHTML;
 
-r : program;
+@members{
+int ord=1;
+	void ImprimeOperacion (String str){
+		System.out.println((ord++) + " : " + str);
+	}
+}
+
+r : program <EOF>; //Generar clases de cabeceras y fuera del g4. luego llamar desde el g4
 
 //Factorizacion. Arreglado
-program : part program_f;
+program returns [String s] : part program_f {ImprimeOperacion($s);};
 program_f : program | ;
 
 part : 'funcion' type restpart | 'procedimiento' restpart;
@@ -25,9 +32,9 @@ sentlist : sent sentlist_r;
 sentlist_r : sent sentlist_r | ;
 
 //Factorizacion. Arreglado
-sent : type lid ';'
+sent returns [String s = "gghh"]: type lid ';'
     | IDENTIFICADOR sent_f1
-    | 'return' exp ';'
+    | 'return' exp ';'{ImprimeOperacion($s);}
     | 'bifurcacion' '(' lcond ')' 'entonces' blq 'sino' blq
     | 'buclepara' '(' IDENTIFICADOR asig exp ';' lcond ';' IDENTIFICADOR asig exp ')' blq
     | 'buclemientras' '(' lcond ')' blq
