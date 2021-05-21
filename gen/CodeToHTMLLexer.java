@@ -1,4 +1,7 @@
-// Generated from C:/Users/gocruz17/IdeaProjects/Code2HTML/src\CodeToHTML.g4 by ANTLR 4.9.1
+// Generated from C:/Users/alvar/Desktop/WorkinSpace/ANTLR/Code2HTML/src\CodeToHTML.g4 by ANTLR 4.9.1
+
+	import SintData.Sintesis;
+
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
@@ -99,12 +102,6 @@ public class CodeToHTMLLexer extends Lexer {
 	public Vocabulary getVocabulary() {
 		return VOCABULARY;
 	}
-
-
-	int ord=1;
-		void ImprimeOperacion (String str){
-			System.out.println((ord++) + " : " + str);
-		}
 
 
 	public CodeToHTMLLexer(CharStream input) {

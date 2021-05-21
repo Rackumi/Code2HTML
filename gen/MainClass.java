@@ -1,3 +1,4 @@
+import SintData.Sintesis;
 import org.antlr.v4.runtime.*;
 
 import java.io.FileOutputStream;
@@ -12,7 +13,9 @@ public class MainClass{
             CodeToHTMLLexer analex = new  CodeToHTMLLexer(input);
             CommonTokenStream tokens = new CommonTokenStream(analex);
 
-            CodeToHTMLParser anasint = new CodeToHTMLParser(tokens);
+            Sintesis datos = new Sintesis();
+
+            CodeToHTMLParser anasint = new CodeToHTMLParser(tokens, datos);
             anasint.removeErrorListeners();
             anasint.addErrorListener(new CodeToHTMLErrorListener());
 
@@ -20,6 +23,7 @@ public class MainClass{
             System.setOut(new PrintStream(f));
 
             anasint.r();
+            datos.resumen();
 
         } catch (RecognitionException e) { //Fallo al reconocer la entrada
             System.err.println("REC " + e.getMessage());

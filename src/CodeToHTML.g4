@@ -1,16 +1,25 @@
 grammar CodeToHTML;
 
-@members{
-int ord=1;
-	void ImprimeOperacion (String str){
-		System.out.println((ord++) + " : " + str);
-	}
+@header{
+	import SintData.Sintesis;
+}
+
+
+@parser::members{
+
+    private Sintesis myinfo;
+
+    public CodeToHTMLParser(TokenStream input, Sintesis theinfo){
+        this(input);
+        myinfo = theinfo;
+    }
+
 }
 
 r : program <EOF>; //Generar clases de cabeceras y fuera del g4. luego llamar desde el g4
 
 //Factorizacion. Arreglado
-program returns [String s] : part program_f {ImprimeOperacion($s);};
+program : part program_f;
 program_f : program | ;
 
 part : 'funcion' type restpart | 'procedimiento' restpart;
@@ -23,18 +32,18 @@ restpart_f : listparam | ;
 listparam : type IDENTIFICADOR listparam_r;
 listparam_r : ',' type IDENTIFICADOR listparam_r | ;
 
-type : 'entero' | 'real' | 'caracter';
+type : 'entero' | 'real' | 'caracter'{myinfo.newDec();};
 
-blq : 'inicio' sentlist 'fin';
+blq : 'inicio' sentlist 'fin'{myinfo.newVar();};
 
 //Recursividad por la izquierda. Arreglado.
 sentlist : sent sentlist_r;
 sentlist_r : sent sentlist_r | ;
 
 //Factorizacion. Arreglado
-sent returns [String s = "gghh"]: type lid ';'
+sent: type lid ';'
     | IDENTIFICADOR sent_f1
-    | 'return' exp ';'{ImprimeOperacion($s);}
+    | 'return' exp ';'
     | 'bifurcacion' '(' lcond ')' 'entonces' blq 'sino' blq
     | 'buclepara' '(' IDENTIFICADOR asig exp ';' lcond ';' IDENTIFICADOR asig exp ')' blq
     | 'buclemientras' '(' lcond ')' blq
