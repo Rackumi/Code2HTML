@@ -64,16 +64,16 @@ sent_f1 : asig exp ';' | '(' sent_f2;
 sent_f2 : lid ')' ';' | '(' ')' ';';
 
 //Factorizacion. Arreglado
-lid : IDENTIFICADOR lid_f;
-lid_f : ',' lid | ;
+lid returns[String lid_S]: IDENTIFICADOR lid_f {$lid_S = $IDENTIFICADOR.text + $lid_f.lid_f_S;};
+lid_f returns[String lid_f_S]: ',' lid {$lid_f_S = "," + $lid.lid_S;} | ;
 
 asig : '=' | '+=' | '-=' | '*=' | '/=';
 
 //Recursividad por la izquierda. Arreglado.
 //Factorizacion. Arreglado
-exp : IDENTIFICADOR exp_f | '(' exp ')' exp_r | CONSTENTERO exp_r | CONSTREAL exp_r | CONSTLIT exp_r;
-exp_f : '(' lid ')' exp_r | exp_r;
-exp_r : op exp exp_r | ;
+exp returns[String exp_S]: IDENTIFICADOR exp_f {$exp_S = $IDENTIFICADOR.text + $exp_f.exp_f_S;} | '(' exp ')' exp_r | CONSTENTERO exp_r | CONSTREAL exp_r | CONSTLIT exp_r;
+exp_f returns[String exp_f_S]: '(' lid ')' exp_r {$exp_f_S = "(" + $lid.lid_S + ")" + $exp_r.exp_r_S;}| exp_r{$exp_f_S = $exp_r.exp_r_S;};
+exp_r returns[String exp_r_S]: op exp exp_r {$exp_r_S = $op.text + $exp.exp_S + $exp_r.exp_r_S;} | ;
 
 op : '+' | '-' | '*' | '/';
 
@@ -81,7 +81,7 @@ op : '+' | '-' | '*' | '/';
 lcond : cond lcond_r | 'no' cond lcond_r;
 lcond_r : opl lcond lcond_r | ;
 
-cond returns [String cond_S] : exp opr {$cond_S = $opr.text;} exp | 'cierto' {$cond_S = "cierto";} | 'falso' {$cond_S = "falso";};
+cond returns [String cond_S] : exp opr  exp {$cond_S = $exp.exp_S + $opr.text + $exp.exp_S; System.out.println($cond_S);}| 'cierto' {$cond_S = "cierto";} | 'falso' {$cond_S = "falso";};
 
 opl : 'y' | 'o';
 
