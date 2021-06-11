@@ -26,3 +26,5 @@ funcion entero nombre1(entero var5, real var6)
                     fin
             fin
     fin
+
+
