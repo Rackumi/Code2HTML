@@ -2,21 +2,32 @@ grammar CodeToHTML;
 
 @header{
 	import SintData.Sintesis;
+	import java.io.File;
+	import java.util.LinkedList;
 }
 
+@lexer::members {
+}
 
 @parser::members{
 
-    private Sintesis myinfo;
+    private Sintesis info;
+
+    String inic;
+    String end;
 
     public CodeToHTMLParser(TokenStream input, Sintesis theinfo){
         this(input);
-        myinfo = theinfo;
+        info = theinfo;
     }
 
 }
 
-r : program <EOF>; //Generar clases de cabeceras y fuera del g4. luego llamar desde el g4
+r : {inic = info.inic(MainClass.nf);}
+    program <EOF>
+    {end = info.end();
+    System.out.println(inic+end);
+    };
 
 //Factorizacion. Arreglado
 program : part program_f;
@@ -25,16 +36,16 @@ program_f : program | ;
 part : 'funcion' type restpart | 'procedimiento' restpart;
 
 //Factorizacion. Arreglado
-restpart : IDENTIFICADOR '(' restpart_f ')' blq;
+restpart returns [String restpart_S]: IDENTIFICADOR {$restpart_S = $IDENTIFICADOR.text;} '(' restpart_f ')' blq;
 restpart_f : listparam | ;
 
 //Recursividad por la izquierda. Arreglado.
 listparam : type IDENTIFICADOR listparam_r;
-listparam_r : ',' type IDENTIFICADOR listparam_r | ;
+listparam_r : ',' type IDENTIFICADOR  listparam_r | ;
 
-type : 'entero' | 'real' | 'caracter';
+type returns [String type_S]: 'entero'{$type_S = "entero";} | 'real' {$type_S = "real";} | 'caracter'{$type_S = "caracter";};
 
-blq : 'inicio' sentlist 'fin'{myinfo.newVar();};
+blq : 'inicio' sentlist 'fin';
 
 //Recursividad por la izquierda. Arreglado.
 sentlist : sent sentlist_r;
@@ -70,11 +81,11 @@ op : '+' | '-' | '*' | '/';
 lcond : cond lcond_r | 'no' cond lcond_r;
 lcond_r : opl lcond lcond_r | ;
 
-cond : exp opr exp | 'cierto' | 'falso';
+cond returns [String cond_S] : exp opr {$cond_S = $opr.text;} exp | 'cierto' {$cond_S = "cierto";} | 'falso' {$cond_S = "falso";};
 
 opl : 'y' | 'o';
 
-opr : '==' | '<>' | '<' | '>' | '>=' | '<=';
+opr : '=='| '<>' | '<' | '>' | '>=' | '<=';
 
 IDENTIFICADOR : ('_' | WORD)('_' | WORD | DECIMAL )*;
 

@@ -1,14 +1,16 @@
 import SintData.Sintesis;
 import org.antlr.v4.runtime.*;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
+import java.io.*;
 
 public class MainClass{
 
+    public static String nf;
+
     public static void main(String[] args){
+
         try{
+
             CharStream input = CharStreams.fromFileName(args[0]);
             CodeToHTMLLexer analex = new  CodeToHTMLLexer(input);
             CommonTokenStream tokens = new CommonTokenStream(analex);
@@ -19,8 +21,12 @@ public class MainClass{
             anasint.removeErrorListeners();
             anasint.addErrorListener(new CodeToHTMLErrorListener());
 
-            FileOutputStream f = new FileOutputStream("Ejemplo.html");
+            String nameFile = args[0] + ".html";
+            FileOutputStream f = new FileOutputStream(nameFile);
             System.setOut(new PrintStream(f));
+
+            String[] path = args[0].split("/");
+            nf = path[path.length-1];
 
             anasint.r();
             datos.resumen();

@@ -9,7 +9,7 @@ funcion entero nombre1()
         var4 -= +56.65;
         var5 = "Hola";
     fin
-funcion entero nombre1(entero var5, real var6)
+funcion entero nombre2(entero var5, real var6)
     inicio
         entero var3;
         real var4;
@@ -19,7 +19,7 @@ funcion entero nombre1(entero var5, real var6)
         var5 *= 'Maunuel" ';
         var5 = "Paco  ' ";
     fin
-funcion entero nombre1()
+funcion entero nombre3()
     inicio
         var4 = var1 + var2;
         var5 = (-66335.3262 * 33445);
@@ -27,13 +27,13 @@ funcion entero nombre1()
         var6 = +56.65;
         var2 = "Hola" + 11;
     fin
-funcion entero nombre1(entero var5, real var6)
+funcion entero nombre4(entero var5, real var6)
     inicio
         var4 = (5252 * 3726) / 7822;
         var += var2;
         var /= $0.FFFF;
     fin
-funcion entero nombre1()
+funcion entero nombre5()
     inicio
         bifurcacion (a == 5) entonces
             inicio
@@ -50,7 +50,7 @@ funcion entero nombre1()
                 return b;
             fin
     fin
-funcion entero nombre1(entero var5, real var6)
+funcion entero nombre6(entero var5, real var6)
     inicio
         buclepara (i = 0; i <= var6; j = -2)
             inicio
@@ -61,26 +61,31 @@ funcion entero nombre1(entero var5, real var6)
                     fin
             fin
     fin
-procedimiento nombre1(entero variable1, entero variable2)
+procedimiento nombre7(entero variable1, entero variable2)
     inicio
         return 0;
     fin
 
-procedimiento nombre1()
+procedimiento nombre8()
     inicio
         return 0;
     fin
 
 %% Hola esto es un comentario de una linea
 
-funcion entero nombre1()
+funcion entero nombre9()
     inicio
         return 0; %% Comentario despues de un elemento
     fin
 
-funcion entero nombre1()
+funcion entero nombre10()
     inicio
         return 0; %% Comentario despues de un elemento
+    fin
+
+procedimiento nombre11()
+    inicio
+        return 0;
     fin
 %- Hola esto es un comentario
 multilinea -%

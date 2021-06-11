@@ -1,6 +1,8 @@
 // Generated from C:/Users/alvar/Desktop/WorkinSpace/ANTLR/Code2HTML/src\CodeToHTML.g4 by ANTLR 4.9.1
 
 	import SintData.Sintesis;
+	import java.io.File;
+	import java.util.LinkedList;
 
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
@@ -102,6 +104,8 @@ public class CodeToHTMLLexer extends Lexer {
 	public Vocabulary getVocabulary() {
 		return VOCABULARY;
 	}
+
+
 
 
 	public CodeToHTMLLexer(CharStream input) {
