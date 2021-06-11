@@ -33,23 +33,23 @@ r : {inic = info.inic(MainClass.nf);}
 program : part program_f;
 program_f : program | ;
 
-part : 'funcion' type restpart | 'procedimiento' restpart;
+part returns [String part_S]: 'funcion' type restpart {$part_S = "funcion" + $type.type_S + $restpart.restpart_S;} | 'procedimiento' restpart {$part_S = "procedure" + $restpart.restpart_S;};
 
 //Factorizacion. Arreglado
-restpart returns [String restpart_S]: IDENTIFICADOR {$restpart_S = $IDENTIFICADOR.text;} '(' restpart_f ')' blq;
-restpart_f : listparam | ;
+restpart returns [String restpart_S]: IDENTIFICADOR '(' restpart_f ')' blq {$restpart_S = $IDENTIFICADOR.text + "(" + $restpart_f.restpart_f_S + ")" + $blq.blq_S;};
+restpart_f returns [String restpart_f_S]: listparam {$restpart_f_S = $listparam.listparam_S;} | ;
 
 //Recursividad por la izquierda. Arreglado.
-listparam : type IDENTIFICADOR listparam_r;
-listparam_r : ',' type IDENTIFICADOR  listparam_r | ;
+listparam returns [String listparam_S]: type IDENTIFICADOR listparam_r {$listparam_S = $type.type_S + $IDENTIFICADOR.text + $listparam_r.listparam_r_S;};
+listparam_r returns [String listparam_r_S]: ',' type IDENTIFICADOR  listparam_r {$listparam_r_S = "," + $type.type_S + $IDENTIFICADOR.text + $listparam_r.listparam_r_S;} | ;
 
 type returns [String type_S]: 'entero'{$type_S = "entero";} | 'real' {$type_S = "real";} | 'caracter'{$type_S = "caracter";};
 
-blq : 'inicio' sentlist 'fin';
+blq returns [String blq_S] : 'inicio' sentlist 'fin' {$blq_S = "inicio" + $sentlinst.sentlist_S + "fin";};
 
 //Recursividad por la izquierda. Arreglado.
-sentlist : sent sentlist_r;
-sentlist_r : sent sentlist_r | ;
+sentlist returns [String sentlist_S]: sent sentlist_r {$sentlist_S = $sent.sent_S + $sentlist_r.sentlist_r_S;};
+sentlist_r returns [String sentlist_r_S]: sent sentlist_r {$sentlist_r_S = $sent.sent_S + $sentlist_r.sentlist_r_S;} | ;
 
 //Factorizacion. Arreglado
 sent: type lid ';'
@@ -72,16 +72,16 @@ asig : '=' | '+=' | '-=' | '*=' | '/=';
 //Recursividad por la izquierda. Arreglado.
 //Factorizacion. Arreglado
 exp returns[String exp_S]: IDENTIFICADOR exp_f {$exp_S = $IDENTIFICADOR.text + $exp_f.exp_f_S;} | '(' exp ')' exp_r | CONSTENTERO exp_r | CONSTREAL exp_r | CONSTLIT exp_r;
-exp_f returns[String exp_f_S]: '(' lid ')' exp_r {$exp_f_S = "(" + $lid.lid_S + ")" + $exp_r.exp_r_S;}| exp_r{$exp_f_S = $exp_r.exp_r_S;};
+exp_f returns[String exp_f_S]: '(' lid ')' exp_r {$exp_f_S = "(" + $lid.lid_S + ")" + $exp_r.exp_r_S;}| exp_r {$exp_f_S = $exp_r.exp_r_S;};
 exp_r returns[String exp_r_S]: op exp exp_r {$exp_r_S = $op.text + $exp.exp_S + $exp_r.exp_r_S;} | ;
 
 op : '+' | '-' | '*' | '/';
 
 //Recursividad por la izquierda. Arreglado.
-lcond : cond lcond_r | 'no' cond lcond_r;
-lcond_r : opl lcond lcond_r | ;
+lcond returns[String lcond_S]: cond lcond_r {$lcond_S = $cond.cond_S + $lcond_r.lcond_r_S;} | 'no' cond lcond_r {$lcond_S = "no" + $cond.cond_S + $lcond_r.lcond_r_S;};
+lcond_r returns[String lcond_r_S]: opl lcond lcond_r {$lcond_r_S = $opl.text + $lcond.lcond+ $lcond_r.lcond_r_S;} | ;
 
-cond returns [String cond_S] : exp opr  exp {$cond_S = $exp.exp_S + $opr.text + $exp.exp_S; System.out.println($cond_S);}| 'cierto' {$cond_S = "cierto";} | 'falso' {$cond_S = "falso";};
+cond returns [String cond_S] : exp opr exp {$cond_S = $exp.exp_S + $opr.text + $exp.exp_S; System.out.println($cond_S);}| 'cierto' {$cond_S = "cierto";} | 'falso' {$cond_S = "falso";};
 
 opl : 'y' | 'o';
 

@@ -33,19 +33,19 @@ r : {inic = info.inic(MainClass.nf);}
 program : part program_f;
 program_f : program | ;
 
-part : 'funcion' type restpart | 'procedimiento' restpart;
+part returns [String part_S]: 'funcion' type restpart {$part_S = "funcion" + $type.type_S + $restpart.restpart_S;} | 'procedimiento' restpart {$part_S = "procedure" + $restpart.restpart_S;};
 
 //Factorizacion. Arreglado
-restpart returns [String restpart_S]: IDENTIFICADOR {$restpart_S = $IDENTIFICADOR.text;} '(' restpart_f ')' blq;
-restpart_f : listparam | ;
+restpart returns [String restpart_S]: IDENTIFICADOR '(' restpart_f ')' blq {$restpart_S = $IDENTIFICADOR.text + "(" + $restpart_f.restpart_f_S + ")" + $blq.blq_S;};
+restpart_f returns [String restpart_f_S]: listparam {$restpart_f_S = $listparam.listparam_S;} | ;
 
 //Recursividad por la izquierda. Arreglado.
-listparam : type IDENTIFICADOR listparam_r;
-listparam_r : ',' type IDENTIFICADOR  listparam_r | ;
+listparam returns [String listparam_S]: type IDENTIFICADOR listparam_r {$listparam_S = $type.type_S + $IDENTIFICADOR.text + $listparam_r.listparam_r_S;};
+listparam_r returns [String listparam_r_S]: ',' type IDENTIFICADOR  listparam_r {$listparam_r_S = "," + $type.type_S + $IDENTIFICADOR.text + $listparam_r.listparam_r_S;} | ;
 
 type returns [String type_S]: 'entero'{$type_S = "entero";} | 'real' {$type_S = "real";} | 'caracter'{$type_S = "caracter";};
 
-blq : 'inicio' sentlist 'fin';
+blq returns [String blq_S] : 'inicio' sentlist 'fin' {$blq_S = "a";};
 
 //Recursividad por la izquierda. Arreglado.
 sentlist : sent sentlist_r;
