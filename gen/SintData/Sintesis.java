@@ -15,24 +15,38 @@ public class Sintesis {
 				".ident {color:rgb(55,40,244);}\n" +
 				".palres {color:rgb(0,0,0);font-weight:bold;}\n" +
 				"</style>\n" +
-				"</head>"+
-				"<BODY>\n" +
+				"</head>\n"+
+				"\n<BODY>\n" +
 				"<A NAME=\"inicio\">\n" +
 				"<H1>Programa: "+ titulo +"</H1>\n" +
 				"<H2>Funciones y procedimientos</H2>\n");
 	}
 
 	public String end(){
-		return("</BODY>\n" +
+		return("\n</BODY>\n" +
 				"</HTML>");
 	}
 
+	public String cabecera(String cabezas){
+		return("<UL>\n" +
+				"<LI><A HREF=\"#"+ "titulo1" +"\">real "+ "titulo1" +" ( "+ "params" +" )</A></LI>\n" +
+				"</UL>\n");
+	}
+
 	public String parrafo(String codigo){
-		return("<HR/>\n" +
+		return("\n<HR/>\n" +
 				codigo);
 	}
 
-	public Sintesis() {
+	public String aperturaYCierre(String codigo){
+		return("<SPAN CLASS=\"palres\">inicio</SPAN><BR/>\n"+codigo+"<SPAN CLASS=\"palres\">fin</SPAN><BR/>\n");
+	}
+
+	public String cuerpo(String codigo){
+		return("\t<DIV style=\"text-indent: 0.5cm\"><SPAN CLASS=\"palres\">real</SPAN> <SPAN CLASS=\"ident\">resultado</SPAN>;</DIV>");
+	}
+
+	public Sintesis(){
 		variable = 0;
 		declaraciones = 0;
 	}

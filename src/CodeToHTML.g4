@@ -2,6 +2,7 @@ grammar CodeToHTML;
 
 @header{
 	import SintData.Sintesis;
+	import SintData.Cabecera;
 	import java.io.File;
 	import java.util.LinkedList;
 }
@@ -16,6 +17,7 @@ grammar CodeToHTML;
     String inic;
     String end;
     String cuerpo;
+    LinkedList<Cabecera> cabeceras = new LinkedList<>();
 
     public CodeToHTMLParser(TokenStream input, Sintesis theinfo){
         this(input);
@@ -27,26 +29,26 @@ grammar CodeToHTML;
 r : {inic = info.inic(MainClass.nf);}
     program <EOF>
     {end = info.end();
-    System.out.println(inic+cuerpo+end);
+    System.out.println(inic+info.cabecera("")+$program.program_S+end);
     };
 
 //Factorizacion. Arreglado
-program returns[String program_S]: part program_f{$program_S = $part.part_S + $program_f.program_f_S; cuerpo = $program_S;};
+program returns[String program_S, LinkedList<String> cab]: part {$cab = new LinkedList<>(); $cab.add($part.partCab_S); System.out.println($part.partCab_S);} program_f {$program_S = $part.part_S + $program_f.program_f_S;};
 program_f returns[String program_f_S]: program {$program_f_S = $program.program_S;} | {$program_f_S = "";};
 
-part returns [String part_S]: 'funcion' type restpart {$part_S = info.parrafo("funcion" + $type.type_S + $restpart.restpart_S);} | 'procedimiento' restpart {$part_S = "procedimiento" + $restpart.restpart_S;};
+part returns [String part_S, String partCab_S]: 'funcion' type restpart {$partCab_S = $type.text+" "+$restpart.restpartCab_S; $part_S = info.parrafo("funcion" + $type.type_S + $restpart.restpart_S);} | 'procedimiento' restpart {$partCab_S = $restpart.restpartCab_S; $part_S = "procedimiento" + $restpart.restpart_S;};
 
 //Factorizacion. Arreglado
-restpart returns [String restpart_S]: IDENTIFICADOR '(' restpart_f ')' blq {$restpart_S = $IDENTIFICADOR.text + "(" + $restpart_f.restpart_f_S + ")" + $blq.blq_S;};
-restpart_f returns [String restpart_f_S]: listparam {$restpart_f_S = $listparam.listparam_S;} | {$restpart_f_S = "";};
+restpart returns [String restpart_S, String restpartCab_S]: IDENTIFICADOR '(' restpart_f {$restpartCab_S = $IDENTIFICADOR.text+" "+$restpart_f.restpart_fCab_S; }')' blq {$restpart_S = $IDENTIFICADOR.text + "(" + $restpart_f.restpart_f_S + ")" + $blq.blq_S;};
+restpart_f returns [String restpart_f_S, String restpart_fCab_S]: listparam {$restpart_fCab_S = $listparam.listparamCab_S; $restpart_f_S = $listparam.listparam_S;} | {$restpart_fCab_S = ""; $restpart_f_S = "";};
 
 //Recursividad por la izquierda. Arreglado.
-listparam returns [String listparam_S]: type IDENTIFICADOR listparam_r {$listparam_S = $type.type_S + $IDENTIFICADOR.text + $listparam_r.listparam_r_S;};
-listparam_r returns [String listparam_r_S]: ',' type IDENTIFICADOR  listparam_r {$listparam_r_S = "," + $type.type_S + $IDENTIFICADOR.text + $listparam_r.listparam_r_S;} | {$listparam_r_S = "";};
+listparam returns [String listparam_S, String listparamCab_S]: type IDENTIFICADOR listparam_r {$listparamCab_S=$type.type_S +" "+ $IDENTIFICADOR.text +" "+ $listparam_r.listparam_rCab_S; $listparam_S = $type.type_S + $IDENTIFICADOR.text + $listparam_r.listparam_r_S;};
+listparam_r returns [String listparam_r_S, String listparam_rCab_S]: ',' type IDENTIFICADOR  listparam_r {$listparam_rCab_S = $type.type_S +" "+ $IDENTIFICADOR.text +" "+ $listparam_r.listparam_rCab_S; $listparam_r_S = "," + $type.type_S + $IDENTIFICADOR.text + $listparam_r.listparam_r_S;} | {$listparam_rCab_S = ""; $listparam_r_S = "";};
 
 type returns [String type_S]: 'entero'{$type_S = "entero";} | 'real' {$type_S = "real";} | 'caracter'{$type_S = "caracter";};
 
-blq returns [String blq_S] : 'inicio' sentlist 'fin' {$blq_S = "inicio" + $sentlist.sentlist_S + "fin";};
+blq returns [String blq_S] : 'inicio' sentlist 'fin' {$blq_S = info.aperturaYCierre($sentlist.sentlist_S);};
 
 //Recursividad por la izquierda. Arreglado.
 sentlist returns [String sentlist_S]: sent sentlist_r {$sentlist_S = $sent.sent_S + $sentlist_r.sentlist_r_S;};

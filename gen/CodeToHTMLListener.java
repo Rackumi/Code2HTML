@@ -1,6 +1,7 @@
 // Generated from C:/Users/alvar/Desktop/WorkinSpace/ANTLR/Code2HTML/src\CodeToHTML.g4 by ANTLR 4.9.1
 
 	import SintData.Sintesis;
+	import SintData.Cabecera;
 	import java.io.File;
 	import java.util.LinkedList;
 
