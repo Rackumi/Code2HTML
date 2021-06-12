@@ -27,6 +27,11 @@ public class Sintesis {
 				"</HTML>");
 	}
 
+	public String parrafo(String codigo){
+		return("<HR/>\n" +
+				codigo);
+	}
+
 	public Sintesis() {
 		variable = 0;
 		declaraciones = 0;

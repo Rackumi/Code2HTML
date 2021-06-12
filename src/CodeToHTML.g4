@@ -15,6 +15,7 @@ grammar CodeToHTML;
 
     String inic;
     String end;
+    String cuerpo;
 
     public CodeToHTMLParser(TokenStream input, Sintesis theinfo){
         this(input);
@@ -26,22 +27,22 @@ grammar CodeToHTML;
 r : {inic = info.inic(MainClass.nf);}
     program <EOF>
     {end = info.end();
-    System.out.println(inic+end);
+    System.out.println(inic+cuerpo+end);
     };
 
 //Factorizacion. Arreglado
-program : part program_f;
-program_f : program | ;
+program returns[String program_S]: part program_f{$program_S = $part.part_S + $program_f.program_f_S; cuerpo = $program_S;};
+program_f returns[String program_f_S]: program {$program_f_S = $program.program_S;} | {$program_f_S = "";};
 
-part returns [String part_S]: 'funcion' type restpart {$part_S = "funcion" + $type.type_S + $restpart.restpart_S;} | 'procedimiento' restpart {$part_S = "procedimiento" + $restpart.restpart_S;};
+part returns [String part_S]: 'funcion' type restpart {$part_S = info.parrafo("funcion" + $type.type_S + $restpart.restpart_S);} | 'procedimiento' restpart {$part_S = "procedimiento" + $restpart.restpart_S;};
 
 //Factorizacion. Arreglado
 restpart returns [String restpart_S]: IDENTIFICADOR '(' restpart_f ')' blq {$restpart_S = $IDENTIFICADOR.text + "(" + $restpart_f.restpart_f_S + ")" + $blq.blq_S;};
-restpart_f returns [String restpart_f_S]: listparam {$restpart_f_S = $listparam.listparam_S;} | ;
+restpart_f returns [String restpart_f_S]: listparam {$restpart_f_S = $listparam.listparam_S;} | {$restpart_f_S = "";};
 
 //Recursividad por la izquierda. Arreglado.
 listparam returns [String listparam_S]: type IDENTIFICADOR listparam_r {$listparam_S = $type.type_S + $IDENTIFICADOR.text + $listparam_r.listparam_r_S;};
-listparam_r returns [String listparam_r_S]: ',' type IDENTIFICADOR  listparam_r {$listparam_r_S = "," + $type.type_S + $IDENTIFICADOR.text + $listparam_r.listparam_r_S;} | ;
+listparam_r returns [String listparam_r_S]: ',' type IDENTIFICADOR  listparam_r {$listparam_r_S = "," + $type.type_S + $IDENTIFICADOR.text + $listparam_r.listparam_r_S;} | {$listparam_r_S = "";};
 
 type returns [String type_S]: 'entero'{$type_S = "entero";} | 'real' {$type_S = "real";} | 'caracter'{$type_S = "caracter";};
 
@@ -49,7 +50,7 @@ blq returns [String blq_S] : 'inicio' sentlist 'fin' {$blq_S = "inicio" + $sentl
 
 //Recursividad por la izquierda. Arreglado.
 sentlist returns [String sentlist_S]: sent sentlist_r {$sentlist_S = $sent.sent_S + $sentlist_r.sentlist_r_S;};
-sentlist_r returns [String sentlist_r_S]: sent sentlist_r {$sentlist_r_S = $sent.sent_S + $sentlist_r.sentlist_r_S;} | ;
+sentlist_r returns [String sentlist_r_S]: sent sentlist_r {$sentlist_r_S = $sent.sent_S + $sentlist_r.sentlist_r_S;} | {$sentlist_r_S = "";};
 
 //Factorizacion. Arreglado
 sent returns[String sent_S]: type lid ';' {$sent_S = $type.type_S + $lid.lid_S + ";" ;}
@@ -65,7 +66,7 @@ sent_f2 returns[String sent_f2_S]: lid ')' ';' {$sent_f2_S = $lid.lid_S + ")" + 
 
 //Factorizacion. Arreglado
 lid returns[String lid_S]: IDENTIFICADOR lid_f {$lid_S = $IDENTIFICADOR.text + $lid_f.lid_f_S;};
-lid_f returns[String lid_f_S]: ',' lid {$lid_f_S = "," + $lid.lid_S;} | ;
+lid_f returns[String lid_f_S]: ',' lid {$lid_f_S = "," + $lid.lid_S;} | {$lid_f_S = "";};
 
 asig : '=' | '+=' | '-=' | '*=' | '/=';
 
@@ -75,17 +76,17 @@ exp returns[String exp_S]: IDENTIFICADOR exp_f {$exp_S = $IDENTIFICADOR.text + $
     | '(' exp ')' exp_r {$exp_S = "(" + $exp.exp_S + ")" + $exp_r.exp_r_S;}
     | CONSTENTERO exp_r {$exp_S = $CONSTENTERO.text + $exp_r.exp_r_S;}
     | CONSTREAL exp_r {$exp_S = $CONSTREAL.text + $exp_r.exp_r_S;}
-    | CONSTLIT exp_r {$exp_S = $CONSTLIT.text + $exp_r.exp_r_S;} ;
+    | CONSTLIT exp_r {$exp_S = $CONSTLIT.text + $exp_r.exp_r_S;};
 exp_f returns[String exp_f_S]: '(' lid ')' exp_r {$exp_f_S = "(" + $lid.lid_S + ")" + $exp_r.exp_r_S;}| exp_r {$exp_f_S = $exp_r.exp_r_S;};
-exp_r returns[String exp_r_S]: op exp exp_r {$exp_r_S = $op.text + $exp.exp_S + $exp_r.exp_r_S;} | ;
+exp_r returns[String exp_r_S]: op exp exp_r {$exp_r_S = $op.text + $exp.exp_S + $exp_r.exp_r_S;} | {$exp_r_S = "";};
 
 op : '+' | '-' | '*' | '/';
 
 //Recursividad por la izquierda. Arreglado.
 lcond returns[String lcond_S]: cond lcond_r {$lcond_S = $cond.cond_S + $lcond_r.lcond_r_S;} | 'no' cond lcond_r {$lcond_S = "no" + $cond.cond_S + $lcond_r.lcond_r_S;};
-lcond_r returns[String lcond_r_S]: opl lcond lcond_r {$lcond_r_S = $opl.text + $lcond.lcond_S+ $lcond_r.lcond_r_S;} | ;
+lcond_r returns[String lcond_r_S]: opl lcond lcond_r {$lcond_r_S = $opl.text + $lcond.lcond_S+ $lcond_r.lcond_r_S;} | {$lcond_r_S = "";};
 
-cond returns [String cond_S] : exp opr exp {$cond_S = $exp.exp_S + $opr.text + $exp.exp_S; System.out.println($cond_S);}| 'cierto' {$cond_S = "cierto";} | 'falso' {$cond_S = "falso";};
+cond returns [String cond_S] : exp opr exp {$cond_S = $exp.exp_S + $opr.text + $exp.exp_S;}| 'cierto' {$cond_S = "cierto";} | 'falso' {$cond_S = "falso";};
 
 opl : 'y' | 'o';
 
