@@ -33,7 +33,7 @@ r : {inic = info.inic(MainClass.nf);}
 program : part program_f;
 program_f : program | ;
 
-part returns [String part_S]: 'funcion' type restpart {$part_S = "funcion" + $type.type_S + $restpart.restpart_S;} | 'procedimiento' restpart {$part_S = "procedure" + $restpart.restpart_S;};
+part returns [String part_S]: 'funcion' type restpart {$part_S = "funcion" + $type.type_S + $restpart.restpart_S;} | 'procedimiento' restpart {$part_S = "procedimiento" + $restpart.restpart_S;};
 
 //Factorizacion. Arreglado
 restpart returns [String restpart_S]: IDENTIFICADOR '(' restpart_f ')' blq {$restpart_S = $IDENTIFICADOR.text + "(" + $restpart_f.restpart_f_S + ")" + $blq.blq_S;};
@@ -45,23 +45,23 @@ listparam_r returns [String listparam_r_S]: ',' type IDENTIFICADOR  listparam_r 
 
 type returns [String type_S]: 'entero'{$type_S = "entero";} | 'real' {$type_S = "real";} | 'caracter'{$type_S = "caracter";};
 
-blq returns [String blq_S] : 'inicio' sentlist 'fin' {$blq_S = "a";};
+blq returns [String blq_S] : 'inicio' sentlist 'fin' {$blq_S = "inicio" + $sentlist.sentlist_S + "fin";};
 
 //Recursividad por la izquierda. Arreglado.
-sentlist : sent sentlist_r;
-sentlist_r : sent sentlist_r | ;
+sentlist returns [String sentlist_S]: sent sentlist_r {$sentlist_S = $sent.sent_S + $sentlist_r.sentlist_r_S;};
+sentlist_r returns [String sentlist_r_S]: sent sentlist_r {$sentlist_r_S = $sent.sent_S + $sentlist_r.sentlist_r_S;} | ;
 
 //Factorizacion. Arreglado
-sent: type lid ';'
-    | IDENTIFICADOR sent_f1
-    | 'return' exp ';'
-    | 'bifurcacion' '(' lcond ')' 'entonces' blq 'sino' blq
-    | 'buclepara' '(' IDENTIFICADOR asig exp ';' lcond ';' IDENTIFICADOR asig exp ')' blq
-    | 'buclemientras' '(' lcond ')' blq
-    | 'bucle' blq 'hasta' '(' lcond ')'
-    | blq;
-sent_f1 : asig exp ';' | '(' sent_f2;
-sent_f2 : lid ')' ';' | '(' ')' ';';
+sent returns[String sent_S]: type lid ';' {$sent_S = $type.type_S + $lid.lid_S + ";" ;}
+    | IDENTIFICADOR sent_f1 {$sent_S = $IDENTIFICADOR.text + $sent_f1.sent_f1_S;}
+    | 'return' exp ';' {$sent_S = "return" + $exp.exp_S + ";";}
+    | 'bifurcacion' '(' lcond ')' 'entonces' blq 'sino' blq {$sent_S = "bifurcacion" + "(" + $lcond.lcond_S + ")" + "entonces" + $blq.blq_S + "sino" + $blq.blq_S;}
+    | 'buclepara' '(' IDENTIFICADOR asig exp ';' lcond ';' IDENTIFICADOR asig exp ')' blq {$sent_S = "buclepara" + "(" + $IDENTIFICADOR.text + $asig.text + $exp.exp_S + ";" + $lcond.lcond_S + ";" + $IDENTIFICADOR.text + $asig.text + $exp.exp_S + ")" + $blq.blq_S;}
+    | 'buclemientras' '(' lcond ')' blq {$sent_S = "buclemientras" + "(" + $lcond.lcond_S + ")" + $blq.blq_S;}
+    | 'bucle' blq 'hasta' '(' lcond ')' {$sent_S = "bucle" + $blq.blq_S + "hasta" + "(" + $lcond.lcond_S + ")";}
+    | blq {$sent_S = $blq.blq_S;};
+sent_f1 returns[String sent_f1_S]: asig exp ';' {$sent_f1_S = $asig.text + $exp.exp_S + ";";} | '(' sent_f2 {$sent_f1_S = "(" + $sent_f2.sent_f2_S;};
+sent_f2 returns[String sent_f2_S]: lid ')' ';' {$sent_f2_S = $lid.lid_S + ")" + ";";} | '(' ')' ';' {$sent_f2_S = "(" + ")" + ";";};
 
 //Factorizacion. Arreglado
 lid returns[String lid_S]: IDENTIFICADOR lid_f {$lid_S = $IDENTIFICADOR.text + $lid_f.lid_f_S;};
@@ -71,17 +71,21 @@ asig : '=' | '+=' | '-=' | '*=' | '/=';
 
 //Recursividad por la izquierda. Arreglado.
 //Factorizacion. Arreglado
-exp returns[String exp_S]: IDENTIFICADOR exp_f {$exp_S = $IDENTIFICADOR.text + $exp_f.exp_f_S;} | '(' exp ')' exp_r | CONSTENTERO exp_r | CONSTREAL exp_r | CONSTLIT exp_r;
-exp_f returns[String exp_f_S]: '(' lid ')' exp_r {$exp_f_S = "(" + $lid.lid_S + ")" + $exp_r.exp_r_S;}| exp_r{$exp_f_S = $exp_r.exp_r_S;};
+exp returns[String exp_S]: IDENTIFICADOR exp_f {$exp_S = $IDENTIFICADOR.text + $exp_f.exp_f_S;}
+    | '(' exp ')' exp_r {$exp_S = "(" + $exp.exp_S + ")" + $exp_r.exp_r_S;}
+    | CONSTENTERO exp_r {$exp_S = $CONSTENTERO.text + $exp_r.exp_r_S;}
+    | CONSTREAL exp_r {$exp_S = $CONSTREAL.text + $exp_r.exp_r_S;}
+    | CONSTLIT exp_r {$exp_S = $CONSTLIT.text + $exp_r.exp_r_S;} ;
+exp_f returns[String exp_f_S]: '(' lid ')' exp_r {$exp_f_S = "(" + $lid.lid_S + ")" + $exp_r.exp_r_S;}| exp_r {$exp_f_S = $exp_r.exp_r_S;};
 exp_r returns[String exp_r_S]: op exp exp_r {$exp_r_S = $op.text + $exp.exp_S + $exp_r.exp_r_S;} | ;
 
 op : '+' | '-' | '*' | '/';
 
 //Recursividad por la izquierda. Arreglado.
-lcond : cond lcond_r | 'no' cond lcond_r;
-lcond_r : opl lcond lcond_r | ;
+lcond returns[String lcond_S]: cond lcond_r {$lcond_S = $cond.cond_S + $lcond_r.lcond_r_S;} | 'no' cond lcond_r {$lcond_S = "no" + $cond.cond_S + $lcond_r.lcond_r_S;};
+lcond_r returns[String lcond_r_S]: opl lcond lcond_r {$lcond_r_S = $opl.text + $lcond.lcond_S+ $lcond_r.lcond_r_S;} | ;
 
-cond returns [String cond_S] : exp opr  exp {$cond_S = $exp.exp_S + $opr.text + $exp.exp_S; System.out.println($cond_S);}| 'cierto' {$cond_S = "cierto";} | 'falso' {$cond_S = "falso";};
+cond returns [String cond_S] : exp opr exp {$cond_S = $exp.exp_S + $opr.text + $exp.exp_S; System.out.println($cond_S);}| 'cierto' {$cond_S = "cierto";} | 'falso' {$cond_S = "falso";};
 
 opl : 'y' | 'o';
 
