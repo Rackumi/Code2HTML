@@ -57,12 +57,12 @@ part returns [String part_S, String partCab_S]: 'funcion' type restpart {$partCa
                                                                                                 , $restpart.restpartName_S
                                                                                                 );
                                                                          }
-                                                                         | 'procedimiento' restpart {$partCab_S = $restpart.restpartCab_S;
-                                                                                                     $part_S = info.parrafo(info.palres("procedimiento")
-                                                                                                                            + $restpart.restpart_S
-                                                                                                                            , $restpart.restpartName_S
-                                                                                                                            );
-                                                                                                     };
+                                              | 'procedimiento' restpart {$partCab_S = $restpart.restpartCab_S;
+                                                                          $part_S = info.parrafo(info.palres("procedimiento")
+                                                                                    + $restpart.restpart_S
+                                                                                    , $restpart.restpartName_S
+                                                                                    );
+                                                                          };
 
 //Factorizacion. Arreglado
 restpart returns [String restpart_S,
