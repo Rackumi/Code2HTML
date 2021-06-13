@@ -57,8 +57,8 @@ public class Sintesis {
 		return("<LI><A HREF=\"#"+ nombre +"\">"+ tipo +" "+ nombre +" ( "+ strParametros +" )</A></LI>\n");
 	}
 
-	public String parrafo(String codigo){
-		return("\n<HR/>\n" +
+	public String parrafo(String codigo, String ancla){
+		return("\n<HR/>\n" + "<A NAME=\""+ancla+"\">\n" +
 				codigo);
 	}
 

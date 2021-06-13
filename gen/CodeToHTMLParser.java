@@ -351,7 +351,7 @@ public class CodeToHTMLParser extends Parser {
 				((PartContext)_localctx).type = type();
 				setState(70);
 				((PartContext)_localctx).restpart = restpart();
-				((PartContext)_localctx).partCab_S =  (((PartContext)_localctx).type!=null?_input.getText(((PartContext)_localctx).type.start,((PartContext)_localctx).type.stop):null)+" "+((PartContext)_localctx).restpart.restpartCab_S; ((PartContext)_localctx).part_S =  info.parrafo("funcion" + ((PartContext)_localctx).type.type_S + ((PartContext)_localctx).restpart.restpart_S);
+				((PartContext)_localctx).partCab_S =  (((PartContext)_localctx).type!=null?_input.getText(((PartContext)_localctx).type.start,((PartContext)_localctx).type.stop):null)+" "+((PartContext)_localctx).restpart.restpartCab_S; ((PartContext)_localctx).part_S =  info.parrafo("funcion" + ((PartContext)_localctx).type.type_S + ((PartContext)_localctx).restpart.restpart_S, ((PartContext)_localctx).restpart.restpartName_S);
 				}
 				break;
 			case T__1:
@@ -361,7 +361,7 @@ public class CodeToHTMLParser extends Parser {
 				match(T__1);
 				setState(74);
 				((PartContext)_localctx).restpart = restpart();
-				((PartContext)_localctx).partCab_S =  ((PartContext)_localctx).restpart.restpartCab_S; ((PartContext)_localctx).part_S =  "procedimiento" + ((PartContext)_localctx).restpart.restpart_S;
+				((PartContext)_localctx).partCab_S =  ((PartContext)_localctx).restpart.restpartCab_S; ((PartContext)_localctx).part_S =  info.parrafo("procedimiento" + ((PartContext)_localctx).restpart.restpart_S, ((PartContext)_localctx).restpart.restpartName_S);
 				}
 				break;
 			default:
@@ -382,6 +382,7 @@ public class CodeToHTMLParser extends Parser {
 	public static class RestpartContext extends ParserRuleContext {
 		public String restpart_S;
 		public String restpartCab_S;
+		public String restpartName_S;
 		public Token IDENTIFICADOR;
 		public Restpart_fContext restpart_f;
 		public BlqContext blq;
@@ -423,7 +424,7 @@ public class CodeToHTMLParser extends Parser {
 			match(T__2);
 			setState(81);
 			((RestpartContext)_localctx).restpart_f = restpart_f();
-			((RestpartContext)_localctx).restpartCab_S =  (((RestpartContext)_localctx).IDENTIFICADOR!=null?((RestpartContext)_localctx).IDENTIFICADOR.getText():null)+" "+((RestpartContext)_localctx).restpart_f.restpart_fCab_S; 
+			((RestpartContext)_localctx).restpartName_S =  (((RestpartContext)_localctx).IDENTIFICADOR!=null?((RestpartContext)_localctx).IDENTIFICADOR.getText():null); ((RestpartContext)_localctx).restpartCab_S =  (((RestpartContext)_localctx).IDENTIFICADOR!=null?((RestpartContext)_localctx).IDENTIFICADOR.getText():null)+" "+((RestpartContext)_localctx).restpart_f.restpart_fCab_S; 
 			setState(83);
 			match(T__3);
 			setState(84);
