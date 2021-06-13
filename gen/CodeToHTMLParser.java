@@ -164,7 +164,7 @@ public class CodeToHTMLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			inic = info.inic(MainClass.nf);
+			inic = info.inic();
 			setState(55);
 			((RContext)_localctx).program = program();
 			end = info.end();

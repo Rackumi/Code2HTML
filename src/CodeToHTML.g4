@@ -26,7 +26,7 @@ grammar CodeToHTML;
 
 }
 
-r : {inic = info.inic(MainClass.nf);}
+r : {inic = info.inic();}
     program <EOF>
     {end = info.end();
     cabezas = "";

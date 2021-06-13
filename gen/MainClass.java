@@ -28,8 +28,8 @@ public class MainClass{
             String[] path = args[0].split("/");
             nf = path[path.length-1];
 
+            datos.setTitulo(nf);
             anasint.r();
-//            datos.resumen();
 
         } catch (RecognitionException e) { //Fallo al reconocer la entrada
             System.err.println("REC " + e.getMessage());

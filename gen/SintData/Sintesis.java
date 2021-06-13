@@ -3,11 +3,21 @@ package SintData;
 public class Sintesis {
 	private int variable, declaraciones;
 
-	public String inic(String titulo){
+	private String titulo;
+
+	public void setTitulo(String titulo){
+		this.titulo = titulo;
+	}
+
+	public String getTitulo(){
+		return this.titulo;
+	}
+
+	public String inic(){
 		return("<!DOCTYPE html>\n" +
 				"<HTML>\n" +
 				"<head>\n" +
-				"<title>"+ titulo +"</title>\n" +
+				"<title>"+ getTitulo() +"</title>\n" +
 				"<style>\n" +
 				".cte {color:rgb(19,189,72);}\n" +
 				".ident {color:rgb(55,40,244);}\n" +
@@ -16,7 +26,7 @@ public class Sintesis {
 				"</head>\n"+
 				"\n<BODY>\n" +
 				"<A NAME=\"inicio\">\n" +
-				"<H1>Programa: "+ titulo +"</H1>\n" +
+				"<H1>Programa: "+ getTitulo() +"</H1>\n" +
 				"<H2>Funciones y procedimientos</H2>\n");
 	}
 
