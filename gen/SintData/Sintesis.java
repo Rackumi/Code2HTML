@@ -1,7 +1,5 @@
 package SintData;
 
-import java.util.LinkedList;
-
 public class Sintesis {
 	private int variable, declaraciones;
 
@@ -59,7 +57,8 @@ public class Sintesis {
 
 	public String parrafo(String codigo, String ancla){
 		return("\n<HR/>\n" + "<A NAME=\""+ancla+"\">\n" +
-				codigo);
+				codigo+ "<A HREF=\"#"+ancla+"\">Inicio de rutina</A><BR/>\n" +
+				"<A HREF=\"#inicio\">Inicio de programa</A><BR/>");
 	}
 
 	public String ident(String codigo){
@@ -70,12 +69,20 @@ public class Sintesis {
 		return "<SPAN CLASS=\"palres\">"+codigo+"</SPAN> ";
 	}
 
+	public String cte(String codigo){
+		return "<SPAN CLASS=\"cte\">"+codigo+"</SPAN> ";
+	}
+
+	public String asigopEspacio(String codigo){
+		return " "+codigo+" ";
+	}
+
 	public String aperturaYCierre(String codigo){
 		return (palres("inicio")+saltoBR()+codigo+palres("fin")+saltoBR());
 	}
 
-	public String cuerpo(String codigo){
-		return("\t<DIV style=\"text-indent: 0.5cm\"><SPAN CLASS=\"palres\">real</SPAN> <SPAN CLASS=\"ident\">resultado</SPAN>;</DIV>");
+	public String div(String codigo){
+		return("\t<DIV style=\"text-indent: 0.5cm\">"+codigo+"</DIV>\n");
 	}
 
 	public String saltoBR(){
@@ -103,6 +110,6 @@ public class Sintesis {
 			if(variable == 1) System.out.println(" con una variable.");
 			else System.out.println("con " + variable + " variables.");
 		}
-		
+
 	}
 }

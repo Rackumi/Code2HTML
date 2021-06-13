@@ -29,7 +29,7 @@ public class MainClass{
             nf = path[path.length-1];
 
             anasint.r();
-            datos.resumen();
+//            datos.resumen();
 
         } catch (RecognitionException e) { //Fallo al reconocer la entrada
             System.err.println("REC " + e.getMessage());
