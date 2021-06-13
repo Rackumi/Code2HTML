@@ -62,14 +62,25 @@ public class Sintesis {
 				codigo);
 	}
 
+	public String ident(String codigo){
+		return "<SPAN CLASS=\"ident\">"+codigo+"</SPAN> ";
+	}
+
+	public String palres(String codigo){
+		return "<SPAN CLASS=\"palres\">"+codigo+"</SPAN> ";
+	}
+
 	public String aperturaYCierre(String codigo){
-		return("<SPAN CLASS=\"palres\">inicio</SPAN><BR/>\n"+codigo+"<SPAN CLASS=\"palres\">fin</SPAN><BR/>\n");
+		return (palres("inicio")+saltoBR()+codigo+palres("fin")+saltoBR());
 	}
 
 	public String cuerpo(String codigo){
 		return("\t<DIV style=\"text-indent: 0.5cm\"><SPAN CLASS=\"palres\">real</SPAN> <SPAN CLASS=\"ident\">resultado</SPAN>;</DIV>");
 	}
 
+	public String saltoBR(){
+		return " <BR/>\n";
+	}
 	public Sintesis(){
 		variable = 0;
 		declaraciones = 0;

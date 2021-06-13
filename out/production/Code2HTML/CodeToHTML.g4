@@ -41,15 +41,15 @@ r : {inic = info.inic(MainClass.nf);}
 program returns[String program_S, LinkedList<String> cab]: part program_f {$program_S = $part.part_S + $program_f.program_f_S; $cab = new LinkedList<>(); $cab.add($part.partCab_S); $cab.addAll($program_f.cab2);};
 program_f returns[String program_f_S, LinkedList<String> cab2]: program {$program_f_S = $program.program_S; $cab2 = new LinkedList<>(); $cab2.addAll($program.cab);} | {$program_f_S = ""; $cab2 = new LinkedList<>();};
 
-part returns [String part_S, String partCab_S]: 'funcion' type restpart {$partCab_S = $type.text+" "+$restpart.restpartCab_S; $part_S = info.parrafo("funcion" + $type.type_S + $restpart.restpart_S, $restpart.restpartName_S);} | 'procedimiento' restpart {$partCab_S = $restpart.restpartCab_S; $part_S = info.parrafo("procedimiento" + $restpart.restpart_S, $restpart.restpartName_S);};
+part returns [String part_S, String partCab_S]: 'funcion' type restpart {$partCab_S = $type.text+" "+$restpart.restpartCab_S; $part_S = info.parrafo(info.palres("funcion") + info.palres($type.type_S) + $restpart.restpart_S, $restpart.restpartName_S);} | 'procedimiento' restpart {$partCab_S = $restpart.restpartCab_S; $part_S = info.parrafo(info.palres("procedimiento") + $restpart.restpart_S, $restpart.restpartName_S);};
 
 //Factorizacion. Arreglado
-restpart returns [String restpart_S, String restpartCab_S, String restpartName_S]: IDENTIFICADOR '(' restpart_f {$restpartName_S = $IDENTIFICADOR.text; $restpartCab_S = $IDENTIFICADOR.text+" "+$restpart_f.restpart_fCab_S; }')' blq {$restpart_S = $IDENTIFICADOR.text + "(" + $restpart_f.restpart_f_S + ")" + $blq.blq_S;};
+restpart returns [String restpart_S, String restpartCab_S, String restpartName_S]: IDENTIFICADOR '(' restpart_f {$restpartName_S = $IDENTIFICADOR.text; $restpartCab_S = $IDENTIFICADOR.text+" "+$restpart_f.restpart_fCab_S; }')' blq {$restpart_S = info.ident($IDENTIFICADOR.text) + "(" + $restpart_f.restpart_f_S + ")"  + info.saltoBR() + $blq.blq_S;};
 restpart_f returns [String restpart_f_S, String restpart_fCab_S]: listparam {$restpart_fCab_S = $listparam.listparamCab_S; $restpart_f_S = $listparam.listparam_S;} | {$restpart_fCab_S = ""; $restpart_f_S = "";};
 
 //Recursividad por la izquierda. Arreglado.
-listparam returns [String listparam_S, String listparamCab_S]: type IDENTIFICADOR listparam_r {$listparamCab_S=$type.type_S +" "+ $IDENTIFICADOR.text +" "+ $listparam_r.listparam_rCab_S; $listparam_S = $type.type_S + $IDENTIFICADOR.text + $listparam_r.listparam_r_S;};
-listparam_r returns [String listparam_r_S, String listparam_rCab_S]: ',' type IDENTIFICADOR  listparam_r {$listparam_rCab_S = $type.type_S +" "+ $IDENTIFICADOR.text +" "+ $listparam_r.listparam_rCab_S; $listparam_r_S = "," + $type.type_S + $IDENTIFICADOR.text + $listparam_r.listparam_r_S;} | {$listparam_rCab_S = ""; $listparam_r_S = "";};
+listparam returns [String listparam_S, String listparamCab_S]: type IDENTIFICADOR listparam_r {$listparamCab_S=$type.type_S +" "+ $IDENTIFICADOR.text +" "+ $listparam_r.listparam_rCab_S; $listparam_S = info.palres($type.type_S) + info.ident($IDENTIFICADOR.text) + $listparam_r.listparam_r_S;};
+listparam_r returns [String listparam_r_S, String listparam_rCab_S]: ',' type IDENTIFICADOR  listparam_r {$listparam_rCab_S = $type.type_S +" "+ $IDENTIFICADOR.text +" "+ $listparam_r.listparam_rCab_S; $listparam_r_S = ", " + info.palres($type.type_S) + info.ident($IDENTIFICADOR.text) + $listparam_r.listparam_r_S;} | {$listparam_rCab_S = ""; $listparam_r_S = "";};
 
 type returns [String type_S]: 'entero'{$type_S = "entero";} | 'real' {$type_S = "real";} | 'caracter'{$type_S = "caracter";};
 
@@ -60,7 +60,7 @@ sentlist returns [String sentlist_S]: sent sentlist_r {$sentlist_S = $sent.sent_
 sentlist_r returns [String sentlist_r_S]: sent sentlist_r {$sentlist_r_S = $sent.sent_S + $sentlist_r.sentlist_r_S;} | {$sentlist_r_S = "";};
 
 //Factorizacion. Arreglado
-sent returns[String sent_S]: type lid ';' {$sent_S = $type.type_S + $lid.lid_S + ";" ;}
+sent returns[String sent_S]: type lid ';' {$sent_S = info.palres($type.type_S) + $lid.lid_S + ";" ;}
     | IDENTIFICADOR sent_f1 {$sent_S = $IDENTIFICADOR.text + $sent_f1.sent_f1_S;}
     | 'return' exp ';' {$sent_S = "return" + $exp.exp_S + ";";}
     | 'bifurcacion' '(' lcond ')' 'entonces' blq 'sino' blq {$sent_S = "bifurcacion" + "(" + $lcond.lcond_S + ")" + "entonces" + $blq.blq_S + "sino" + $blq.blq_S;}

@@ -351,7 +351,7 @@ public class CodeToHTMLParser extends Parser {
 				((PartContext)_localctx).type = type();
 				setState(70);
 				((PartContext)_localctx).restpart = restpart();
-				((PartContext)_localctx).partCab_S =  (((PartContext)_localctx).type!=null?_input.getText(((PartContext)_localctx).type.start,((PartContext)_localctx).type.stop):null)+" "+((PartContext)_localctx).restpart.restpartCab_S; ((PartContext)_localctx).part_S =  info.parrafo("funcion" + ((PartContext)_localctx).type.type_S + ((PartContext)_localctx).restpart.restpart_S, ((PartContext)_localctx).restpart.restpartName_S);
+				((PartContext)_localctx).partCab_S =  (((PartContext)_localctx).type!=null?_input.getText(((PartContext)_localctx).type.start,((PartContext)_localctx).type.stop):null)+" "+((PartContext)_localctx).restpart.restpartCab_S; ((PartContext)_localctx).part_S =  info.parrafo(info.palres("funcion") + info.palres(((PartContext)_localctx).type.type_S) + ((PartContext)_localctx).restpart.restpart_S, ((PartContext)_localctx).restpart.restpartName_S);
 				}
 				break;
 			case T__1:
@@ -361,7 +361,7 @@ public class CodeToHTMLParser extends Parser {
 				match(T__1);
 				setState(74);
 				((PartContext)_localctx).restpart = restpart();
-				((PartContext)_localctx).partCab_S =  ((PartContext)_localctx).restpart.restpartCab_S; ((PartContext)_localctx).part_S =  info.parrafo("procedimiento" + ((PartContext)_localctx).restpart.restpart_S, ((PartContext)_localctx).restpart.restpartName_S);
+				((PartContext)_localctx).partCab_S =  ((PartContext)_localctx).restpart.restpartCab_S; ((PartContext)_localctx).part_S =  info.parrafo(info.palres("procedimiento") + ((PartContext)_localctx).restpart.restpart_S, ((PartContext)_localctx).restpart.restpartName_S);
 				}
 				break;
 			default:
@@ -429,7 +429,7 @@ public class CodeToHTMLParser extends Parser {
 			match(T__3);
 			setState(84);
 			((RestpartContext)_localctx).blq = blq();
-			((RestpartContext)_localctx).restpart_S =  (((RestpartContext)_localctx).IDENTIFICADOR!=null?((RestpartContext)_localctx).IDENTIFICADOR.getText():null) + "(" + ((RestpartContext)_localctx).restpart_f.restpart_f_S + ")" + ((RestpartContext)_localctx).blq.blq_S;
+			((RestpartContext)_localctx).restpart_S =  info.ident((((RestpartContext)_localctx).IDENTIFICADOR!=null?((RestpartContext)_localctx).IDENTIFICADOR.getText():null)) + "(" + ((RestpartContext)_localctx).restpart_f.restpart_f_S + ")"  + info.saltoBR() + ((RestpartContext)_localctx).blq.blq_S;
 			}
 		}
 		catch (RecognitionException re) {
@@ -551,7 +551,7 @@ public class CodeToHTMLParser extends Parser {
 			((ListparamContext)_localctx).IDENTIFICADOR = match(IDENTIFICADOR);
 			setState(95);
 			((ListparamContext)_localctx).listparam_r = listparam_r();
-			((ListparamContext)_localctx).listparamCab_S = ((ListparamContext)_localctx).type.type_S +" "+ (((ListparamContext)_localctx).IDENTIFICADOR!=null?((ListparamContext)_localctx).IDENTIFICADOR.getText():null) +" "+ ((ListparamContext)_localctx).listparam_r.listparam_rCab_S; ((ListparamContext)_localctx).listparam_S =  ((ListparamContext)_localctx).type.type_S + (((ListparamContext)_localctx).IDENTIFICADOR!=null?((ListparamContext)_localctx).IDENTIFICADOR.getText():null) + ((ListparamContext)_localctx).listparam_r.listparam_r_S;
+			((ListparamContext)_localctx).listparamCab_S = ((ListparamContext)_localctx).type.type_S +" "+ (((ListparamContext)_localctx).IDENTIFICADOR!=null?((ListparamContext)_localctx).IDENTIFICADOR.getText():null) +" "+ ((ListparamContext)_localctx).listparam_r.listparam_rCab_S; ((ListparamContext)_localctx).listparam_S =  info.palres(((ListparamContext)_localctx).type.type_S) + info.ident((((ListparamContext)_localctx).IDENTIFICADOR!=null?((ListparamContext)_localctx).IDENTIFICADOR.getText():null)) + ((ListparamContext)_localctx).listparam_r.listparam_r_S;
 			}
 		}
 		catch (RecognitionException re) {
@@ -615,7 +615,7 @@ public class CodeToHTMLParser extends Parser {
 				((Listparam_rContext)_localctx).IDENTIFICADOR = match(IDENTIFICADOR);
 				setState(101);
 				((Listparam_rContext)_localctx).listparam_r = listparam_r();
-				((Listparam_rContext)_localctx).listparam_rCab_S =  ((Listparam_rContext)_localctx).type.type_S +" "+ (((Listparam_rContext)_localctx).IDENTIFICADOR!=null?((Listparam_rContext)_localctx).IDENTIFICADOR.getText():null) +" "+ ((Listparam_rContext)_localctx).listparam_r.listparam_rCab_S; ((Listparam_rContext)_localctx).listparam_r_S =  "," + ((Listparam_rContext)_localctx).type.type_S + (((Listparam_rContext)_localctx).IDENTIFICADOR!=null?((Listparam_rContext)_localctx).IDENTIFICADOR.getText():null) + ((Listparam_rContext)_localctx).listparam_r.listparam_r_S;
+				((Listparam_rContext)_localctx).listparam_rCab_S =  ((Listparam_rContext)_localctx).type.type_S +" "+ (((Listparam_rContext)_localctx).IDENTIFICADOR!=null?((Listparam_rContext)_localctx).IDENTIFICADOR.getText():null) +" "+ ((Listparam_rContext)_localctx).listparam_r.listparam_rCab_S; ((Listparam_rContext)_localctx).listparam_r_S =  ", " + info.palres(((Listparam_rContext)_localctx).type.type_S) + info.ident((((Listparam_rContext)_localctx).IDENTIFICADOR!=null?((Listparam_rContext)_localctx).IDENTIFICADOR.getText():null)) + ((Listparam_rContext)_localctx).listparam_r.listparam_r_S;
 				}
 				break;
 			case T__3:
@@ -967,7 +967,7 @@ public class CodeToHTMLParser extends Parser {
 				((SentContext)_localctx).lid = lid();
 				setState(133);
 				match(T__10);
-				((SentContext)_localctx).sent_S =  ((SentContext)_localctx).type.type_S + ((SentContext)_localctx).lid.lid_S + ";" ;
+				((SentContext)_localctx).sent_S =  info.palres(((SentContext)_localctx).type.type_S) + ((SentContext)_localctx).lid.lid_S + ";" ;
 				}
 				break;
 			case IDENTIFICADOR:
