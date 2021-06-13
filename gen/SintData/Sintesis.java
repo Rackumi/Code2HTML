@@ -28,9 +28,33 @@ public class Sintesis {
 	}
 
 	public String cabecera(String cabezas){
-		return("<UL>\n" +
-				"<LI><A HREF=\"#"+ "titulo1" +"\">real "+ "titulo1" +" ( "+ "params" +" )</A></LI>\n" +
-				"</UL>\n");
+
+		String[] elementos = cabezas.split(" ");
+		String tipo = "";
+		String nombre;
+		StringBuilder strParametros = new StringBuilder();
+
+		int cont = 0;
+		if(elementos[cont].equals("entero") || elementos[cont].equals("real") || elementos[cont].equals("caracter")){
+			tipo = elementos[cont];
+			cont++;
+			nombre = elementos[cont];
+			cont++;
+		}
+		else{
+			nombre = elementos[cont];
+			cont++;
+		}
+		for(int i=cont; i<elementos.length; i++){
+			if (i<elementos.length-1) {
+				strParametros.append(elementos[i]).append(" ");
+			}
+			else{
+				strParametros.append(elementos[i]);
+			}
+		}
+
+		return("<LI><A HREF=\"#"+ nombre +"\">"+ tipo +" "+ nombre +" ( "+ strParametros +" )</A></LI>\n");
 	}
 
 	public String parrafo(String codigo){

@@ -16,8 +16,8 @@ grammar CodeToHTML;
 
     String inic;
     String end;
+    String cabezas;
     String cuerpo;
-    LinkedList<Cabecera> cabeceras = new LinkedList<>();
 
     public CodeToHTMLParser(TokenStream input, Sintesis theinfo){
         this(input);
@@ -29,12 +29,17 @@ grammar CodeToHTML;
 r : {inic = info.inic(MainClass.nf);}
     program <EOF>
     {end = info.end();
-    System.out.println(inic+info.cabecera("")+$program.program_S+end);
+    cabezas = "";
+    for(String c: $program.cab){
+        cabezas = cabezas + info.cabecera(c);
+    }
+    cabezas = "<UL>\n" + cabezas + "</UL>\n";
+    System.out.println(inic+cabezas+$program.program_S+end);
     };
 
 //Factorizacion. Arreglado
-program returns[String program_S, LinkedList<String> cab]: part {$cab = new LinkedList<>(); $cab.add($part.partCab_S); System.out.println($part.partCab_S);} program_f {$program_S = $part.part_S + $program_f.program_f_S;};
-program_f returns[String program_f_S]: program {$program_f_S = $program.program_S;} | {$program_f_S = "";};
+program returns[String program_S, LinkedList<String> cab]: part program_f {$program_S = $part.part_S + $program_f.program_f_S; $cab = new LinkedList<>(); $cab.add($part.partCab_S); $cab.addAll($program_f.cab2);};
+program_f returns[String program_f_S, LinkedList<String> cab2]: program {$program_f_S = $program.program_S; $cab2 = new LinkedList<>(); $cab2.addAll($program.cab);} | {$program_f_S = ""; $cab2 = new LinkedList<>();};
 
 part returns [String part_S, String partCab_S]: 'funcion' type restpart {$partCab_S = $type.text+" "+$restpart.restpartCab_S; $part_S = info.parrafo("funcion" + $type.type_S + $restpart.restpart_S);} | 'procedimiento' restpart {$partCab_S = $restpart.restpartCab_S; $part_S = "procedimiento" + $restpart.restpart_S;};
 
