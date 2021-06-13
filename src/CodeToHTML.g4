@@ -68,20 +68,23 @@ restpart_f returns [String restpart_f_S, String restpart_fCab_S]: listparam {$re
 //Recursividad por la izquierda. Arreglado.
 listparam returns [String listparam_S, String listparamCab_S]: type IDENTIFICADOR listparam_r { $listparamCab_S=$type.type_S +" "+ $IDENTIFICADOR.text +" "+ $listparam_r.listparam_rCab_S;
                                                                                                 $listparam_S = info.palres($type.type_S) + info.ident($IDENTIFICADOR.text) + $listparam_r.listparam_r_S;
-                                                                                                };
+                                                                                              };
 
 listparam_r returns [String listparam_r_S, String listparam_rCab_S]: ',' type IDENTIFICADOR  listparam_r {  $listparam_rCab_S = $type.type_S +" "+ $IDENTIFICADOR.text +" "+ $listparam_r.listparam_rCab_S;
                                                                                                             $listparam_r_S = ", " + info.palres($type.type_S) + info.ident($IDENTIFICADOR.text) + $listparam_r.listparam_r_S;}
-                                                                                                            | {$listparam_rCab_S = ""; $listparam_r_S = "";};
+                                                                                                         | {$listparam_rCab_S = ""; $listparam_r_S = "";};
 
-type returns [String type_S]: 'entero'{$type_S = "entero";} | 'real' {$type_S = "real";} | 'caracter'{$type_S = "caracter";};
+type returns [String type_S]: 'entero'{$type_S = "entero";}
+                            | 'real' {$type_S = "real";}
+                            | 'caracter'{$type_S = "caracter";};
 
 blq returns [String blq_S] : 'inicio' sentlist 'fin' {$blq_S = info.aperturaYCierre($sentlist.sentlist_S);};
 
 //Recursividad por la izquierda. Arreglado.
 sentlist returns [String sentlist_S]: sent sentlist_r {$sentlist_S = info.div($sent.sent_S) + $sentlist_r.sentlist_r_S;};
+
 sentlist_r returns [String sentlist_r_S]: sent sentlist_r { $sentlist_r_S = info.div($sent.sent_S) + $sentlist_r.sentlist_r_S;}
-                                                            | {$sentlist_r_S = "";};
+                                                          | {$sentlist_r_S = "";};
 
 //Factorizacion. Arreglado
 sent returns[String sent_S]: type lid ';' {$sent_S = info.palres($type.type_S) + $lid.lid_S + ";" ;}
@@ -93,8 +96,11 @@ sent returns[String sent_S]: type lid ';' {$sent_S = info.palres($type.type_S) +
     | 'bucle' blq 'hasta' '(' lcond ')' {$sent_S = info.palres("bucle") + $blq.blq_S + info.palres("hasta") + "(" + $lcond.lcond_S + ")";}
     | blq {$sent_S = $blq.blq_S;};
 
-sent_f1 returns[String sent_f1_S]: asig exp ';' {$sent_f1_S = info.asigopEspacio($asig.text) + $exp.exp_S + ";";} | '(' sent_f2 {$sent_f1_S = "(" + $sent_f2.sent_f2_S;};
-sent_f2 returns[String sent_f2_S]: lid ')' ';' {$sent_f2_S = $lid.lid_S + ")" + ";";} | '(' ')' ';' {$sent_f2_S = "(" + ")" + ";";};
+sent_f1 returns[String sent_f1_S]: asig exp ';' {$sent_f1_S = info.asigopEspacio($asig.text) + $exp.exp_S + ";";}
+                                 | '(' sent_f2 {$sent_f1_S = "(" + $sent_f2.sent_f2_S;};
+
+sent_f2 returns[String sent_f2_S]: lid ')' ';' {$sent_f2_S = $lid.lid_S + ")" + ";";}
+                                 | '(' ')' ';' {$sent_f2_S = "(" + ")" + ";";};
 
 //Factorizacion. Arreglado
 lid returns[String lid_S]: IDENTIFICADOR lid_f {String aux = info.ident($IDENTIFICADOR.text);
