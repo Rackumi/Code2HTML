@@ -69,7 +69,7 @@ restpart returns [String restpart_S,
                   String restpartCab_S,
                   String restpartName_S]: IDENTIFICADOR '(' restpart_f {$restpartName_S = $IDENTIFICADOR.text;
                                                                         $restpartCab_S = $IDENTIFICADOR.text+" "
-                                                                                         +$restpart_f.restpart_fCab_S;}
+                                                                                         + $restpart_f.restpart_fCab_S;}
                                                                         ')' blq {$restpart_S = info.ident($IDENTIFICADOR.text)
                                                                                                + "("
                                                                                                + $restpart_f.restpart_f_S
@@ -111,38 +111,58 @@ type returns [String type_S]: 'entero'{$type_S = "entero";}
 blq returns [String blq_S] : 'inicio' sentlist 'fin' {$blq_S = info.aperturaYCierre($sentlist.sentlist_S);};
 
 //Recursividad por la izquierda. Arreglado.
-sentlist returns [String sentlist_S]: sent sentlist_r {$sentlist_S = info.div($sent.sent_S) + $sentlist_r.sentlist_r_S;};
+sentlist returns [String sentlist_S]: sent sentlist_r {String aux = "";
+                                                       if(!($sent.sent_S.contains("fin"))){
+                                                            aux=info.saltoBR();
+                                                       }
+                                                       else{
+                                                            aux = "";
+                                                       }
+                                                       $sentlist_S = $sent.sent_S + aux + $sentlist_r.sentlist_r_S;};
 
-sentlist_r returns [String sentlist_r_S]: sent sentlist_r { $sentlist_r_S = info.div($sent.sent_S)
+sentlist_r returns [String sentlist_r_S]: sent sentlist_r { String aux = "";
+                                                           if(!($sent.sent_S.contains("fin"))){
+                                                                aux=info.saltoBR();
+                                                           }
+                                                           else{
+                                                                aux = "";
+                                                           }
+                                                            $sentlist_r_S = $sent.sent_S + aux
                                                                             + $sentlist_r.sentlist_r_S;}
-                                                          | {$sentlist_r_S = "";};
+                                                          | {$sentlist_r_S = "" ;};
 
 //Factorizacion. Arreglado
 sent returns[String sent_S]: type lid ';' {$sent_S = info.palres($type.type_S) + $lid.lid_S + ";" ;}
     | IDENTIFICADOR sent_f1 {$sent_S = info.ident($IDENTIFICADOR.text) + $sent_f1.sent_f1_S;}
     | 'return' exp ';' {$sent_S = info.palres("return ") + $exp.exp_S + ";";}
-    | 'bifurcacion' '(' lcond ')'
-                'entonces' blq 'sino' blq {$sent_S = info.palres("bifurcacion")
-                                                     + "(" + $lcond.lcond_S + ")"
-                                                     + info.palres("entonces")
-                                                     + $blq.blq_S
-                                                     + info.palres("sino")
-                                                     + $blq.blq_S;}
+    | 'bifurcacion' '(' lcond ')' 'entonces' blq1=blq 'sino' blq2=blq {$sent_S = info.palres("bifurcacion")
+                                                                         + "(" + $lcond.lcond_S + ")"
+                                                                         + info.saltoBR()
+                                                                         + info.palres("entonces")
+                                                                         + info.saltoBR()
+                                                                         + $blq1.blq_S
+                                                                         + info.palres("sino")
+                                                                         + info.saltoBR()
+                                                                         + $blq2.blq_S;}
 
-    | 'buclepara' '(' IDENTIFICADOR asig exp ';' lcond ';'
-                      IDENTIFICADOR asig exp ')' blq {$sent_S = info.palres("buclepara")
-                                                                + "(" + info.ident($IDENTIFICADOR.text)
+    | 'buclepara' '(' id1=IDENTIFICADOR asig exp ';' lcond ';'
+                      id2=IDENTIFICADOR asig exp ')' blq {$sent_S = info.palres("buclepara")
+                                                                + "(" + info.ident($id1.text)
                                                                 + info.asigopEspacio($asig.text)
                                                                 + $exp.exp_S + ";" + $lcond.lcond_S
-                                                                + ";" + info.ident($IDENTIFICADOR.text)
+                                                                + ";" + info.ident($id2.text)
                                                                 + info.asigopEspacio($asig.text)
-                                                                + $exp.exp_S + ")" + $blq.blq_S;}
+                                                                + $exp.exp_S + ")"
+                                                                + info.saltoBR()
+                                                                + $blq.blq_S;}
 
     | 'buclemientras' '(' lcond ')' blq {$sent_S = info.palres("buclemientras")
                                                    + "(" + $lcond.lcond_S + ")"
+                                                   + info.saltoBR()
                                                    + $blq.blq_S;}
 
     | 'bucle' blq 'hasta' '(' lcond ')' {$sent_S = info.palres("bucle")
+                                                   + info.saltoBR()
                                                    + $blq.blq_S
                                                    + info.palres("hasta")
                                                    + "(" + $lcond.lcond_S
@@ -199,7 +219,7 @@ opl : 'y' | 'o';
 
 opr : '=='| '<>' | '<' | '>' | '>=' | '<=';
 
-IDENTIFICADOR : ('_' | WORD)('_' | WORD | DECIMAL )*;
+IDENTIFICADOR : ('_' | WORD)('_' | WORD | DECIMAL)*;
 
 CONSTENTERO : ((('+'|'-')? DECIMAL+) | ('$' ('+'|'-')? HEXADECIMAL+));
 

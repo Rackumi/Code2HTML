@@ -1,5 +1,7 @@
 package SintData;
 
+import java.util.Arrays;
+
 public class Sintesis {
 	private int variable, declaraciones;
 
@@ -88,11 +90,31 @@ public class Sintesis {
 	}
 
 	public String aperturaYCierre(String codigo){
-		return (palres("inicio")+saltoBR()+codigo+palres("fin")+saltoBR());
+		return (palres("inicio")+saltoBR()+div(codigo)+palres("fin")+saltoBR());
 	}
 
 	public String div(String codigo){
-		return("\t<DIV style=\"text-indent: 0.5cm\">"+codigo+"</DIV>\n");
+		String[] saltos = codigo.split("\n");
+		StringBuilder salida = new StringBuilder();
+		String aux = "";
+		int cont = 0;
+
+		if(saltos.length > 0){
+			for (String salto : saltos) {
+				if (salto.contains("\t<DIV style=\"text-indent: ")) {
+					aux = salto.replaceFirst("0.5cm", "1cm");
+					salida.append(aux);
+				}
+				else {
+					salida.append("\t<DIV style=\"text-indent: 0.5cm\">").append(salto).append("</DIV>\n");
+				}
+			}
+		}
+		else{
+			salida = new StringBuilder("\t<DIV style=\"text-indent: 0.5cm\">" + codigo + "</DIV>\n");
+		}
+
+		return(salida.toString());
 	}
 
 	public String saltoBR(){
