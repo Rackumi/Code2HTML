@@ -98,11 +98,16 @@ public class Sintesis {
 	public String saltoBR(){
 		return " <BR/>\n";
 	}
+
+	public String saltoIF(String codigo) {return ("<dl>"+"<dd>"+codigo+"</dd>"+ "</dl>"); }
+
 	public Sintesis(){
 		variable = 0;
 		declaraciones = 0;
 	}
-	
+
+
+
 	public void newDec ( ) {
 		declaraciones++;
 		variable++;
