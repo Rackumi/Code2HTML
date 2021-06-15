@@ -1,6 +1,10 @@
 package SintData;
 
+import org.abego.treelayout.internal.util.java.lang.string.StringUtil;
+
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Sintesis {
 	private int variable, declaraciones;
@@ -97,21 +101,26 @@ public class Sintesis {
 		String[] saltos = codigo.split("\n");
 		StringBuilder salida = new StringBuilder();
 		String aux = "";
-		int cont = 0;
+		String desp = "";
+		double desplazamiento;
 
 		if(saltos.length > 0){
 			for (String salto : saltos) {
 				if (salto.contains("\t<DIV style=\"text-indent: ")) {
-					aux = salto.replaceFirst("0.5cm", "1cm");
-					salida.append(aux);
+					Pattern p = Pattern.compile("[0-9]+.?[0-9]*cm");
+					Matcher m = p.matcher(salto);
+					while(m.find()) {
+						desp = m.group();
+					}
+					desp = desp.substring(0, desp.length()-2);
+					desplazamiento = Double.parseDouble(desp);
+					aux = salto.replaceFirst("[0-9]+.?[0-9]*cm", String.valueOf(desplazamiento+0.5)+"cm");
+					salida.append(aux).append("\n");
 				}
 				else {
-					salida.append("\t<DIV style=\"text-indent: 0.5cm\">").append(salto).append("</DIV>\n");
+					salida.append("\t<DIV style=\"text-indent: ").append("0.5").append("cm\">").append(salto).append("</DIV>\n");
 				}
 			}
-		}
-		else{
-			salida = new StringBuilder("\t<DIV style=\"text-indent: 0.5cm\">" + codigo + "</DIV>\n");
 		}
 
 		return(salida.toString());
@@ -120,8 +129,6 @@ public class Sintesis {
 	public String saltoBR(){
 		return " <BR/>\n";
 	}
-
-	public String saltoIF(String codigo) {return ("<dl>"+"<dd>"+codigo+"</dd>"+ "</dl>"); }
 
 	public Sintesis(){
 		variable = 0;
