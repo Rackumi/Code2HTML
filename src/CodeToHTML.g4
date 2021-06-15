@@ -193,14 +193,15 @@ sent returns[String sent_S]: type lid ';' {$sent_S = info.palres($type.type_S) +
                                                    + $blq.blq_S
                                                    + info.palres("hasta")
                                                    + "(" + $lcond.lcond_S
-                                                   + ")";}
+                                                   + ")"
+                                                   + info.saltoBR();}
     | blq {$sent_S = $blq.blq_S;};
 
 sent_f1 returns[String sent_f1_S]: asig exp ';' {$sent_f1_S = info.asigopEspacio($asig.text) + $exp.exp_S + ";";}
                                  | '(' sent_f2 {$sent_f1_S = "(" + $sent_f2.sent_f2_S;};
 
 sent_f2 returns[String sent_f2_S]: lid ')' ';' {$sent_f2_S = $lid.lid_S + ")" + ";";}
-                                 | '(' ')' ';' {$sent_f2_S = "(" + ")" + ";";};
+                                 | ')' ';' {$sent_f2_S = ")" + ";";};
 
 //Factorizacion. Arreglado
 lid returns[String lid_S]: IDENTIFICADOR lid_f {String aux = info.ident($IDENTIFICADOR.text);
@@ -208,7 +209,7 @@ lid returns[String lid_S]: IDENTIFICADOR lid_f {String aux = info.ident($IDENTIF
                                                 $lid_S = aux + $lid_f.lid_f_S;
                                                 };
 
-lid_f returns[String lid_f_S]: ',' lid {$lid_f_S = "," + $lid.lid_S;}
+lid_f returns[String lid_f_S]: ',' lid {$lid_f_S = ", " + $lid.lid_S;}
                                         | {$lid_f_S = "";};
 
 asig : '=' | '+=' | '-=' | '*=' | '/=';

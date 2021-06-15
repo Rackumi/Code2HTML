@@ -18,6 +18,8 @@ grammar CodeToHTML;
     String end;
     String cabezas;
     String cuerpo;
+    String principal ="";
+    int contPrincipal = 0;
 
     public CodeToHTMLParser(TokenStream input, Sintesis theinfo){
         this(input);
@@ -34,7 +36,12 @@ r : {inic = info.inic();}
         cabezas = cabezas + info.cabecera(c);
     }
     cabezas = "<UL>\n" + cabezas + "</UL>\n";
-    System.out.println(inic+cabezas+$program.program_S+end);
+    if(contPrincipal>1){
+        System.err.println("Error. Más de un métodos Principal definidos");
+    }
+    else{
+        System.out.println(inic+cabezas+principal+$program.program_S+end);
+    }
     };
 
 //Factorizacion. Arreglado
@@ -50,18 +57,38 @@ program_f returns[String program_f_S, LinkedList<String> cab2]: program {   $pro
                                                                             | {$program_f_S = ""; $cab2 = new LinkedList<>();
                                                                             };
 
-part returns [String part_S, String partCab_S]: 'funcion' type restpart {$partCab_S = $type.text+" "+$restpart.restpartCab_S;
-                                                                         $part_S = info.parrafo(info.palres("funcion")
-                                                                                                + info.palres($type.type_S)
-                                                                                                + $restpart.restpart_S
-                                                                                                , $restpart.restpartName_S
-                                                                                                );
+part returns [String part_S, String partCab_S]: 'funcion' type restpart {String p = "";
+                                                                         if(info.esPrincipal($restpart.restpart_S)){
+                                                                             principal = info.parrafo(info.palres("funcion")
+                                                                                 + info.palres($type.type_S)
+                                                                                 + $restpart.restpart_S
+                                                                                 , $restpart.restpartName_S);
+                                                                             contPrincipal++;
                                                                          }
-                                              | 'procedimiento' restpart {$partCab_S = $restpart.restpartCab_S;
-                                                                          $part_S = info.parrafo(info.palres("procedimiento")
-                                                                                    + $restpart.restpart_S
-                                                                                    , $restpart.restpartName_S
-                                                                                    );
+                                                                         else{
+                                                                             p = info.parrafo(info.palres("funcion")
+                                                                                  + info.palres($type.type_S)
+                                                                                  + $restpart.restpart_S
+                                                                                  , $restpart.restpartName_S);
+                                                                         }
+                                                                         $partCab_S = $type.text+" "+$restpart.restpartCab_S;
+                                                                              $part_S = p;
+                                                                         }
+                                              | 'procedimiento' restpart {String p = "";
+                                                                          if(info.esPrincipal($restpart.restpart_S)){
+                                                                              principal = info.parrafo(info.palres("procedimiento")
+                                                                                  + $restpart.restpart_S
+                                                                                  , $restpart.restpartName_S);
+                                                                              contPrincipal++;
+                                                                          }
+                                                                          else{
+                                                                              p = info.parrafo(info.palres("procedimiento")
+                                                                                  + $restpart.restpart_S
+                                                                                  , $restpart.restpartName_S);
+                                                                          }
+
+                                                                          $partCab_S = $restpart.restpartCab_S;
+                                                                          $part_S = p;
                                                                           };
 
 //Factorizacion. Arreglado
@@ -166,14 +193,15 @@ sent returns[String sent_S]: type lid ';' {$sent_S = info.palres($type.type_S) +
                                                    + $blq.blq_S
                                                    + info.palres("hasta")
                                                    + "(" + $lcond.lcond_S
-                                                   + ")";}
+                                                   + ")"
+                                                   + info.saltoBR();}
     | blq {$sent_S = $blq.blq_S;};
 
 sent_f1 returns[String sent_f1_S]: asig exp ';' {$sent_f1_S = info.asigopEspacio($asig.text) + $exp.exp_S + ";";}
                                  | '(' sent_f2 {$sent_f1_S = "(" + $sent_f2.sent_f2_S;};
 
 sent_f2 returns[String sent_f2_S]: lid ')' ';' {$sent_f2_S = $lid.lid_S + ")" + ";";}
-                                 | '(' ')' ';' {$sent_f2_S = "(" + ")" + ";";};
+                                 | ')' ';' {$sent_f2_S = ")" + ";";};
 
 //Factorizacion. Arreglado
 lid returns[String lid_S]: IDENTIFICADOR lid_f {String aux = info.ident($IDENTIFICADOR.text);
@@ -181,7 +209,7 @@ lid returns[String lid_S]: IDENTIFICADOR lid_f {String aux = info.ident($IDENTIF
                                                 $lid_S = aux + $lid_f.lid_f_S;
                                                 };
 
-lid_f returns[String lid_f_S]: ',' lid {$lid_f_S = "," + $lid.lid_S;}
+lid_f returns[String lid_f_S]: ',' lid {$lid_f_S = ", " + $lid.lid_S;}
                                         | {$lid_f_S = "";};
 
 asig : '=' | '+=' | '-=' | '*=' | '/=';

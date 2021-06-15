@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<HTML>
+<head>
+<title>EjAprobadoCorrec.pl</title>
+<style>
+.cte {color:rgb(19,189,72);}
+.ident {color:rgb(55,40,244);}
+.palres {color:rgb(0,0,0);font-weight:bold;}
+</style>
+</head>
+
+<BODY>
+<A NAME="inicio">
+<H1>Programa: EjAprobadoCorrec.pl</H1>
+<H2>Funciones y procedimientos</H2>
+<UL>
+<LI><A HREF="#ids_ctesnum">real ids_ctesnum ( real lado )</A></LI>
+<LI><A HREF="#ctescar"> ctescar ( real lado )</A></LI>
+<LI><A HREF="#fun_con_parametros">entero fun_con_parametros ( entero v1 real v2 )</A></LI>
+<LI><A HREF="#fun_sin_parametros">entero fun_sin_parametros (  )</A></LI>
+<LI><A HREF="#proc_con_parametros"> proc_con_parametros ( entero v1 real v2 )</A></LI>
+<LI><A HREF="#proc_sin_parametros"> proc_sin_parametros (  )</A></LI>
+</UL>
+
+<HR/>
+<A NAME="ids_ctesnum">
+<SPAN CLASS="palres">funcion</SPAN> <SPAN CLASS="palres">real</SPAN> <SPAN CLASS="ident">ids_ctesnum</SPAN> (<SPAN CLASS="palres">real</SPAN> <SPAN CLASS="ident">lado</SPAN> ) <BR/>
+<SPAN CLASS="palres">inicio</SPAN>  <BR/>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="palres">real</SPAN> <SPAN CLASS="ident">resultado</SPAN>,<SPAN CLASS="ident">contador</SPAN>,<SPAN CLASS="ident">contador1</SPAN>,<SPAN CLASS="ident">acumulador_total_2</SPAN>,<SPAN CLASS="ident">_contador3</SPAN>; <BR/></DIV>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="ident">resultado</SPAN>  = <SPAN CLASS="cte">+123</SPAN>  * <SPAN CLASS="cte">-69</SPAN>  - <SPAN CLASS="cte">45</SPAN> ; <BR/></DIV>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="ident">contador</SPAN>  = (<SPAN CLASS="cte">$+123</SPAN>  / <SPAN CLASS="cte">$-A6F9</SPAN> ) + <SPAN CLASS="cte">$FFFF</SPAN> ; <BR/></DIV>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="ident">contador1</SPAN>  = <SPAN CLASS="cte">+123.456</SPAN>  + (<SPAN CLASS="cte">-0.69</SPAN>  * <SPAN CLASS="cte">45.0</SPAN> ); <BR/></DIV>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="ident">acumulador_total_2</SPAN>  = (<SPAN CLASS="cte">$+123.0</SPAN>  - (<SPAN CLASS="cte">$-E.A6F9</SPAN>  / <SPAN CLASS="cte">$0.FFFF</SPAN> )); <BR/></DIV>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="palres">return </SPAN> <SPAN CLASS="ident">resultado</SPAN> ; <BR/></DIV>
+<SPAN CLASS="palres">fin</SPAN>  <BR/>
+<A HREF="#ids_ctesnum">Inicio de rutina</A><BR/>
+<A HREF="#inicio">Inicio de programa</A><BR/>
+<HR/>
+<A NAME="ctescar">
+<SPAN CLASS="palres">procedimiento</SPAN> <SPAN CLASS="ident">ctescar</SPAN> (<SPAN CLASS="palres">real</SPAN> <SPAN CLASS="ident">lado</SPAN> ) <BR/>
+<SPAN CLASS="palres">inicio</SPAN>  <BR/>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="palres">caracter</SPAN> <SPAN CLASS="ident">string</SPAN>; <BR/></DIV>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="ident">string</SPAN>  = <SPAN CLASS="cte">'comilla doble " dentro'</SPAN> ; <BR/></DIV>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="ident">string</SPAN>  = <SPAN CLASS="cte">"comilla simple ' dentro"</SPAN> ; <BR/></DIV>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="ident">string</SPAN>  = <SPAN CLASS="cte">'comilla simple '' dentro'</SPAN> ; <BR/></DIV>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="ident">string</SPAN>  = <SPAN CLASS="cte">"comilla doble "" dentro"</SPAN> ; <BR/></DIV>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="ident">string</SPAN>  = <SPAN CLASS="cte">'comilla doble " y simple '' dentro'</SPAN> ; <BR/></DIV>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="ident">string</SPAN>  = <SPAN CLASS="cte">"comilla simple ' y doble "" dentro"</SPAN> ; <BR/></DIV>
+<SPAN CLASS="palres">fin</SPAN>  <BR/>
+<A HREF="#ctescar">Inicio de rutina</A><BR/>
+<A HREF="#inicio">Inicio de programa</A><BR/>
+<HR/>
+<A NAME="fun_con_parametros">
+<SPAN CLASS="palres">funcion</SPAN> <SPAN CLASS="palres">entero</SPAN> <SPAN CLASS="ident">fun_con_parametros</SPAN> (<SPAN CLASS="palres">entero</SPAN> <SPAN CLASS="ident">v1</SPAN> , <SPAN CLASS="palres">real</SPAN> <SPAN CLASS="ident">v2</SPAN> ) <BR/>
+<SPAN CLASS="palres">inicio</SPAN>  <BR/>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="palres">caracter</SPAN> <SPAN CLASS="ident">aux</SPAN>; <BR/></DIV>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="ident">aux</SPAN>  += <SPAN CLASS="cte">0</SPAN> ; <BR/></DIV>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="ident">aux</SPAN>  -= <SPAN CLASS="ident">v1</SPAN> ; <BR/></DIV>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="ident">v1</SPAN>  *= <SPAN CLASS="ident">v2</SPAN> ; <BR/></DIV>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="ident">proc_con_parametros</SPAN> (<SPAN CLASS="ident">aux</SPAN>,<SPAN CLASS="ident">v2</SPAN>); <BR/></DIV>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="ident">v2</SPAN>  /= <SPAN CLASS="ident">aux</SPAN> ; <BR/></DIV>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="palres">return </SPAN> <SPAN CLASS="ident">v2</SPAN> ; <BR/></DIV>
+<SPAN CLASS="palres">fin</SPAN>  <BR/>
+<A HREF="#fun_con_parametros">Inicio de rutina</A><BR/>
+<A HREF="#inicio">Inicio de programa</A><BR/>
+<HR/>
+<A NAME="fun_sin_parametros">
+<SPAN CLASS="palres">funcion</SPAN> <SPAN CLASS="palres">entero</SPAN> <SPAN CLASS="ident">fun_sin_parametros</SPAN> () <BR/>
+<SPAN CLASS="palres">inicio</SPAN>  <BR/>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="palres">entero</SPAN> <SPAN CLASS="ident">aux</SPAN>,<SPAN CLASS="ident">aux1</SPAN>,<SPAN CLASS="ident">aux2</SPAN>; <BR/></DIV>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="ident">aux1</SPAN>  = <SPAN CLASS="ident">fun_con_parametros</SPAN> (<SPAN CLASS="ident">aux1</SPAN>,<SPAN CLASS="ident">aux2</SPAN>); <BR/></DIV>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="ident">aux2</SPAN>  = <SPAN CLASS="cte">1</SPAN> ; <BR/></DIV>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="palres">return </SPAN> <SPAN CLASS="ident">aux1</SPAN>  + <SPAN CLASS="ident">aux2</SPAN> ; <BR/></DIV>
+<SPAN CLASS="palres">fin</SPAN>  <BR/>
+<A HREF="#fun_sin_parametros">Inicio de rutina</A><BR/>
+<A HREF="#inicio">Inicio de programa</A><BR/>
+<HR/>
+<A NAME="proc_con_parametros">
+<SPAN CLASS="palres">procedimiento</SPAN> <SPAN CLASS="ident">proc_con_parametros</SPAN> (<SPAN CLASS="palres">entero</SPAN> <SPAN CLASS="ident">v1</SPAN> , <SPAN CLASS="palres">real</SPAN> <SPAN CLASS="ident">v2</SPAN> ) <BR/>
+<SPAN CLASS="palres">inicio</SPAN>  <BR/>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="palres">caracter</SPAN> <SPAN CLASS="ident">aux</SPAN>; <BR/></DIV>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="ident">aux</SPAN>  = <SPAN CLASS="cte">0</SPAN> ; <BR/></DIV>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="ident">aux</SPAN>  = <SPAN CLASS="ident">v1</SPAN> ; <BR/></DIV>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="ident">proc_sin_parametros</SPAN> (); <BR/></DIV>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="ident">v1</SPAN>  = <SPAN CLASS="ident">v2</SPAN> ; <BR/></DIV>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="ident">v2</SPAN>  = <SPAN CLASS="ident">aux</SPAN> ; <BR/></DIV>
+<SPAN CLASS="palres">fin</SPAN>  <BR/>
+<A HREF="#proc_con_parametros">Inicio de rutina</A><BR/>
+<A HREF="#inicio">Inicio de programa</A><BR/>
+<HR/>
+<A NAME="proc_sin_parametros">
+<SPAN CLASS="palres">procedimiento</SPAN> <SPAN CLASS="ident">proc_sin_parametros</SPAN> () <BR/>
+<SPAN CLASS="palres">inicio</SPAN>  <BR/>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="palres">entero</SPAN> <SPAN CLASS="ident">aux</SPAN>,<SPAN CLASS="ident">aux1</SPAN>,<SPAN CLASS="ident">aux2</SPAN>; <BR/></DIV>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="ident">aux1</SPAN>  = <SPAN CLASS="cte">0</SPAN> ; <BR/></DIV>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="ident">aux2</SPAN>  = <SPAN CLASS="cte">1</SPAN> ; <BR/></DIV>
+	<DIV style="text-indent: 0.5cm"><SPAN CLASS="ident">aux</SPAN>  = <SPAN CLASS="ident">aux1</SPAN>  + <SPAN CLASS="ident">aux2</SPAN> ; <BR/></DIV>
+<SPAN CLASS="palres">fin</SPAN>  <BR/>
+<A HREF="#proc_sin_parametros">Inicio de rutina</A><BR/>
+<A HREF="#inicio">Inicio de programa</A><BR/>
+</BODY>
+</HTML>
