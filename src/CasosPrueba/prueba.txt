@@ -19,6 +19,19 @@ funcion entero nombre2(entero var5, real var6)
         var5 *= 'Maunuel" ';
         var5 = "Paco  ' ";
     fin
+
+funcion entero Principal()
+    inicio
+        caracter var5;
+        entero var3;
+        var4 = +56.65;
+        var4 = -66335.3262;
+        var4 += 23545;
+        var4 = +56.65;
+        var4 -= +56.65;
+        var5 = "Hola";
+    fin
+
 funcion entero nombre3()
     inicio
         var4 = var1 + var2;
@@ -61,6 +74,7 @@ funcion entero nombre6(entero var5, real var6)
                     fin
             fin
     fin
+
 procedimiento nombre7(entero variable1, entero variable2)
     inicio
         return 0;

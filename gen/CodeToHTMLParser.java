@@ -122,6 +122,8 @@ public class CodeToHTMLParser extends Parser {
 	    String end;
 	    String cabezas;
 	    String cuerpo;
+	    String principal ="";
+	    int contPrincipal = 0;
 
 	    public CodeToHTMLParser(TokenStream input, Sintesis theinfo){
 	        this(input);
@@ -173,7 +175,12 @@ public class CodeToHTMLParser extends Parser {
 			        cabezas = cabezas + info.cabecera(c);
 			    }
 			    cabezas = "<UL>\n" + cabezas + "</UL>\n";
-			    System.out.println(inic+cabezas+((RContext)_localctx).program.program_S+end);
+			    if(contPrincipal>1){
+			        System.err.println("Error. Más de un métodos Principal definidos");
+			    }
+			    else{
+			        System.out.println(inic+cabezas+principal+((RContext)_localctx).program.program_S+end);
+			    }
 			    
 			}
 		}
@@ -359,12 +366,22 @@ public class CodeToHTMLParser extends Parser {
 				((PartContext)_localctx).type = type();
 				setState(70);
 				((PartContext)_localctx).restpart = restpart();
-				((PartContext)_localctx).partCab_S =  (((PartContext)_localctx).type!=null?_input.getText(((PartContext)_localctx).type.start,((PartContext)_localctx).type.stop):null)+" "+((PartContext)_localctx).restpart.restpartCab_S;
-				                                                                         ((PartContext)_localctx).part_S =  info.parrafo(info.palres("funcion")
-				                                                                                                + info.palres(((PartContext)_localctx).type.type_S)
-				                                                                                                + ((PartContext)_localctx).restpart.restpart_S
-				                                                                                                , ((PartContext)_localctx).restpart.restpartName_S
-				                                                                                                );
+				String p = "";
+				                                                                         if(info.esPrincipal(((PartContext)_localctx).restpart.restpart_S)){
+				                                                                             principal = info.parrafo(info.palres("funcion")
+				                                                                                 + info.palres(((PartContext)_localctx).type.type_S)
+				                                                                                 + ((PartContext)_localctx).restpart.restpart_S
+				                                                                                 , ((PartContext)_localctx).restpart.restpartName_S);
+				                                                                             contPrincipal++;
+				                                                                         }
+				                                                                         else{
+				                                                                             p = info.parrafo(info.palres("funcion")
+				                                                                                  + info.palres(((PartContext)_localctx).type.type_S)
+				                                                                                  + ((PartContext)_localctx).restpart.restpart_S
+				                                                                                  , ((PartContext)_localctx).restpart.restpartName_S);
+				                                                                         }
+				                                                                         ((PartContext)_localctx).partCab_S =  (((PartContext)_localctx).type!=null?_input.getText(((PartContext)_localctx).type.start,((PartContext)_localctx).type.stop):null)+" "+((PartContext)_localctx).restpart.restpartCab_S;
+				                                                                              ((PartContext)_localctx).part_S =  p;
 				                                                                         
 				}
 				break;
@@ -375,11 +392,21 @@ public class CodeToHTMLParser extends Parser {
 				match(T__1);
 				setState(74);
 				((PartContext)_localctx).restpart = restpart();
-				((PartContext)_localctx).partCab_S =  ((PartContext)_localctx).restpart.restpartCab_S;
-				                                                                          ((PartContext)_localctx).part_S =  info.parrafo(info.palres("procedimiento")
-				                                                                                    + ((PartContext)_localctx).restpart.restpart_S
-				                                                                                    , ((PartContext)_localctx).restpart.restpartName_S
-				                                                                                    );
+				String p = "";
+				                                                                          if(info.esPrincipal(((PartContext)_localctx).restpart.restpart_S)){
+				                                                                              principal = info.parrafo(info.palres("procedimiento")
+				                                                                                  + ((PartContext)_localctx).restpart.restpart_S
+				                                                                                  , ((PartContext)_localctx).restpart.restpartName_S);
+				                                                                              contPrincipal++;
+				                                                                          }
+				                                                                          else{
+				                                                                              p = info.parrafo(info.palres("procedimiento")
+				                                                                                  + ((PartContext)_localctx).restpart.restpart_S
+				                                                                                  , ((PartContext)_localctx).restpart.restpartName_S);
+				                                                                          }
+
+				                                                                          ((PartContext)_localctx).partCab_S =  ((PartContext)_localctx).restpart.restpartCab_S;
+				                                                                          ((PartContext)_localctx).part_S =  p;
 				                                                                          
 				}
 				break;

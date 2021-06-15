@@ -71,6 +71,10 @@ public class Sintesis {
 		return("<LI><A HREF=\"#"+ nombre +"\">"+ tipo +" "+ nombre +" ( "+ strParametros +" )</A></LI>\n");
 	}
 
+	public boolean esPrincipal(String cabeza){
+		return cabeza.contains("Principal");
+	}
+
 	public String parrafo(String codigo, String ancla){
 		return("\n<HR/>\n" + "<A NAME=\""+ancla+"\">\n" +
 				codigo+ "<A HREF=\"#"+ancla+"\">Inicio de rutina</A><BR/>\n" +
