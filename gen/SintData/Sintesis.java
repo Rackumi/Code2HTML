@@ -159,4 +159,8 @@ public class Sintesis {
 		return codigo;
 	}
 
+	public String referenciadont(String referencia, String texto){
+		return referencia;
+	}
+
 }

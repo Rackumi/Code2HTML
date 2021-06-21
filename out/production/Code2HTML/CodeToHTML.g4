@@ -111,7 +111,8 @@ listparam returns [String listparam_S,
                    String listparamCab_S]: type IDENTIFICADOR listparam_r { $listparamCab_S= $type.type_S
                                                                                              +" "+ $IDENTIFICADOR.text +" "
                                                                                              + $listparam_r.listparam_rCab_S;
-                                                                            $listparam_S = info.palres($type.type_S)
+                                                                            $listparam_S = info.referencia($IDENTIFICADOR.text)
+                                                                                           + info.palres($type.type_S)
                                                                                            + info.ident($IDENTIFICADOR.text)
                                                                                            + $listparam_r.listparam_r_S;
                                                                             };
@@ -120,7 +121,8 @@ listparam_r returns [String listparam_r_S,
                     String listparam_rCab_S]: ',' type IDENTIFICADOR  listparam_r {$listparam_rCab_S = ", " + $type.type_S
                                                                                                         +" "+ $IDENTIFICADOR.text +" "
                                                                                                         + $listparam_r.listparam_rCab_S;
-                                                                                   $listparam_r_S = ", " + info.palres($type.type_S)
+                                                                                   $listparam_r_S = ", " + info.referencia($IDENTIFICADOR.text)
+                                                                                                    + info.palres($type.type_S)
                                                                                                     + info.ident($IDENTIFICADOR.text)
                                                                                                     + $listparam_r.listparam_r_S;}
                                                                                    | {$listparam_rCab_S = "";
@@ -154,8 +156,8 @@ sentlist_r returns [String sentlist_r_S]: sent sentlist_r { String aux = "";
                                                           | {$sentlist_r_S = "" ;};
 
 //Factorizacion. Arreglado
-sent returns[String sent_S]: type lid ';' {$sent_S = info.referencia($lid.lidId_S) + info.palres($type.type_S) + $lid.lid_S + ";" ;}
-    | IDENTIFICADOR sent_f1 {$sent_S = info.ident($IDENTIFICADOR.text) + $sent_f1.sent_f1_S;}
+sent returns[String sent_S]: type lid ';' {$sent_S = info.palres($type.type_S) + $lid.lid_S + ";" ;}
+    | IDENTIFICADOR sent_f1 {$sent_S = info.referenciado($IDENTIFICADOR.text, $IDENTIFICADOR.text) + $sent_f1.sent_f1_S;}
     | 'return' exp ';' {$sent_S = info.palres("return ") + $exp.exp_S + ";";}
     | 'bifurcacion' '(' lcond ')' 'entonces' blq1=blq 'sino' blq2=blq {$sent_S = info.palres("bifurcacion")
                                                                          + "(" + $lcond.lcond_S + ")"
@@ -169,10 +171,10 @@ sent returns[String sent_S]: type lid ';' {$sent_S = info.referencia($lid.lidId_
 
     | 'buclepara' '(' id1=IDENTIFICADOR asig1=asig exp1=exp ';' lcond ';'
                       id2=IDENTIFICADOR asig2=asig exp2=exp ')' blq {$sent_S = info.palres("buclepara")
-                                                                + "(" + info.ident($id1.text)
+                                                                + "(" + info.referenciado($id1.text, $id1.text)
                                                                 + info.asigopEspacio($asig1.text)
                                                                 + $exp1.exp_S + "; " + $lcond.lcond_S
-                                                                + "; " + info.ident($id2.text)
+                                                                + "; " + info.referenciado($id2.text, $id2.text)
                                                                 + info.asigopEspacio($asig2.text)
                                                                 + $exp2.exp_S + ")"
                                                                 + info.saltoBR()
@@ -199,10 +201,9 @@ sent_f2 returns[String sent_f2_S]: lid ')' ';' {$sent_f2_S = $lid.lid_S + ")" + 
                                  | ')' ';' {$sent_f2_S = ")" + ";";};
 
 //Factorizacion. Arreglado
-lid returns[String lid_S, String lidId_S]: IDENTIFICADOR lid_f {String aux = info.ident($IDENTIFICADOR.text);
+lid returns[String lid_S, String lidId_S]: IDENTIFICADOR lid_f {String aux = info.referencia($IDENTIFICADOR.text) + info.ident($IDENTIFICADOR.text);
                                                 aux = aux.substring(0, aux.length()-1);
                                                 $lid_S = aux + $lid_f.lid_f_S;
-                                                $lidId_S = $IDENTIFICADOR.text;
                                                 };
 
 lid_f returns[String lid_f_S]: ',' lid {$lid_f_S = ", " + $lid.lid_S;}
@@ -212,7 +213,7 @@ asig : '=' | '+=' | '-=' | '*=' | '/=';
 
 //Recursividad por la izquierda. Arreglado.
 //Factorizacion. Arreglado
-exp returns[String exp_S]: IDENTIFICADOR exp_f {$exp_S = info.ident($IDENTIFICADOR.text) + $exp_f.exp_f_S;}
+exp returns[String exp_S]: IDENTIFICADOR exp_f {$exp_S = info.referenciado($IDENTIFICADOR.text, $IDENTIFICADOR.text) + $exp_f.exp_f_S;}
     | '(' exp ')' exp_r {$exp_S = "(" + $exp.exp_S + ")" + $exp_r.exp_r_S;}
     | CONSTENTERO exp_r {$exp_S = info.cte($CONSTENTERO.text) + $exp_r.exp_r_S;}
     | CONSTREAL exp_r {$exp_S = info.cte($CONSTREAL.text) + $exp_r.exp_r_S;}
