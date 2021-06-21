@@ -1,20 +1,11 @@
 package SintData;
 
-import org.abego.treelayout.internal.util.java.lang.string.StringUtil;
-
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Sintesis {
 
-	private int variable, declaraciones;
 	private String titulo;
-
-	public Sintesis(){
-		variable = 0;
-		declaraciones = 0;
-	}
 
 	public void setTitulo(String titulo){
 		this.titulo = titulo;
@@ -151,30 +142,21 @@ public class Sintesis {
 			}
 		}
 
-
 		StringBuilder sb = new StringBuilder(codigo);
 		sb.deleteCharAt(0);
 		sb.deleteCharAt(sb.length()-1);
 		return sb.toString();
 	}
 
-	public void newDec ( ) {
-		declaraciones++;
-		variable++;
-	}
-	
-	public void newVar ( ) {
-		variable++;
+	public String referencia(String codigo){
+		codigo = "<A NAME=\""+codigo+"\">";
+		return codigo;
 	}
 
-	public void resumen () {
-		if(declaraciones == 0) System.out.println("No hay declaraciones.");
-		else {
-			if(declaraciones == 1) System.out.print("Se ha detectado una declaracion ");
-			else System.out.print("Se han detectado " + declaraciones + " declaraciones ");
-			if(variable == 1) System.out.println(" con una variable.");
-			else System.out.println("con " + variable + " variables.");
-		}
-
+	public String referenciado(String referencia, String texto){
+		String codigo;
+		codigo = "<A HREF=\"#"+referencia+"\">"+texto+"</A>";
+		return codigo;
 	}
+
 }

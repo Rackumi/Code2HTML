@@ -2,6 +2,7 @@ import SintData.Sintesis;
 import org.antlr.v4.runtime.*;
 
 import java.io.*;
+import java.util.regex.Pattern;
 
 public class MainClass{
 
@@ -25,7 +26,14 @@ public class MainClass{
             FileOutputStream f = new FileOutputStream(nameFile);
             System.setOut(new PrintStream(f));
 
-            String[] path = args[0].split("/");
+            String[] path = args;
+            if(args[0].contains("/")){
+                path = args[0].split("/");
+            }
+            else if(args[0].contains("\\")){
+                path = args[0].split(Pattern.quote(File.separator));
+            }
+
             nf = path[path.length-1];
 
             datos.setTitulo(nf);

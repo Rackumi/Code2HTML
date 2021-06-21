@@ -14,7 +14,7 @@ grammar CodeToHTML;
     String end;
     String cabezas;
     String cuerpo;
-    String principal ="";
+    String principal = "";
     int contPrincipal = 0;
 
     public CodeToHTMLParser(TokenStream input, Sintesis theinfo){
@@ -117,7 +117,7 @@ listparam returns [String listparam_S,
                                                                             };
 
 listparam_r returns [String listparam_r_S,
-                    String listparam_rCab_S]: ',' type IDENTIFICADOR  listparam_r {$listparam_rCab_S = $type.type_S
+                    String listparam_rCab_S]: ',' type IDENTIFICADOR  listparam_r {$listparam_rCab_S = ", " + $type.type_S
                                                                                                         +" "+ $IDENTIFICADOR.text +" "
                                                                                                         + $listparam_r.listparam_rCab_S;
                                                                                    $listparam_r_S = ", " + info.palres($type.type_S)
@@ -154,7 +154,7 @@ sentlist_r returns [String sentlist_r_S]: sent sentlist_r { String aux = "";
                                                           | {$sentlist_r_S = "" ;};
 
 //Factorizacion. Arreglado
-sent returns[String sent_S]: type lid ';' {$sent_S = info.palres($type.type_S) + $lid.lid_S + ";" ;}
+sent returns[String sent_S]: type lid ';' {$sent_S = info.referencia($lid.lidId_S) + info.palres($type.type_S) + $lid.lid_S + ";" ;}
     | IDENTIFICADOR sent_f1 {$sent_S = info.ident($IDENTIFICADOR.text) + $sent_f1.sent_f1_S;}
     | 'return' exp ';' {$sent_S = info.palres("return ") + $exp.exp_S + ";";}
     | 'bifurcacion' '(' lcond ')' 'entonces' blq1=blq 'sino' blq2=blq {$sent_S = info.palres("bifurcacion")
@@ -171,8 +171,8 @@ sent returns[String sent_S]: type lid ';' {$sent_S = info.palres($type.type_S) +
                       id2=IDENTIFICADOR asig2=asig exp2=exp ')' blq {$sent_S = info.palres("buclepara")
                                                                 + "(" + info.ident($id1.text)
                                                                 + info.asigopEspacio($asig1.text)
-                                                                + $exp1.exp_S + ";" + $lcond.lcond_S
-                                                                + ";" + info.ident($id2.text)
+                                                                + $exp1.exp_S + "; " + $lcond.lcond_S
+                                                                + "; " + info.ident($id2.text)
                                                                 + info.asigopEspacio($asig2.text)
                                                                 + $exp2.exp_S + ")"
                                                                 + info.saltoBR()
@@ -199,9 +199,10 @@ sent_f2 returns[String sent_f2_S]: lid ')' ';' {$sent_f2_S = $lid.lid_S + ")" + 
                                  | ')' ';' {$sent_f2_S = ")" + ";";};
 
 //Factorizacion. Arreglado
-lid returns[String lid_S]: IDENTIFICADOR lid_f {String aux = info.ident($IDENTIFICADOR.text);
+lid returns[String lid_S, String lidId_S]: IDENTIFICADOR lid_f {String aux = info.ident($IDENTIFICADOR.text);
                                                 aux = aux.substring(0, aux.length()-1);
                                                 $lid_S = aux + $lid_f.lid_f_S;
+                                                $lidId_S = $IDENTIFICADOR.text;
                                                 };
 
 lid_f returns[String lid_f_S]: ',' lid {$lid_f_S = ", " + $lid.lid_S;}
@@ -234,7 +235,7 @@ lcond_r returns[String lcond_r_S]: opl lcond lcond_r {$lcond_r_S = info.asigopEs
                                                                    + $lcond_r.lcond_r_S;}
                                                      | {$lcond_r_S = "";};
 
-cond returns [String cond_S] : exp opr exp {$cond_S = $exp.exp_S + info.asigopEspacio($opr.text) + $exp.exp_S;}
+cond returns [String cond_S] : exp1=exp opr exp2=exp {$cond_S = $exp1.exp_S + info.asigopEspacio($opr.text) + $exp2.exp_S;}
                              | 'cierto' {$cond_S = "cierto";}
                              | 'falso' {$cond_S = "falso";};
 
