@@ -6,11 +6,11 @@ funcion entero nombre1()
         var4 += -66335.3262;
         var4 = 23545;
         acumulador_total_2 = +56.65;
-        var4 = +56.65;
+        1var4 = +56.65;
         var5 = "Hola";
         entero;
         _contador3 = 'comilla doble " dentro';
-        1varp = "comilla simple ' dentro";
+        varp = "comilla simple ' dentro";
         varp = 'comilla simple '' dentro';
         varp = "comilla doble "" dentro";
         varp = 'comilla doble " y simple '' dentro';

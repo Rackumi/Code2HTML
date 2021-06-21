@@ -403,7 +403,6 @@ public class CodeToHTMLParser extends Parser {
 				                                                                                  + ((PartContext)_localctx).restpart.restpart_S
 				                                                                                  , ((PartContext)_localctx).restpart.restpartName_S);
 				                                                                          }
-
 				                                                                          ((PartContext)_localctx).partCab_S =  ((PartContext)_localctx).restpart.restpartCab_S;
 				                                                                          ((PartContext)_localctx).part_S =  p;
 				                                                                          
@@ -979,8 +978,11 @@ public class CodeToHTMLParser extends Parser {
 		public BlqContext blq1;
 		public BlqContext blq2;
 		public Token id1;
-		public AsigContext asig;
+		public AsigContext asig1;
+		public ExpContext exp1;
 		public Token id2;
+		public AsigContext asig2;
+		public ExpContext exp2;
 		public BlqContext blq;
 		public TypeContext type() {
 			return getRuleContext(TypeContext.class,0);
@@ -1118,9 +1120,9 @@ public class CodeToHTMLParser extends Parser {
 				setState(157);
 				((SentContext)_localctx).id1 = match(IDENTIFICADOR);
 				setState(158);
-				((SentContext)_localctx).asig = asig();
+				((SentContext)_localctx).asig1 = asig();
 				setState(159);
-				((SentContext)_localctx).exp = exp();
+				((SentContext)_localctx).exp1 = exp();
 				setState(160);
 				match(T__10);
 				setState(161);
@@ -1130,20 +1132,20 @@ public class CodeToHTMLParser extends Parser {
 				setState(163);
 				((SentContext)_localctx).id2 = match(IDENTIFICADOR);
 				setState(164);
-				((SentContext)_localctx).asig = asig();
+				((SentContext)_localctx).asig2 = asig();
 				setState(165);
-				((SentContext)_localctx).exp = exp();
+				((SentContext)_localctx).exp2 = exp();
 				setState(166);
 				match(T__3);
 				setState(167);
 				((SentContext)_localctx).blq = blq();
 				((SentContext)_localctx).sent_S =  info.palres("buclepara")
 				                                                                + "(" + info.ident((((SentContext)_localctx).id1!=null?((SentContext)_localctx).id1.getText():null))
-				                                                                + info.asigopEspacio((((SentContext)_localctx).asig!=null?_input.getText(((SentContext)_localctx).asig.start,((SentContext)_localctx).asig.stop):null))
-				                                                                + ((SentContext)_localctx).exp.exp_S + ";" + ((SentContext)_localctx).lcond.lcond_S
+				                                                                + info.asigopEspacio((((SentContext)_localctx).asig1!=null?_input.getText(((SentContext)_localctx).asig1.start,((SentContext)_localctx).asig1.stop):null))
+				                                                                + ((SentContext)_localctx).exp1.exp_S + ";" + ((SentContext)_localctx).lcond.lcond_S
 				                                                                + ";" + info.ident((((SentContext)_localctx).id2!=null?((SentContext)_localctx).id2.getText():null))
-				                                                                + info.asigopEspacio((((SentContext)_localctx).asig!=null?_input.getText(((SentContext)_localctx).asig.start,((SentContext)_localctx).asig.stop):null))
-				                                                                + ((SentContext)_localctx).exp.exp_S + ")"
+				                                                                + info.asigopEspacio((((SentContext)_localctx).asig2!=null?_input.getText(((SentContext)_localctx).asig2.start,((SentContext)_localctx).asig2.stop):null))
+				                                                                + ((SentContext)_localctx).exp2.exp_S + ")"
 				                                                                + info.saltoBR()
 				                                                                + ((SentContext)_localctx).blq.blq_S;
 				}

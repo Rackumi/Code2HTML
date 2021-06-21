@@ -7,9 +7,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Sintesis {
-	private int variable, declaraciones;
 
+	private int variable, declaraciones;
 	private String titulo;
+
+	public Sintesis(){
+		variable = 0;
+		declaraciones = 0;
+	}
 
 	public void setTitulo(String titulo){
 		this.titulo = titulo;
@@ -152,13 +157,6 @@ public class Sintesis {
 		sb.deleteCharAt(sb.length()-1);
 		return sb.toString();
 	}
-
-	public Sintesis(){
-		variable = 0;
-		declaraciones = 0;
-	}
-
-
 
 	public void newDec ( ) {
 		declaraciones++;

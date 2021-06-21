@@ -6,9 +6,6 @@ grammar CodeToHTML;
 	import java.util.LinkedList;
 }
 
-@lexer::members {
-}
-
 @parser::members{
 
     private Sintesis info;
@@ -85,7 +82,6 @@ part returns [String part_S, String partCab_S]: 'funcion' type restpart {String 
                                                                                   + $restpart.restpart_S
                                                                                   , $restpart.restpartName_S);
                                                                           }
-
                                                                           $partCab_S = $restpart.restpartCab_S;
                                                                           $part_S = p;
                                                                           };
@@ -171,14 +167,14 @@ sent returns[String sent_S]: type lid ';' {$sent_S = info.palres($type.type_S) +
                                                                          + info.saltoBR()
                                                                          + $blq2.blq_S;}
 
-    | 'buclepara' '(' id1=IDENTIFICADOR asig exp ';' lcond ';'
-                      id2=IDENTIFICADOR asig exp ')' blq {$sent_S = info.palres("buclepara")
+    | 'buclepara' '(' id1=IDENTIFICADOR asig1=asig exp1=exp ';' lcond ';'
+                      id2=IDENTIFICADOR asig2=asig exp2=exp ')' blq {$sent_S = info.palres("buclepara")
                                                                 + "(" + info.ident($id1.text)
-                                                                + info.asigopEspacio($asig.text)
-                                                                + $exp.exp_S + ";" + $lcond.lcond_S
+                                                                + info.asigopEspacio($asig1.text)
+                                                                + $exp1.exp_S + ";" + $lcond.lcond_S
                                                                 + ";" + info.ident($id2.text)
-                                                                + info.asigopEspacio($asig.text)
-                                                                + $exp.exp_S + ")"
+                                                                + info.asigopEspacio($asig2.text)
+                                                                + $exp2.exp_S + ")"
                                                                 + info.saltoBR()
                                                                 + $blq.blq_S;}
 
@@ -256,7 +252,7 @@ CONSTLIT : (('"' (WORD | '\'' | '""' | SYMBOL | WS)+ '"') | ('\'' (WORD | '"' | 
 
 COMENTARIOL : '%%'.*?[\r\n]-> skip;
 
-COMENTARIOM : '%-' .*?[\r\n]* '-%'-> skip;
+COMENTARIOM : '%-'.*?[\r\n]* '-%'-> skip;
 
 WS : [ \n\t\r] -> skip;
 
@@ -265,7 +261,7 @@ fragment
 
 DECIMAL : [0-9];
 
-HEXADECIMAL: [0-9A-F];
+HEXADECIMAL : [0-9A-F];
 
 SYMBOL : [ !#-&(-~];
 
