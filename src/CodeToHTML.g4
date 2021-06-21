@@ -2,7 +2,6 @@ grammar CodeToHTML;
 
 @header{
 	import SintData.Sintesis;
-	import SintData.Cabecera;
 	import java.io.File;
 	import java.util.LinkedList;
 }
@@ -220,7 +219,7 @@ exp returns[String exp_S]: IDENTIFICADOR exp_f {$exp_S = info.ident($IDENTIFICAD
     | '(' exp ')' exp_r {$exp_S = "(" + $exp.exp_S + ")" + $exp_r.exp_r_S;}
     | CONSTENTERO exp_r {$exp_S = info.cte($CONSTENTERO.text) + $exp_r.exp_r_S;}
     | CONSTREAL exp_r {$exp_S = info.cte($CONSTREAL.text) + $exp_r.exp_r_S;}
-    | CONSTLIT exp_r {$exp_S = info.cte($CONSTLIT.text) + $exp_r.exp_r_S;};
+    | CONSTLIT exp_r {$exp_S = info.cte(info.comillas($CONSTLIT.text)) + $exp_r.exp_r_S;};
 
 exp_f returns[String exp_f_S]: '(' lid ')' exp_r {$exp_f_S = "(" + $lid.lid_S + ")" + $exp_r.exp_r_S;}
                              | exp_r {$exp_f_S = $exp_r.exp_r_S;};

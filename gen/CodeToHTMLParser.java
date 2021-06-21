@@ -1,14 +1,17 @@
-// Generated from C:/Users/gocruz17/IdeaProjects/Code2HTML/src\CodeToHTML.g4 by ANTLR 4.9.1
+// Generated from C:/Users/alvar/Desktop/WorkinSpace/ANTLR/Code2HTML/src\CodeToHTML.g4 by ANTLR 4.9.1
 
 	import SintData.Sintesis;
-
+	import java.io.File;
 	import java.util.LinkedList;
 
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
-	import org.antlr.v4.runtime.tree.*;
+import org.antlr.v4.runtime.misc.*;
+import org.antlr.v4.runtime.tree.*;
 import java.util.List;
+import java.util.Iterator;
+import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class CodeToHTMLParser extends Parser {
@@ -1628,7 +1631,7 @@ public class CodeToHTMLParser extends Parser {
 				((ExpContext)_localctx).CONSTLIT = match(CONSTLIT);
 				setState(243);
 				((ExpContext)_localctx).exp_r = exp_r();
-				((ExpContext)_localctx).exp_S =  info.cte((((ExpContext)_localctx).CONSTLIT!=null?((ExpContext)_localctx).CONSTLIT.getText():null)) + ((ExpContext)_localctx).exp_r.exp_r_S;
+				((ExpContext)_localctx).exp_S =  info.cte(info.comillas((((ExpContext)_localctx).CONSTLIT!=null?((ExpContext)_localctx).CONSTLIT.getText():null))) + ((ExpContext)_localctx).exp_r.exp_r_S;
 				}
 				break;
 			default:

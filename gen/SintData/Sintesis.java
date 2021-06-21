@@ -134,6 +134,25 @@ public class Sintesis {
 		return " <BR/>\n";
 	}
 
+	public String comillas(String codigo){
+		if(codigo.startsWith("\"")){
+			if(codigo.contains("\"\"")){
+				codigo = codigo.replace("\"\"", "\"");
+			}
+  		}
+		else{
+			if(codigo.contains("''")){
+				codigo = codigo.replace("''", "'");
+			}
+		}
+
+
+		StringBuilder sb = new StringBuilder(codigo);
+		sb.deleteCharAt(0);
+		sb.deleteCharAt(sb.length()-1);
+		return sb.toString();
+	}
+
 	public Sintesis(){
 		variable = 0;
 		declaraciones = 0;
