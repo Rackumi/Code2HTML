@@ -1,11 +1,6 @@
 // Generated from C:/Users/alvar/Desktop/WorkinSpace/ANTLR/Code2HTML/src\CodeToHTML.g4 by ANTLR 4.9.1
 
-	import SintData.Sintesis;
-	import SintData.Cabecera;
-	import java.io.File;
-	import java.util.LinkedList;
-
-import org.antlr.v4.runtime.tree.ParseTreeVisitor;
+	import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
  * This interface defines a complete generic visitor for a parse tree produced
