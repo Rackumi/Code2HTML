@@ -8,9 +8,7 @@ public class CodeToHTMLErrorListener extends BaseErrorListener{
     public static boolean failed = false;
     int[] contador = new int[1];
 
-    public static boolean isFailed() {
-        return failed;
-    }
+
 
     public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol, int line, int charPositionInLine, String msg, RecognitionException e){
 
@@ -63,5 +61,8 @@ public class CodeToHTMLErrorListener extends BaseErrorListener{
             }
         }
         System.err.println("\n");
+    }
+    public static boolean isFailed() {
+        return failed;
     }
 }

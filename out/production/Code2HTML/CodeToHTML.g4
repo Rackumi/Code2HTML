@@ -1,4 +1,5 @@
 grammar CodeToHTML;
+//Ampliar casos prueba
 
 @header{
 	import SintData.Sintesis;
@@ -22,7 +23,6 @@ grammar CodeToHTML;
         this(input);
         info = theinfo;
     }
-
 }
 
 r : {inic = info.inic();}
@@ -37,10 +37,10 @@ r : {inic = info.inic();}
     if(cabPrincipal != ""){
         cabezas = info.cabecera(cabPrincipal) + cabezas;
     }
-
     cabezas = "<UL>\n" + cabezas + "</UL>\n";
 
     if(CodeToHTMLErrorListener.isFailed()){
+
     }
     else if(contPrincipal>1){
         System.err.println("Error. Más de un método Principal definido");
@@ -48,7 +48,7 @@ r : {inic = info.inic();}
     else{
         System.out.println(inic+cabezas+principal+$program.program_S+end);
     }
-    };
+};
 
 //Factorizacion. Arreglado
 program returns[String program_S, LinkedList<String> cab]: part program_f { $program_S = $part.part_S + $program_f.program_f_S;

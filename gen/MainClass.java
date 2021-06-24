@@ -21,10 +21,10 @@ public class MainClass{
             CodeToHTMLParser anasint = new CodeToHTMLParser(tokens, datos);
             anasint.removeErrorListeners();
             anasint.addErrorListener(new CodeToHTMLErrorListener());
-
             String nameFile = args[0] + ".html";
             FileOutputStream f = new FileOutputStream(nameFile);
             System.setOut(new PrintStream(f));
+
 
             String[] path = args;
             if(args[0].contains("/")){
@@ -33,11 +33,18 @@ public class MainClass{
             else if(args[0].contains("\\")){
                 path = args[0].split(Pattern.quote(File.separator));
             }
-
             nf = path[path.length-1];
-
             datos.setTitulo(nf);
+
             anasint.r();
+            f.close();
+            if (CodeToHTMLErrorListener.isFailed()){
+                File f2 = new File(System.getProperty("user.dir"),nameFile);
+                f2.delete();
+            }
+
+
+
 
         } catch (RecognitionException e) { //Fallo al reconocer la entrada
             System.err.println("REC " + e.getMessage());

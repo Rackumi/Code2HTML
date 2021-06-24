@@ -1,4 +1,4 @@
-// Generated from C:/Users/alvar/Desktop/WorkinSpace/ANTLR/Code2HTML/src\CodeToHTML.g4 by ANTLR 4.9.1
+// Generated from C:/Users/gocruz17/IdeaProjects/Code2HTML/src\CodeToHTML.g4 by ANTLR 4.9.1
 
 	import SintData.Sintesis;
 	import java.io.File;
@@ -130,7 +130,6 @@ public class CodeToHTMLParser extends Parser {
 	        info = theinfo;
 	    }
 
-
 	public CodeToHTMLParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
@@ -179,10 +178,10 @@ public class CodeToHTMLParser extends Parser {
 			    if(cabPrincipal != ""){
 			        cabezas = info.cabecera(cabPrincipal) + cabezas;
 			    }
-
 			    cabezas = "<UL>\n" + cabezas + "</UL>\n";
 
 			    if(CodeToHTMLErrorListener.isFailed()){
+
 			    }
 			    else if(contPrincipal>1){
 			        System.err.println("Error. Más de un método Principal definido");
@@ -190,7 +189,7 @@ public class CodeToHTMLParser extends Parser {
 			    else{
 			        System.out.println(inic+cabezas+principal+((RContext)_localctx).program.program_S+end);
 			    }
-			    
+
 			}
 		}
 		catch (RecognitionException re) {

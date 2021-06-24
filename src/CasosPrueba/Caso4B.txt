@@ -7,7 +7,7 @@ procedimiento nombre1(entero variable1, entero variable2)
 
 
 
-funcion entero nombre1()
+funcion entero nombre1(entero var3)
     inicio
         return 0; %- Comentario despues de un elemento
     fin hola-%

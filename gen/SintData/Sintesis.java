@@ -155,5 +155,4 @@ public class Sintesis {
 		codigo = "<A HREF=\"#"+referencia+"\">"+texto+"</A>";
 		return codigo;
 	}
-
 }

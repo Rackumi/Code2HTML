@@ -3,15 +3,15 @@ procedimiento nombre1(entero variable1, entero variable2)
         return 0;
     fin
 
-procedimiento nombre1()
+procedimiento nombre1(real var4)
     inicio
-        return 0;
+        return var4;
     fin
 
 %% Hola esto es un comentario de una linea
 
 
-funcion entero nombre1()
+funcion entero nombre1(entero var3)
     inicio
         return 0; %% Comentario despues de un elemento
     fin

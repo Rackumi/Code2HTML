@@ -6,14 +6,12 @@ funcion entero nombre1()
         d =  $+123;
         e =  $-A6F9;
         f =  $FFFF;
-
         g = +123.456;
         h = -0.69;
         i = 45.0;
         j = $+123.0;
         k = $-E.A6F9;
         l = $0.FFFF;
-
         caracter var5;
         entero var3;
         var4 = +56.65;
@@ -31,8 +29,7 @@ funcion entero nombre1()
         VAT = "?|``";
     fin
 
-
-funcion entero nombre1(entero var5, real var6)
+funcion entero Principal(entero var5, real var6)
     inicio
         entero var3;
         real var4;

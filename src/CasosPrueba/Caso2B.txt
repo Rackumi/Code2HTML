@@ -1,17 +1,19 @@
 funcion entero nombre1()
     inicio
-        var4 = var1 + var2;
-        var5 = (-66335.3262 * 33445;
-        var4 += 23545;
+        contador = var1 + var2;
+        contador1 = ((4/1)(4*6)) + 4;
+        acumulador_total_2 += contador1 + contador;
+        _contador3 = -1;
+        var5 = (-66335.3262 * 33445);
+        var4 +== 23545;
         var6 = +56.65;
-        var4 =* +56.65;
         var2 = "Hola" + 11;
     fin
-funcion entero nombre1(entero var5, real var6)
+funcion entero nombre1(var5, real var6)
     inicio
-        var4 = (5252 * 3726)  7822;
+        var4 = (5252 * 3726) / 7822;
         var += var2;
-        var /== $0.FFFF;
+        var / = $+0.FFFF;
         var = $-AAAA + $-A6F9;
-        var **= $A.AFED;
+        var *= $A.AFED;
     fin
