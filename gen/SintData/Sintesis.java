@@ -142,10 +142,7 @@ public class Sintesis {
 			}
 		}
 
-		StringBuilder sb = new StringBuilder(codigo);
-		sb.deleteCharAt(0);
-		sb.deleteCharAt(sb.length()-1);
-		return sb.toString();
+		return codigo;
 	}
 
 	public String referencia(String codigo){
@@ -157,10 +154,6 @@ public class Sintesis {
 		String codigo;
 		codigo = "<A HREF=\"#"+referencia+"\">"+texto+"</A>";
 		return codigo;
-	}
-
-	public String referenciadont(String referencia, String texto){
-		return referencia;
 	}
 
 }

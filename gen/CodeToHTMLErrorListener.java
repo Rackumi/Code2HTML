@@ -1,16 +1,20 @@
 import org.antlr.v4.runtime.*;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.Collections;
 import java.util.List;
 
 public class CodeToHTMLErrorListener extends BaseErrorListener{
 
+    public static boolean failed = false;
     int[] contador = new int[1];
+
+    public static boolean isFailed() {
+        return failed;
+    }
 
     public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol, int line, int charPositionInLine, String msg, RecognitionException e){
 
+        failed = true;
         contador[0]++;
         System.err.println("< Error numero "+ contador[0]+" >");
 

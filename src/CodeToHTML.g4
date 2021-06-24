@@ -15,6 +15,7 @@ grammar CodeToHTML;
     String cabezas;
     String cuerpo;
     String principal = "";
+    String cabPrincipal = "";
     int contPrincipal = 0;
 
     public CodeToHTMLParser(TokenStream input, Sintesis theinfo){
@@ -29,11 +30,17 @@ r : {inic = info.inic();}
     {end = info.end();
     cabezas = "";
     for(String c: $program.cab){
-        cabezas = cabezas + info.cabecera(c);
+        if(c != ""){
+            cabezas = cabezas + info.cabecera(c);
+        }
     }
+    cabezas = info.cabecera(cabPrincipal) + cabezas;
     cabezas = "<UL>\n" + cabezas + "</UL>\n";
-    if(contPrincipal>1){
-        System.err.println("Error. Más de un métodos Principal definidos");
+
+    if(CodeToHTMLErrorListener.isFailed()){
+    }
+    else if(contPrincipal>1){
+        System.err.println("Error. Más de un método Principal definido");
     }
     else{
         System.out.println(inic+cabezas+principal+$program.program_S+end);
@@ -54,35 +61,42 @@ program_f returns[String program_f_S, LinkedList<String> cab2]: program {   $pro
                                                                             };
 
 part returns [String part_S, String partCab_S]: 'funcion' type restpart {String p = "";
+                                                                         String c = "";
                                                                          if(info.esPrincipal($restpart.restpart_S)){
                                                                              principal = info.parrafo(info.palres("funcion")
                                                                                  + info.palres($type.type_S)
                                                                                  + $restpart.restpart_S
                                                                                  , $restpart.restpartName_S);
                                                                              contPrincipal++;
+                                                                             cabPrincipal = $type.text+" "+$restpart.restpartCab_S;
                                                                          }
                                                                          else{
                                                                              p = info.parrafo(info.palres("funcion")
                                                                                   + info.palres($type.type_S)
                                                                                   + $restpart.restpart_S
                                                                                   , $restpart.restpartName_S);
+                                                                             c = $type.text+" "+$restpart.restpartCab_S;
                                                                          }
-                                                                         $partCab_S = $type.text+" "+$restpart.restpartCab_S;
-                                                                              $part_S = p;
+                                                                         $partCab_S = c;
+                                                                         $part_S = p;
                                                                          }
                                               | 'procedimiento' restpart {String p = "";
+                                                                          String c = "";
                                                                           if(info.esPrincipal($restpart.restpart_S)){
                                                                               principal = info.parrafo(info.palres("procedimiento")
                                                                                   + $restpart.restpart_S
                                                                                   , $restpart.restpartName_S);
                                                                               contPrincipal++;
+                                                                              cabPrincipal = $restpart.restpartCab_S;
                                                                           }
                                                                           else{
                                                                               p = info.parrafo(info.palres("procedimiento")
                                                                                   + $restpart.restpart_S
                                                                                   , $restpart.restpartName_S);
+                                                                                  c = $restpart.restpartCab_S;
                                                                           }
                                                                           $partCab_S = $restpart.restpartCab_S;
+                                                                          $partCab_S = c;
                                                                           $part_S = p;
                                                                           };
 
@@ -204,6 +218,7 @@ sent_f2 returns[String sent_f2_S]: lid ')' ';' {$sent_f2_S = $lid.lid_S + ")" + 
 lid returns[String lid_S, String lidId_S]: IDENTIFICADOR lid_f {String aux = info.referencia($IDENTIFICADOR.text) + info.ident($IDENTIFICADOR.text);
                                                 aux = aux.substring(0, aux.length()-1);
                                                 $lid_S = aux + $lid_f.lid_f_S;
+                                                $lidId_S = $IDENTIFICADOR.text + $lid_f.lid_f_S;
                                                 };
 
 lid_f returns[String lid_f_S]: ',' lid {$lid_f_S = ", " + $lid.lid_S;}
@@ -219,7 +234,7 @@ exp returns[String exp_S]: IDENTIFICADOR exp_f {$exp_S = info.referenciado($IDEN
     | CONSTREAL exp_r {$exp_S = info.cte($CONSTREAL.text) + $exp_r.exp_r_S;}
     | CONSTLIT exp_r {$exp_S = info.cte(info.comillas($CONSTLIT.text)) + $exp_r.exp_r_S;};
 
-exp_f returns[String exp_f_S]: '(' lid ')' exp_r {$exp_f_S = "(" + $lid.lid_S + ")" + $exp_r.exp_r_S;}
+exp_f returns[String exp_f_S]: '(' lid ')' exp_r {$exp_f_S = "(" + info.referenciado($lid.lidId_S, $lid.lidId_S) + ")" + $exp_r.exp_r_S;}
                              | exp_r {$exp_f_S = $exp_r.exp_r_S;};
 
 exp_r returns[String exp_r_S]: op exp exp_r {$exp_r_S = info.asigopEspacio($op.text) + $exp.exp_S + $exp_r.exp_r_S;}
@@ -229,16 +244,16 @@ op : '+' | '-' | '*' | '/';
 
 //Recursividad por la izquierda. Arreglado.
 lcond returns[String lcond_S]: cond lcond_r {$lcond_S = $cond.cond_S + $lcond_r.lcond_r_S;}
-                             | 'no' cond lcond_r {$lcond_S = "no" + $cond.cond_S + $lcond_r.lcond_r_S;};
+                             | 'no' cond lcond_r {$lcond_S = info.palres("no") + $cond.cond_S + $lcond_r.lcond_r_S;};
 
-lcond_r returns[String lcond_r_S]: opl lcond lcond_r {$lcond_r_S = info.asigopEspacio($opl.text)
+lcond_r returns[String lcond_r_S]: opl lcond lcond_r {$lcond_r_S = info.asigopEspacio(info.palres($opl.text))
                                                                    + $lcond.lcond_S
                                                                    + $lcond_r.lcond_r_S;}
                                                      | {$lcond_r_S = "";};
 
 cond returns [String cond_S] : exp1=exp opr exp2=exp {$cond_S = $exp1.exp_S + info.asigopEspacio($opr.text) + $exp2.exp_S;}
-                             | 'cierto' {$cond_S = "cierto";}
-                             | 'falso' {$cond_S = "falso";};
+                             | 'cierto' {$cond_S = info.palres("cierto");}
+                             | 'falso' {$cond_S = info.palres("falso");};
 
 opl : 'y' | 'o';
 
