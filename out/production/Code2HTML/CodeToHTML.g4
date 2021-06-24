@@ -34,7 +34,10 @@ r : {inic = info.inic();}
             cabezas = cabezas + info.cabecera(c);
         }
     }
-    cabezas = info.cabecera(cabPrincipal) + cabezas;
+    if(cabPrincipal != ""){
+        cabezas = info.cabecera(cabPrincipal) + cabezas;
+    }
+
     cabezas = "<UL>\n" + cabezas + "</UL>\n";
 
     if(CodeToHTMLErrorListener.isFailed()){
@@ -211,18 +214,18 @@ sent returns[String sent_S]: type lid ';' {$sent_S = info.palres($type.type_S) +
 sent_f1 returns[String sent_f1_S]: asig exp ';' {$sent_f1_S = info.asigopEspacio($asig.text) + $exp.exp_S + ";";}
                                  | '(' sent_f2 {$sent_f1_S = "(" + $sent_f2.sent_f2_S;};
 
-sent_f2 returns[String sent_f2_S]: lid ')' ';' {$sent_f2_S = $lid.lid_S + ")" + ";";}
+sent_f2 returns[String sent_f2_S]: lid ')' ';' {$sent_f2_S = $lid.lidId_S + ")" + ";";}
                                  | ')' ';' {$sent_f2_S = ")" + ";";};
 
 //Factorizacion. Arreglado
 lid returns[String lid_S, String lidId_S]: IDENTIFICADOR lid_f {String aux = info.referencia($IDENTIFICADOR.text) + info.ident($IDENTIFICADOR.text);
                                                 aux = aux.substring(0, aux.length()-1);
                                                 $lid_S = aux + $lid_f.lid_f_S;
-                                                $lidId_S = $IDENTIFICADOR.text + $lid_f.lid_f_S;
+                                                $lidId_S = info.referenciado($IDENTIFICADOR.text, $IDENTIFICADOR.text) + $lid_f.lidId_f_S;
                                                 };
 
-lid_f returns[String lid_f_S]: ',' lid {$lid_f_S = ", " + $lid.lid_S;}
-                                        | {$lid_f_S = "";};
+lid_f returns[String lid_f_S, String lidId_f_S]: ',' lid {$lid_f_S = ", " + $lid.lid_S; $lidId_f_S = ", " + $lid.lidId_S;}
+                                        | {$lid_f_S = ""; $lidId_f_S = "";};
 
 asig : '=' | '+=' | '-=' | '*=' | '/=';
 
@@ -234,7 +237,7 @@ exp returns[String exp_S]: IDENTIFICADOR exp_f {$exp_S = info.referenciado($IDEN
     | CONSTREAL exp_r {$exp_S = info.cte($CONSTREAL.text) + $exp_r.exp_r_S;}
     | CONSTLIT exp_r {$exp_S = info.cte(info.comillas($CONSTLIT.text)) + $exp_r.exp_r_S;};
 
-exp_f returns[String exp_f_S]: '(' lid ')' exp_r {$exp_f_S = "(" + info.referenciado($lid.lidId_S, $lid.lidId_S) + ")" + $exp_r.exp_r_S;}
+exp_f returns[String exp_f_S]: '(' lid ')' exp_r {$exp_f_S = "(" + $lid.lidId_S + ")" + $exp_r.exp_r_S;}
                              | exp_r {$exp_f_S = $exp_r.exp_r_S;};
 
 exp_r returns[String exp_r_S]: op exp exp_r {$exp_r_S = info.asigopEspacio($op.text) + $exp.exp_S + $exp_r.exp_r_S;}

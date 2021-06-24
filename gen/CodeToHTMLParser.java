@@ -176,7 +176,10 @@ public class CodeToHTMLParser extends Parser {
 			            cabezas = cabezas + info.cabecera(c);
 			        }
 			    }
-			    cabezas = info.cabecera(cabPrincipal) + cabezas;
+			    if(cabPrincipal != ""){
+			        cabezas = info.cabecera(cabPrincipal) + cabezas;
+			    }
+
 			    cabezas = "<UL>\n" + cabezas + "</UL>\n";
 
 			    if(CodeToHTMLErrorListener.isFailed()){
@@ -1354,7 +1357,7 @@ public class CodeToHTMLParser extends Parser {
 				match(T__3);
 				setState(203);
 				match(T__10);
-				((Sent_f2Context)_localctx).sent_f2_S =  ((Sent_f2Context)_localctx).lid.lid_S + ")" + ";";
+				((Sent_f2Context)_localctx).sent_f2_S =  ((Sent_f2Context)_localctx).lid.lidId_S + ")" + ";";
 				}
 				break;
 			case T__3:
@@ -1423,7 +1426,7 @@ public class CodeToHTMLParser extends Parser {
 			String aux = info.referencia((((LidContext)_localctx).IDENTIFICADOR!=null?((LidContext)_localctx).IDENTIFICADOR.getText():null)) + info.ident((((LidContext)_localctx).IDENTIFICADOR!=null?((LidContext)_localctx).IDENTIFICADOR.getText():null));
 			                                                aux = aux.substring(0, aux.length()-1);
 			                                                ((LidContext)_localctx).lid_S =  aux + ((LidContext)_localctx).lid_f.lid_f_S;
-			                                                ((LidContext)_localctx).lidId_S =  (((LidContext)_localctx).IDENTIFICADOR!=null?((LidContext)_localctx).IDENTIFICADOR.getText():null) + ((LidContext)_localctx).lid_f.lid_f_S;
+			                                                ((LidContext)_localctx).lidId_S =  info.referenciado((((LidContext)_localctx).IDENTIFICADOR!=null?((LidContext)_localctx).IDENTIFICADOR.getText():null), (((LidContext)_localctx).IDENTIFICADOR!=null?((LidContext)_localctx).IDENTIFICADOR.getText():null)) + ((LidContext)_localctx).lid_f.lidId_f_S;
 			                                                
 			}
 		}
@@ -1440,6 +1443,7 @@ public class CodeToHTMLParser extends Parser {
 
 	public static class Lid_fContext extends ParserRuleContext {
 		public String lid_f_S;
+		public String lidId_f_S;
 		public LidContext lid;
 		public LidContext lid() {
 			return getRuleContext(LidContext.class,0);
@@ -1477,14 +1481,14 @@ public class CodeToHTMLParser extends Parser {
 				match(T__4);
 				setState(216);
 				((Lid_fContext)_localctx).lid = lid();
-				((Lid_fContext)_localctx).lid_f_S =  ", " + ((Lid_fContext)_localctx).lid.lid_S;
+				((Lid_fContext)_localctx).lid_f_S =  ", " + ((Lid_fContext)_localctx).lid.lid_S; ((Lid_fContext)_localctx).lidId_f_S =  ", " + ((Lid_fContext)_localctx).lid.lidId_S;
 				}
 				break;
 			case T__3:
 			case T__10:
 				enterOuterAlt(_localctx, 2);
 				{
-				((Lid_fContext)_localctx).lid_f_S =  "";
+				((Lid_fContext)_localctx).lid_f_S =  ""; ((Lid_fContext)_localctx).lidId_f_S =  "";
 				}
 				break;
 			default:
@@ -1716,7 +1720,7 @@ public class CodeToHTMLParser extends Parser {
 				match(T__3);
 				setState(251);
 				((Exp_fContext)_localctx).exp_r = exp_r();
-				((Exp_fContext)_localctx).exp_f_S =  "(" + info.referenciado(((Exp_fContext)_localctx).lid.lidId_S, ((Exp_fContext)_localctx).lid.lidId_S) + ")" + ((Exp_fContext)_localctx).exp_r.exp_r_S;
+				((Exp_fContext)_localctx).exp_f_S =  "(" + ((Exp_fContext)_localctx).lid.lidId_S + ")" + ((Exp_fContext)_localctx).exp_r.exp_r_S;
 				}
 				break;
 			case T__3:
