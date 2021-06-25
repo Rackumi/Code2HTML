@@ -7,7 +7,7 @@ funcion entero nombre1()
                 bucle
                     inicio
                         a = (b + 2) / c;
-                        b = nombre1(var);
+                        b = nombre2();
                         return a;
                     fin
                 hasta(cierto)
