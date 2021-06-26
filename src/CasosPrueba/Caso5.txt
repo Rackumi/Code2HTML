@@ -1,0 +1,29 @@
+funcion real Principal()
+    inicio
+        var4 = +56.65;
+        var5 = -66335.3262;
+        bifurcacion (var4 <= 5)
+        entonces
+            inicio
+                var6 = var4 + var5;
+                return 0;
+            fin
+        sino
+            inicio
+                return 4;
+            fin
+        return var4;
+    fin
+
+procedimiento Principal(entero var5, real var6)
+    inicio
+        var1 = 6;
+        var2 = -5.3;
+        bucle
+            inicio
+                var2 += 1;
+                return 1;
+            fin
+        hasta (var2 <= 5)
+        return var1;
+    fin
