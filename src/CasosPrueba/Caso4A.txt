@@ -11,7 +11,8 @@ procedimiento nombre1(real var4)
 %% Hola esto es un comentario de una linea
 
 
-funcion entero nombre1(entero var3)
+funcion entero %- Hola esto es un comentario
+               multilinea -% nombre1(entero var3)
     inicio
         return 0; %% Comentario despues de un elemento
     fin

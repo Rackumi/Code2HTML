@@ -1,5 +1,4 @@
 grammar CodeToHTML;
-//Ampliar casos prueba
 
 @header{
 	import SintData.Sintesis;
@@ -8,7 +7,6 @@ grammar CodeToHTML;
 }
 
 @parser::members{
-
     private Sintesis info;
 
     String inic;
@@ -43,7 +41,7 @@ r : {inic = info.inic();}
 
     }
     else if(contPrincipal>1){
-        System.err.println("Error. Más de un método Principal definido");
+        System.err.println("Error. Más de un método Principal definido.");
     }
     else{
         System.out.println(inic+cabezas+principal+$program.program_S+end);
@@ -238,7 +236,6 @@ exp returns[String exp_S]: IDENTIFICADOR exp_f {$exp_S = info.referenciado($IDEN
     | CONSTLIT exp_r {$exp_S = info.cte(info.comillas($CONSTLIT.text)) + $exp_r.exp_r_S;};
 
 exp_f returns[String exp_f_S]: '(' lid ')' exp_r {$exp_f_S = "(" + $lid.lidId_S + ")" + $exp_r.exp_r_S;}
-//                             | '(' ')' exp_r {$exp_f_S = "(" + ")" + $exp_r.exp_r_S;}
                              | exp_r {$exp_f_S = $exp_r.exp_r_S;};
 
 exp_r returns[String exp_r_S]: op exp exp_r {$exp_r_S = info.asigopEspacio($op.text) + $exp.exp_S + $exp_r.exp_r_S;}
@@ -276,7 +273,6 @@ COMENTARIOL : '%%'.*?[\r\n]-> skip;
 COMENTARIOM : '%-'.*?[\r\n]* '-%'-> skip;
 
 WS : [ \n\t\r] -> skip;
-
 
 fragment
 

@@ -1,6 +1,5 @@
 import SintData.Sintesis;
 import org.antlr.v4.runtime.*;
-
 import java.io.*;
 import java.util.regex.Pattern;
 
@@ -11,7 +10,6 @@ public class MainClass{
     public static void main(String[] args){
 
         try{
-
             CharStream input = CharStreams.fromFileName(args[0]);
             CodeToHTMLLexer analex = new  CodeToHTMLLexer(input);
             CommonTokenStream tokens = new CommonTokenStream(analex);
@@ -24,7 +22,6 @@ public class MainClass{
             String nameFile = args[0] + ".html";
             FileOutputStream f = new FileOutputStream(nameFile);
             System.setOut(new PrintStream(f));
-
 
             String[] path = args;
             if(args[0].contains("/")){
@@ -42,9 +39,6 @@ public class MainClass{
                 File f2 = new File(System.getProperty("user.dir"),nameFile);
                 f2.delete();
             }
-
-
-
 
         } catch (RecognitionException e) { //Fallo al reconocer la entrada
             System.err.println("REC " + e.getMessage());

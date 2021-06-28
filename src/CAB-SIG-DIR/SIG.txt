@@ -1,3 +1,5 @@
+No se ha considerado necesario
+
 SIG(program) = {$} U
 
 SIG(part) =
